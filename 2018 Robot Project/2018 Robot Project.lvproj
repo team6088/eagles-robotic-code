@@ -126,7 +126,10 @@ AddOutputFilter chunkFilter
 			<Item Name="Test.vi" Type="VI" URL="../Test.vi"/>
 			<Item Name="Vision Processing.vi" Type="VI" URL="../Vision Processing.vi"/>
 		</Item>
+		<Item Name="H-Wheel Speed Selection.vi" Type="VI" URL="../Support Code/H-Wheel Speed Selection.vi"/>
 		<Item Name="Robot Main.vi" Type="VI" URL="../Robot Main.vi"/>
+		<Item Name="X-Axis Speed Selection.vi" Type="VI" URL="../Support Code/X-Axis Speed Selection.vi"/>
+		<Item Name="y-Axis Speed Selection.vi" Type="VI" URL="../Support Code/y-Axis Speed Selection.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="8.6CompatibleGlobalVar.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/config.llb/8.6CompatibleGlobalVar.vi"/>
