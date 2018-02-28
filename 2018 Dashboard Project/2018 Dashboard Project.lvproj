@@ -22,6 +22,7 @@
 		</Item>
 		<Item Name="Dashboard Main.vi" Type="VI" URL="../Dashboard Main.vi"/>
 		<Item Name="Driver list.lvlib" Type="Library" URL="../../2018 Robot Project/Support Code/Driver list.lvlib"/>
+		<Item Name="Controls Tab.vi" Type="VI" URL="../Controls Tab.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="vi.lib" Type="Folder">
 				<Property Name="NI.SortType" Type="Int">0</Property>

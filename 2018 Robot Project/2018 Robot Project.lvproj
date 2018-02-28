@@ -126,6 +126,8 @@ AddOutputFilter chunkFilter
 			<Item Name="Test.vi" Type="VI" URL="../Test.vi"/>
 			<Item Name="Vision Processing.vi" Type="VI" URL="../Vision Processing.vi"/>
 		</Item>
+		<Item Name="Cube Intake.vi" Type="VI" URL="../Support Code/Cube Intake.vi"/>
+		<Item Name="Gyro.vi" Type="VI" URL="../Support Code/Gyro.vi"/>
 		<Item Name="H-Wheel Speed Selection.vi" Type="VI" URL="../Support Code/H-Wheel Speed Selection.vi"/>
 		<Item Name="Robot Main.vi" Type="VI" URL="../Robot Main.vi"/>
 		<Item Name="X-Axis Speed Selection.vi" Type="VI" URL="../Support Code/X-Axis Speed Selection.vi"/>
