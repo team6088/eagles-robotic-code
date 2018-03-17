@@ -126,7 +126,7 @@ AddOutputFilter chunkFilter
 			<Item Name="Test.vi" Type="VI" URL="../Test.vi"/>
 			<Item Name="Vision Processing.vi" Type="VI" URL="../Vision Processing.vi"/>
 		</Item>
-		<Item Name="Cube In Rate.vi" Type="VI" URL="../../Cube In Rate.vi"/>
+		<Item Name="Cube In Rate.vi" Type="VI" URL="../../2018 Dashboard Project REV 1/Cube In Rate.vi"/>
 		<Item Name="Cube Intake.vi" Type="VI" URL="../Support Code/Cube Intake.vi"/>
 		<Item Name="Cube Lift Down Scalar.vi" Type="VI" URL="../Support Code/Cube Lift Down Scalar.vi"/>
 		<Item Name="Gyro.vi" Type="VI" URL="../Support Code/Gyro.vi"/>
@@ -833,7 +833,7 @@ AddOutputFilter chunkFilter
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{6782B190-04E1-4A41-93AB-3F357B35791E}</Property>
 				<Property Name="Bld_targetDestDir" Type="Path">/home/lvuser/natinst/bin</Property>
-				<Property Name="Bld_version.build" Type="Int">32</Property>
+				<Property Name="Bld_version.build" Type="Int">35</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">startup.rtexe</Property>
 				<Property Name="Destination[0].path" Type="Path">/home/lvuser/natinst/bin/startup.rtexe</Property>
