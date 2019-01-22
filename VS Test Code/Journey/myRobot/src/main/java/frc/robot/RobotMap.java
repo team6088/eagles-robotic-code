@@ -35,4 +35,10 @@ public class RobotMap {
 
   // Other Drivetrain Constants 
   public static int wheelDiameter = 6;
+
+  public static int cylinderExtend = 0;
+  public static int cylinderRetract = 1;
+
+  
+
 }
