@@ -39,6 +39,10 @@ public class RobotMap {
   // USB
   public static int joystickPort = 0;
 
+  public static int hatchExtend = 0;
+  public static int hatchRetract = 1;
+  public static int hatchCompressor = 0;
+
 
   //public static int wheelDiameter = 6;
 
