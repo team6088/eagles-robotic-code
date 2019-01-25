@@ -26,7 +26,7 @@ public class ExtendCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    solenoid1.set(DoubleSolenoid.Value.kForward);
+    Robot.pneumaticSubsystem.solenoid1.set(DoubleSolenoid.Value.kForward);
 
   }
 
@@ -39,11 +39,14 @@ public class ExtendCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.pneumaticSubsystem.solenoid1.set(DoubleSolenoid.Value.kForward);
+    
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

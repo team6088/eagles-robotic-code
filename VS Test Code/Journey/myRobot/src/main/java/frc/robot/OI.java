@@ -9,7 +9,7 @@ package frc.robot;
 
 //import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+//import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,9 +22,8 @@ public class OI {
   // You create one by telling it which joystick it's on and which button
   // number it is.
   public Joystick stick = new Joystick(RobotMap.joystickPort);
-  JoystickButton a = new JoystickButton(stick, 1);
-  JoystickButton b = new JoystickButton(stick, 2);
-
+  //JoystickButton a = new JoystickButton(stick, 1);
+  //JoystickButton b = new JoystickButton(stick, 2);
 
 
 

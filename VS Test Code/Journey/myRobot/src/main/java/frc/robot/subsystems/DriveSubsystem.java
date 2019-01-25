@@ -39,6 +39,29 @@ public DriveSubsystem() {
 
 //add teleopDrive() method
 public void teleopDrive(double move, double turn) {
+
+  if (Math.abs(move) < 0.10) {
+      move = 0;
+  }
+  if (Math.abs(move) < 0.10) {
+      turn = 0;
+  }
+
+  if (move > .5){
+      move = .5;
+  }
+  if (move < -.5){
+  move = -.5;
+  }
+
+  if (turn > .5){
+    turn = .5;
+}
+if (turn < -.5){
+turn = -.5;
+}
+
+
 drive.arcadeDrive(move, turn);
 }
 

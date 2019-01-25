@@ -25,10 +25,10 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   //CAN
-  public static int leftMasterPort = 1;
-  public static int leftSlavePort = 2;
-  public static int rightMasterPort = 3;
-  public static int rightSlavePort = 4;
+  public static int leftMasterPort = 2;
+  public static int leftSlavePort = 0;
+  public static int rightMasterPort = 1;
+  public static int rightSlavePort = 3;
 
   //USB
   public static int joystickPort = 0;
@@ -36,8 +36,6 @@ public class RobotMap {
   // Other Drivetrain Constants 
   public static int wheelDiameter = 6;
 
-  public static int cylinderExtend = 0;
-  public static int cylinderRetract = 1;
 
   
 

@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
-//import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -57,14 +55,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
 
-    Compressor c = new Compressor(0);
-    c.setClosedLoopControl(true);
-    c.close();
-
-    //DoubleSolenoid exampleDouble = new DoubleSolenoid(RobotMap.cylinderRetract, RobotMap.cylinderExtend);
-
-    //exampleDouble.set(DoubleSolenoid.Value.kForward);
-    //exampleDouble.set(DoubleSolenoid.Value.kReverse);
 
 
   }

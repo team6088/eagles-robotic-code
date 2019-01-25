@@ -19,13 +19,16 @@ public class DriveManuallyCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    double move = -Robot.oi.stick.getY();
-    double turn = Robot.oi.stick.getX();
+   
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+     double move = -Robot.oi.stick.getY();
+     double turn = Robot.oi.stick.getX();
+     Robot.driveSubsystem.teleopDrive(move, turn);
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
