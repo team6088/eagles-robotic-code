@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -42,6 +45,12 @@ public class RobotMap {
   public static int hatchExtend = 0;
   public static int hatchRetract = 1;
   public static int hatchCompressor = 0;
+
+
+  //Pneumatics
+  public static Compressor compressor = new Compressor(0);
+  public static DoubleSolenoid solenoid = new DoubleSolenoid(0,1);
+
 
 
   //public static int wheelDiameter = 6;

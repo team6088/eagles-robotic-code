@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ExtendCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,10 +23,10 @@ public class OI {
   // You create one by telling it which joystick it's on and which button
   // number it is.
   public Joystick stick = new Joystick(RobotMap.joystickPort);
-  public Button buttonA = new JoystickButton(stick, 1);
-                       // buttonB = new JoystickButton(stick,2);
+  public Button buttonA = new JoystickButton(stick, 1),
+                buttonB = new JoystickButton(stick,2);
 
-
+  public OI(){
 
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
@@ -38,7 +39,7 @@ public class OI {
   // Start the command when the button is pressed and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
-    //buttonA.whenPressed(new ExtendCommand());
+    buttonA.whenPressed(new ExtendCommand());
 
 
   // Run the command while the button is being held down and interrupt it once
@@ -48,4 +49,6 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+  }
+
 }
