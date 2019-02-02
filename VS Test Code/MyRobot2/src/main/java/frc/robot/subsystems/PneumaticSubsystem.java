@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ExtendCommand;
@@ -19,24 +20,26 @@ import frc.robot.commands.ExtendCommand;
 public class PneumaticSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  public static Compressor compressor1 = new Compressor(RobotMap.hatchCompressor);
+  public static DoubleSolenoid solenoid1 = new DoubleSolenoid(RobotMap.hatchRetract,RobotMap.hatchExtend);
 
+  public static void init(){
+    compressor1.setClosedLoopControl(true);
+    //compressor1.enabled();
+  }
+
+  public static void solenoidExtend(){
+    solenoid1.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public static void solenoidRetract(){
+    solenoid1.set(DoubleSolenoid.Value.kReverse);
+  }
   
-  public Compressor compressor1 = new Compressor(RobotMap.hatchCompressor);
-  public DoubleSolenoid solenoid1 = new DoubleSolenoid(RobotMap.hatchExtend, RobotMap.hatchExtend);
+  public static void solenoidOff(){
+    solenoid1.set(DoubleSolenoid.Value.kOff);
+}
 
-  compressor1.setClosedLoopControl(on);
-
-
-  //public Compressor compressor1 = new Compressor(RobotMap.hatchCompressor);
-  //public DoubleSolenoid solenoid1 = new DoubleSolenoid(RobotMap.hatchExtend, RobotMap.hatchExtend);
-
-  //public Compressor getCompressor1() {
-  //  return compressor1;
-  //}
-  
-  //public DoubleSolenoid getSolenoid1() {
-  //  return solenoid1;
-  //}
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

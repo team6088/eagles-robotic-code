@@ -42,16 +42,15 @@ public class RobotMap {
   // USB
   public static int joystickPort = 0;
 
+
+
+
+  //Pneumatics
   public static int hatchExtend = 0;
   public static int hatchRetract = 1;
   public static int hatchCompressor = 0;
 
-
-  //Pneumatics
-  public static Compressor compressor = new Compressor(0);
-  public static DoubleSolenoid solenoid = new DoubleSolenoid(0,1);
-
-
+  
 
   //public static int wheelDiameter = 6;
 

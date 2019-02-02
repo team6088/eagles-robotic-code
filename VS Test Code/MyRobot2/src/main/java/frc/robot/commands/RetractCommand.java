@@ -8,12 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
 import frc.robot.subsystems.PneumaticSubsystem;
+import frc.robot.Robot;
 
-
-public class ExtendCommand extends Command {
-  public ExtendCommand() {
+public class RetractCommand extends Command {
+  public RetractCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.pneumaticSubsystem);
   }
@@ -26,21 +25,21 @@ public class ExtendCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    PneumaticSubsystem.solenoidExtend();
+    PneumaticSubsystem.solenoidRetract();
   }
 
   // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
+ @Override
+ protected boolean isFinished() {
+   return false;
+ }
 
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    PneumaticSubsystem.solenoidOff();
-    
-  }
+ // Called once after isFinished returns true
+ @Override
+ protected void end() {
+   PneumaticSubsystem.solenoidOff();
+   
+ }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run

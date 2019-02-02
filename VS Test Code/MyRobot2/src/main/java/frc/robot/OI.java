@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ExtendCommand;
+import frc.robot.commands.RetractCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -40,6 +41,8 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
     buttonA.whenPressed(new ExtendCommand());
+    buttonB.whenPressed(new RetractCommand());
+
 
 
   // Run the command while the button is being held down and interrupt it once
