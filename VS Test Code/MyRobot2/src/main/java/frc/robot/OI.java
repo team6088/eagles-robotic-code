@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ExtendCommand;
+import frc.robot.commands.LowerRobotCommand;
+import frc.robot.commands.RaiseRobotCommand;
 import frc.robot.commands.RetractCommand;
 
 /**
@@ -25,7 +27,9 @@ public class OI {
   // number it is.
   public Joystick stick = new Joystick(RobotMap.joystickPort);
   public Button buttonA = new JoystickButton(stick, 1),
-                buttonB = new JoystickButton(stick,2);
+                buttonB = new JoystickButton(stick,2),
+                buttonX = new JoystickButton(stick,3),
+                buttonY = new JoystickButton(stick,4);
 
   public OI(){
 
@@ -42,7 +46,8 @@ public class OI {
   // button.whenPressed(new ExampleCommand());
     buttonA.whenPressed(new ExtendCommand());
     buttonB.whenPressed(new RetractCommand());
-
+    buttonX.whenPressed(new LowerRobotCommand());
+    buttonY.whenPressed(new RaiseRobotCommand());
 
 
   // Run the command while the button is being held down and interrupt it once

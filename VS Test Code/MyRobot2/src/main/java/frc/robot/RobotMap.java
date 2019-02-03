@@ -50,6 +50,10 @@ public class RobotMap {
   public static int hatchRetract = 1;
   public static int hatchCompressor = 0;
 
+  public static int liftMotorPort = 3;
+  public static int highLiftSwitch = 3;
+  public static int lowLiftSwitch = 5;
+
   
 
   //public static int wheelDiameter = 6;
