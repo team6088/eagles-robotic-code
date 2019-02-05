@@ -46,8 +46,8 @@ public class OI {
   // button.whenPressed(new ExampleCommand());
     buttonA.whenPressed(new ExtendCommand());
     buttonB.whenPressed(new RetractCommand());
-    buttonX.whenPressed(new LowerRobotCommand());
-    buttonY.whenPressed(new RaiseRobotCommand());
+    buttonX.whileHeld(new LowerRobotCommand());
+    buttonY.whileHeld(new RaiseRobotCommand());
 
 
   // Run the command while the button is being held down and interrupt it once

@@ -28,7 +28,6 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   // PWM
-  //public static int leftMotorPort = 1;
 
   // DIO
 

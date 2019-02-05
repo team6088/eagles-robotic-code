@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.Robot;;
+
 
 /**
  * Add your docs here.
@@ -26,30 +28,43 @@ public class LiftSubsystem extends Subsystem {
     return liftMotor.get();
   }
 
-  public static boolean isRaised(){
-    return highLiftSwitch.get();
+  //public static boolean isRaised(){
+  //  return highLiftSwitch.get();
+  //}
+
+  //public static boolean isLowered(){
+  //  return lowLiftSwitch.get();
+  //}
+
+  public static void raiseRobot(){
+    if(Robot.oi.buttonY.get() & highLiftSwitch.get()==false)
+    liftMotor.set(.8);
+    else {
+      liftMotor.set(0);
+  }
 }
 
-  public static boolean isLowered(){
-    return lowLiftSwitch.get();
-  }
-  public static void raiseRobot(){
-    liftMotor.set(.8);
-  }
-
-  public static void stopRaise(){
-    if(isRaised() & liftMotorSpeed() > 0)
-      liftMotor.set(0);
-  }
+  //public static void stopRaise(){
+    //if(isRaised() & liftMotorSpeed() > 0)
+  //    liftMotor.set(0);
+  //}
 
   public static void lowerRobot(){
-    liftMotor.set(-.8);
+    if(Robot.oi.buttonX.get() & lowLiftSwitch.get()==false)
+      liftMotor.set(-.8);
+    else {
+      liftMotor.set(0);
+    }
   }
 
-  public static void stopLower(){
-    if(isLowered() & liftMotorSpeed() < 0)
-      liftMotor.set(0);
+  public static void stopLift(){
+    liftMotor.set(0);
   }
+
+ // public static void stopLower(){
+    //if(isLowered() & liftMotorSpeed() < 0)
+      //liftMotor.set(0);
+  //}
 
   @Override
   public void initDefaultCommand() {
