@@ -37,7 +37,7 @@ public class LiftSubsystem extends Subsystem {
   //}
 
   public static void raiseRobot(){
-    if(Robot.oi.buttonY.get() & highLiftSwitch.get()==false)
+    if(Robot.oi.buttonY.get() & highLiftSwitch.get()==true)
     liftMotor.set(.8);
     else {
       liftMotor.set(0);
@@ -50,7 +50,7 @@ public class LiftSubsystem extends Subsystem {
   //}
 
   public static void lowerRobot(){
-    if(Robot.oi.buttonX.get() & lowLiftSwitch.get()==false)
+    if(Robot.oi.buttonX.get() & lowLiftSwitch.get()==true)
       liftMotor.set(-.8);
     else {
       liftMotor.set(0);
