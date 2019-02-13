@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExtendCommand;
 import frc.robot.commands.LowerRobotCommand;
 import frc.robot.commands.RaiseRobotCommand;
@@ -57,6 +58,12 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+
+  // Add commands to SmartDashboard
+    SmartDashboard.putData("ExtendCommand", new ExtendCommand());
+    SmartDashboard.putData("RetractCommand", new RetractCommand());
+    SmartDashboard.putData("LowerRobotCommand", new LowerRobotCommand());
+    SmartDashboard.putData("RaiseRobotCommand", new RaiseRobotCommand());
   }
 
 }

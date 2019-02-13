@@ -13,7 +13,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.ExampleAutoCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.RetractCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
@@ -27,15 +29,30 @@ import frc.robot.subsystems.PneumaticSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem subsystem = new ExampleSubsystem();
+  public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
   public static LiftSubsystem liftSubystem = new LiftSubsystem();
-  
   public static OI oi;
-
+  Command retractCommand;
+  Command extendCommand;
+  Command raiseRobotCommand;
+  Command lowerRobotCommand;
+  Command driveManuallyCommand;
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
+
+  // The following is an example of how to add preferences for calibration settings
+  // to the smartDashboard instead of hard-coding them.
+  
+  //	Preferences prefs;
+	//double armUpPosition;
+	//double armDownPosition;	
+	//public void robotInit() {
+	//	prefs = Preferences.getInstance();
+	//	armUpPosition = prefs.getDouble("ArmUpPosition", 1.0);
+	//	armDownPosition = prefs.getDouble("ArmDownPosition", 4.);
+	//}
 
   /**
    * This function is run when the robot is first started up and should be
@@ -44,12 +61,27 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+    retractCommand = new RetractCommand();
+
+
     chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    chooser.addOption("ExampleCommand", new ExampleCommand());
+    chooser.addObject("Example Command2", new ExampleCommand());
+    SmartDashboard.putData("Autonomous mode chooser",chooser);
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
 
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    //Adding Scheduler and commmands to the smartDashboard
+    SmartDashboard.putData(Scheduler.getInstance());
     SmartDashboard.putData("Auto mode", chooser);
+    SmartDashboard.putData(pneumaticSubsystem);
+    SmartDashboard.putData(liftSubystem);
+    SmartDashboard.putData(exampleSubsystem);
+    SmartDashboard.putData(driveSubsystem);
+    SmartDashboard.putData("Retract Command",retractCommand);
+    SmartDashboard.putData("Extend Command",extendCommand);
+
+    
   }
   
 
