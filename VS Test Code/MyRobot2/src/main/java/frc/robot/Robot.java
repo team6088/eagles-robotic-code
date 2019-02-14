@@ -13,9 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleAutoCommand;
+//import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.RetractCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
@@ -34,12 +33,14 @@ public class Robot extends TimedRobot {
   public static PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
   public static LiftSubsystem liftSubystem = new LiftSubsystem();
   public static OI oi;
-  Command retractCommand;
-  Command extendCommand;
-  Command raiseRobotCommand;
-  Command lowerRobotCommand;
-  Command driveManuallyCommand;
+  
+  
+  //Commented out to see if causing issues with robot code crashing 2/14
+  //Command raiseRobotCommand;
+  //Command lowerRobotCommand;
+  //Command driveManuallyCommand;
   Command autonomousCommand;
+
   SendableChooser<Command> chooser = new SendableChooser<>();
 
   // The following is an example of how to add preferences for calibration settings
@@ -61,12 +62,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    retractCommand = new RetractCommand();
+    //retractCommand = new RetractCommand();
 
 
     chooser.setDefaultOption("Default Auto", new ExampleCommand());
     chooser.addOption("ExampleCommand", new ExampleCommand());
-    chooser.addObject("Example Command2", new ExampleCommand());
+    //chooser.addObject("Example Command2", new DriveManuallyCommand());
     SmartDashboard.putData("Autonomous mode chooser",chooser);
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
@@ -74,12 +75,11 @@ public class Robot extends TimedRobot {
     //Adding Scheduler and commmands to the smartDashboard
     SmartDashboard.putData(Scheduler.getInstance());
     SmartDashboard.putData("Auto mode", chooser);
-    SmartDashboard.putData(pneumaticSubsystem);
-    SmartDashboard.putData(liftSubystem);
-    SmartDashboard.putData(exampleSubsystem);
-    SmartDashboard.putData(driveSubsystem);
-    SmartDashboard.putData("Retract Command",retractCommand);
-    SmartDashboard.putData("Extend Command",extendCommand);
+    //SmartDashboard.putData(pneumaticSubsystem);
+    //SmartDashboard.putData(liftSubystem);
+    //SmartDashboard.putData(exampleSubsystem);
+    //SmartDashboard.putData(driveSubsystem);
+    SmartDashboard.putBoolean("Low Lift Switch", LiftSubsystem.lowLiftSwitch.get());
 
     
   }
