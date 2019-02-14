@@ -1,14 +1,47 @@
 <xml version="1.0">
 <dashboard>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.RobotPreferences">
-		<location x="5" y="110"/>
+	<widget field="LowerRobotCommand" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="494"/>
+	</widget>
+	<widget field="Scheduler" type="Scheduler" class="edu.wpi.first.smartdashboard.gui.elements.Scheduler">
+		<location x="21" y="549"/>
+	</widget>
+	<widget field="Autonomous mode chooser" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="12" y="88"/>
+	</widget>
+	<widget field="LiftSubsystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
+		<location x="0" y="528"/>
+	</widget>
+	<widget field="RaiseRobotCommand" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="460"/>
+	</widget>
+	<widget field="PneumaticSubsystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
+		<location x="0" y="439"/>
+	</widget>
+	<widget field="DriveSubsystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
+		<location x="0" y="418"/>
+	</widget>
+	<widget field="RetractCommand" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="384"/>
+	</widget>
+	<widget field="ExampleSubsystem" type="Subsystem" class="edu.wpi.first.smartdashboard.gui.elements.Subsystem">
+		<location x="0" y="363"/>
+	</widget>
+	<widget field="ExtendCommand" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="329"/>
+	</widget>
+	<widget field="Retract Command" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="295"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="503" y="130"/>
+		<width>442</width>
+		<height>288</height>
+		<property name="Camera Choice" value="USB Camera 0"/>
 	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+	<widget field="Auto mode" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
 		<location x="0" y="0"/>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="338" y="174"/>
-	</static-widget>
+	</widget>
 </dashboard>
 <live-window>
 </live-window>
