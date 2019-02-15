@@ -28,7 +28,8 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   // PWM
-
+  public static int liftdrivePort = 3;
+  public static int liftMotorPort = 4;
   // DIO
 
   // CAN
@@ -49,7 +50,7 @@ public class RobotMap {
   public static int hatchRetract = 1;
   public static int hatchCompressor = 0;
 
-  public static int liftMotorPort = 3;
+  //Digital IO
   public static int highLiftSwitch = 3;
   public static int lowLiftSwitch = 5;
 

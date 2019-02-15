@@ -32,6 +32,9 @@ public class OI {
                 buttonX = new JoystickButton(stick,3),
                 buttonY = new JoystickButton(stick,4);
 
+
+
+
   public OI(){
 
   // There are a few additional built in buttons you can use. Additionally,
@@ -49,7 +52,6 @@ public class OI {
     buttonB.whenPressed(new RetractCommand());
     buttonX.whenPressed(new LowerRobotCommand());
     buttonY.whenPressed(new RaiseRobotCommand());
-
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
