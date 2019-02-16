@@ -10,10 +10,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.DriveLiftCommand;
-import frc.robot.Robot;;
-
+import frc.robot.commands.DriveLiftCommand;;
 
 /**
  * Add your docs here.
@@ -66,9 +65,12 @@ public class LiftSubsystem extends Subsystem {
   }
 
   public static void driveLift(){
+    if(Robot.oi.stick.getRawAxis(2) > Robot.oi.stick.getRawAxis((3)))
+    liftDriveMotor.set(Robot.oi.stick.getRawAxis(2)*-1);
+    else
     liftDriveMotor.set(Robot.oi.stick.getRawAxis(3));
-
   }
+
 
  // public static void stopLower(){
     //if(isLowered() & liftMotorSpeed() < 0)
