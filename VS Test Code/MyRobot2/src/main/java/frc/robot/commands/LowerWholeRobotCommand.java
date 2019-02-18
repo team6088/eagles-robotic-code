@@ -9,37 +9,41 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.OI;
 
-public class DriveManuallyCommand extends Command {
-  public DriveManuallyCommand() {
+public class LowerWholeRobotCommand extends Command {
+  public LowerWholeRobotCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.driveSubsystem);
+    requires(Robot.liftSubystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    // where to reset gyro/encoders/etc.
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double move = Robot.oi.stick.getY();
-    double turn = -Robot.oi.stick.getX();
-    Robot.driveSubsystem.manualDrive(move,turn);
-
+    LiftSubsystem.lowerWholeRobot();
   }
-
+  public static boolean stopLower;
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
+
+
+    
+
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    LiftSubsystem.stopBackLift();
+    LiftSubsystem.stopFrontLift();
   }
 
   // Called when another command which requires one or more of the same

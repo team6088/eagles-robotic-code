@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExtendCommand;
-import frc.robot.commands.LowerRobotCommand;
+import frc.robot.commands.LowerRobotFrontCommand;
+import frc.robot.commands.LowerWholeRobotCommand;
+import frc.robot.commands.LowerRobotBackCommand;
 import frc.robot.commands.RaiseRobotCommand;
 import frc.robot.commands.RetractCommand;
 
@@ -30,7 +32,11 @@ public class OI {
   public Button buttonA = new JoystickButton(stick, 1),
                 buttonB = new JoystickButton(stick,2),
                 buttonX = new JoystickButton(stick,3),
-                buttonY = new JoystickButton(stick,4);
+                buttonY = new JoystickButton(stick,4),
+                buttonLeftBumper = new JoystickButton(stick,5),
+                buttonRightBumper = new JoystickButton(stick,6),
+                buttonBack = new JoystickButton(stick,7);
+
 
 
 
@@ -48,10 +54,12 @@ public class OI {
   // Start the command when the button is pressed and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
-    buttonA.whenPressed(new ExtendCommand());
-    buttonB.whenPressed(new RetractCommand());
-    buttonX.whenPressed(new LowerRobotCommand());
+    buttonLeftBumper.whenPressed(new ExtendCommand());
+    buttonRightBumper.whenPressed(new RetractCommand());
+    buttonA.whenPressed(new LowerRobotFrontCommand());
+    buttonB.whenPressed(new LowerRobotBackCommand());
     buttonY.whenPressed(new RaiseRobotCommand());
+    buttonX.whenPressed(new LowerWholeRobotCommand());
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
@@ -64,7 +72,7 @@ public class OI {
   // Add commands to SmartDashboard
     SmartDashboard.putData("ExtendCommand", new ExtendCommand());
     SmartDashboard.putData("RetractCommand", new RetractCommand());
-    SmartDashboard.putData("LowerRobotCommand", new LowerRobotCommand());
+    SmartDashboard.putData("LowerRobotCommand", new LowerRobotFrontCommand());
     SmartDashboard.putData("RaiseRobotCommand", new RaiseRobotCommand());
   }
 

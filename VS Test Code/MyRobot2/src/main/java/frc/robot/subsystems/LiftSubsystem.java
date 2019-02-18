@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,12 +21,16 @@ import frc.robot.commands.DriveLiftCommand;;
 public class LiftSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public static Spark liftMotor = new Spark(RobotMap.liftMotorPort);
-  public static DigitalInput highLiftSwitch = new DigitalInput(RobotMap.highLiftSwitch);
-  public static DigitalInput lowLiftSwitch = new DigitalInput(RobotMap.lowLiftSwitch);
+  public static Spark frontLiftMotor = new Spark(RobotMap.frontLiftMotorPort);
+  public static Spark backLiftMotor = new Spark(RobotMap.backLiftMotorPort);
+  public static DigitalInput frontLiftSwitch = new DigitalInput(RobotMap.frontLiftSwitch);
+  public static DigitalInput backLiftSwitch = new DigitalInput(RobotMap.backLiftSwitch);
+  public static DigitalInput frontLowerSwitch = new DigitalInput(RobotMap.frontLowerSwitch);
+  public static DigitalInput backLowerSwitch = new DigitalInput(RobotMap.backLowerSwitch);
+  
   public static Spark liftDriveMotor = new Spark(RobotMap.liftdrivePort);
   public static double liftMotorSpeed(){
-    return liftMotor.get();
+    return frontLiftMotor.get();
   }
   public static double liftDriveMotorSpeed(){
     return liftDriveMotor.get();
@@ -40,11 +45,17 @@ public class LiftSubsystem extends Subsystem {
   //}
 
   public static void raiseRobot(){
-    if(Robot.oi.buttonY.get() & highLiftSwitch.get()==true)
-    liftMotor.set(.8);
+    if(Robot.oi.buttonY.get() & frontLiftSwitch.get()==true)
+    frontLiftMotor.set(1);
     else {
-      liftMotor.set(0);
-  }
+      frontLiftMotor.set(0);
+    }
+    if(Robot.oi.buttonY.get() & backLiftSwitch.get()==true)
+      backLiftMotor.set(1);
+    else {
+      backLiftMotor.set(0);
+
+    }
 }
 
   //public static void stopRaise(){
@@ -52,19 +63,53 @@ public class LiftSubsystem extends Subsystem {
   //    liftMotor.set(0);
   //}
 
-  public static void lowerRobot(){
-    if(Robot.oi.buttonX.get() & lowLiftSwitch.get()==true)
-      liftMotor.set(-.8);
+  public static void lowerRobotFront(){
+    if(Robot.oi.buttonA.get() & frontLowerSwitch.get()==true)
+      frontLiftMotor.set(-1);
     else {
-      liftMotor.set(0);
+      frontLiftMotor.set(0);
     }
   }
 
-  public static void stopLift(){
-    liftMotor.set(0);
+  public static void lowerRobotBack(){
+    if(Robot.oi.buttonB.get() & backLowerSwitch.get()==true)
+      backLiftMotor.set(-1);
+    else {
+      backLiftMotor.set(0);
+    }
   }
 
+  public static void lowerWholeRobot(){
+    if(Robot.oi.buttonX.get())
+    backLiftMotor.set(-1);
+    frontLiftMotor.set(-1);
+    //else{
+     // backLiftMotor.set(0);
+     // frontLiftMotor.set(0);
+    //}
+}
+
+  public static void stopFrontLift(){
+    frontLiftMotor.set(0);
+  }
+
+  public static void stopBackLift(){
+    backLiftMotor.set(0);
+  }
+
+
+  public static boolean driveType;
+  public static boolean buttonToggle = false;
+  
+
   public static void driveLift(){
+
+
+    //if (driveType =true)
+    //liftDriveMotor.set(1);
+    //else
+    //liftDriveMotor.set(-1);
+
     if(Robot.oi.stick.getRawAxis(2) > Robot.oi.stick.getRawAxis((3)))
     liftDriveMotor.set(Robot.oi.stick.getRawAxis(2)*-1);
     else

@@ -9,10 +9,12 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveManuallyCommand;
+
 
 /**
  * Add your docs here.
@@ -25,10 +27,16 @@ public class DriveSubsystem extends Subsystem {
   public WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.leftSlavePort);
   public WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.rightMasterPort);
   public WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.rightSlavePort);
+  //public VictorSP leftVictor = new VictorSP (RobotMap.victorDrivePortLeft);
+  //public VictorSP rightVictor = new VictorSP(RobotMap.victorDrivePortRight);
+
 
   // instantiate a new DifferentialDrive object and assign motor controllers to
   // differential drive
+
+
   public DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+  //public DifferentialDrive victorDrive = new DifferentialDrive(leftVictor, rightVictor);
 
   // create constructor function
   public DriveSubsystem() {
@@ -45,7 +53,6 @@ public class DriveSubsystem extends Subsystem {
     // if(move>.5) move = .5;
 
     drive.arcadeDrive(move, turn);
-
   }
 
   @Override

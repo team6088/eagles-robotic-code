@@ -7,8 +7,8 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+//import edu.wpi.first.wpilibj.Compressor;
+//import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -29,14 +29,18 @@ public class RobotMap {
 
   // PWM
   public static int liftdrivePort = 3;
-  public static int liftMotorPort = 4;
-  // DIO
+  public static int frontLiftMotorPort = 5;
+  public static int backLiftMotorPort = 1;
+  //public static int victorDrivePortLeft = 0;
+  //public static int victorDrivePortRight = 1;
+
+
 
   // CAN
-  public static int leftMasterPort = 2;
-  public static int leftSlavePort = 0;
-  public static int rightMasterPort = 1;
-  public static int rightSlavePort = 3;
+  public static int leftMasterPort = 1;
+  public static int leftSlavePort = 3;
+  public static int rightMasterPort = 0;
+  public static int rightSlavePort = 2;
 
 
   // USB
@@ -51,8 +55,10 @@ public class RobotMap {
   public static int hatchCompressor = 0;
 
   //Digital IO
-  public static int highLiftSwitch = 3;
-  public static int lowLiftSwitch = 5;
+  public static int frontLiftSwitch = 0;
+  public static int backLiftSwitch = 1;
+  public static int frontLowerSwitch = 6;
+  public static int backLowerSwitch = 7;
 
   
 
