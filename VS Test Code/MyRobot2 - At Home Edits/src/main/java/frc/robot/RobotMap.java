@@ -31,8 +31,8 @@ public class RobotMap {
   public static int liftdrivePort = 3;
   public static int frontLiftMotorPort = 5;
   public static int backLiftMotorPort = 1;
-  //public static int victorDrivePortLeft = 0;
-  //public static int victorDrivePortRight = 1;
+  public static int victorDrivePortLeft = 8;
+  public static int victorDrivePortRight = 9;
 
 
 

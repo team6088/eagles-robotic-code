@@ -45,18 +45,18 @@ public class LiftSubsystem extends Subsystem {
   //}
 
   public static void raiseRobot(){
-    if(Robot.oi.buttonY.get() & frontLiftSwitch.get()==true)
+    if(frontLiftSwitch.get()==true)
     frontLiftMotor.set(1);
-    else {
+    else{
       frontLiftMotor.set(0);
     }
-    if(Robot.oi.buttonY.get() & backLiftSwitch.get()==true)
+    if(backLiftSwitch.get()==true)
       backLiftMotor.set(1);
-    else {
+    else{
       backLiftMotor.set(0);
-
     }
-}
+    }
+
 
   //public static void stopRaise(){
     //if(isRaised() & liftMotorSpeed() > 0)
@@ -64,15 +64,14 @@ public class LiftSubsystem extends Subsystem {
   //}
 
   public static void lowerRobotFront(){
-    if(Robot.oi.buttonA.get() & frontLowerSwitch.get()==true)
+    if(frontLowerSwitch.get()==true)
       frontLiftMotor.set(-1);
-    else {
-      frontLiftMotor.set(0);
-    }
+      else {
+        frontLiftMotor.set(0);
   }
-
+  }
   public static void lowerRobotBack(){
-    if(Robot.oi.buttonB.get() & backLowerSwitch.get()==true)
+    if(backLowerSwitch.get()==true)
       backLiftMotor.set(-1);
     else {
       backLiftMotor.set(0);
@@ -94,6 +93,11 @@ public class LiftSubsystem extends Subsystem {
   }
 
   public static void stopBackLift(){
+    backLiftMotor.set(0);
+  }
+
+  public static void stopBothLifts(){
+    frontLiftMotor.set(0);
     backLiftMotor.set(0);
   }
 
