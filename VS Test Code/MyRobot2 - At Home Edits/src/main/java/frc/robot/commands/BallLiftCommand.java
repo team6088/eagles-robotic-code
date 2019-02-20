@@ -9,12 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.LiftDriveSubsystem;
+import frc.robot.subsystems.BallLiftSubsystem;
 
-public class DriveLiftCommand extends Command {
-  public DriveLiftCommand() {
+public class BallLiftCommand extends Command {
+  public BallLiftCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.liftDriveSubsystem);
+    requires(Robot.ballLiftSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -25,8 +25,7 @@ public class DriveLiftCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    LiftDriveSubsystem.driveLift();
-
+    BallLiftSubsystem.driveLift();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -44,8 +43,5 @@ public class DriveLiftCommand extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    //iftDriveSubsystem.driveLiftStop();
-  
-  
   }
 }

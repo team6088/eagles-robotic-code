@@ -28,13 +28,11 @@ public class LiftSubsystem extends Subsystem {
   public static DigitalInput frontLowerSwitch = new DigitalInput(RobotMap.frontLowerSwitch);
   public static DigitalInput backLowerSwitch = new DigitalInput(RobotMap.backLowerSwitch);
   
-  public static Spark liftDriveMotor = new Spark(RobotMap.liftdrivePort);
+  
   public static double liftMotorSpeed(){
     return frontLiftMotor.get();
   }
-  public static double liftDriveMotorSpeed(){
-    return liftDriveMotor.get();
-  }
+
 
   //public static boolean isRaised(){
   //  return highLiftSwitch.get();
@@ -100,26 +98,7 @@ public class LiftSubsystem extends Subsystem {
     frontLiftMotor.set(0);
     backLiftMotor.set(0);
   }
-
-
-  public static boolean driveType;
-  public static boolean buttonToggle = false;
   
-
-  public static void driveLift(){
-
-
-    //if (driveType =true)
-    //liftDriveMotor.set(1);
-    //else
-    //liftDriveMotor.set(-1);
-
-    if(Robot.oi.stick.getRawAxis(2) > Robot.oi.stick.getRawAxis((3)))
-    liftDriveMotor.set(Robot.oi.stick.getRawAxis(2)*-1);
-    else
-    liftDriveMotor.set(Robot.oi.stick.getRawAxis(3));
-  }
-
 
  // public static void stopLower(){
     //if(isLowered() & liftMotorSpeed() < 0)
@@ -129,6 +108,6 @@ public class LiftSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new DriveLiftCommand());
+    //setDefaultCommand(new DriveLiftCommand());
   }
 }

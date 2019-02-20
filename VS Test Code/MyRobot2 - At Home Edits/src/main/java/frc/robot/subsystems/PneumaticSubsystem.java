@@ -20,23 +20,36 @@ public class PneumaticSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public static Compressor compressor1 = new Compressor(RobotMap.hatchCompressor);
-  public static DoubleSolenoid solenoid1 = new DoubleSolenoid(RobotMap.hatchRetract,RobotMap.hatchExtend);
-
+  public static DoubleSolenoid hatchSolenoid = new DoubleSolenoid(RobotMap.hatchRetract,RobotMap.hatchExtend);
+  public static DoubleSolenoid ballSolenoid = new DoubleSolenoid(RobotMap.ballRetract,RobotMap.ballExtend);
+  
   public static void init(){
     compressor1.setClosedLoopControl(true);
     //compressor1.enabled();
   }
 
-  public static void solenoidExtend(){
-    solenoid1.set(DoubleSolenoid.Value.kForward);
+  public static void hatchSolenoidExtend(){
+    hatchSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
-  public static void solenoidRetract(){
-    solenoid1.set(DoubleSolenoid.Value.kReverse);
+  public static void hatchSolenoidRetract(){
+    hatchSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
   
-  public static void solenoidOff(){
-    solenoid1.set(DoubleSolenoid.Value.kOff);
+  public static void hatchSolenoidOff(){
+    hatchSolenoid.set(DoubleSolenoid.Value.kOff);
+}
+
+public static void ballSolenoidExtend(){
+  ballSolenoid.set(DoubleSolenoid.Value.kForward);
+}
+
+public static void ballSolenoidRetract(){
+  ballSolenoid.set(DoubleSolenoid.Value.kReverse);
+}
+
+public static void ballSolenoidOff(){
+  ballSolenoid.set(DoubleSolenoid.Value.kOff);
 }
 
   @Override

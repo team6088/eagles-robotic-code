@@ -23,8 +23,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.BallLiftSubsystem;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LiftDriveSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 //import org.opencv.core.Point;
@@ -41,6 +44,10 @@ public class Robot extends TimedRobot {
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
   public static LiftSubsystem liftSubystem = new LiftSubsystem();
+  public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
+  public static BallLiftSubsystem ballLiftSubsystem = new BallLiftSubsystem();
+  public static LiftDriveSubsystem liftDriveSubsystem = new LiftDriveSubsystem();
+  
   public static OI oi;
 
   //LiveWindow Test Stuff

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveManuallyCommand;
+import frc.robot.commands.UseVictorsCommand;
 
 
 /**
@@ -29,7 +30,6 @@ public class DriveSubsystem extends Subsystem {
   public WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.rightSlavePort);
   public VictorSP leftVictor = new VictorSP (RobotMap.victorDrivePortLeft);
   public VictorSP rightVictor = new VictorSP(RobotMap.victorDrivePortRight);
-
 
   // instantiate a new DifferentialDrive object and assign motor controllers to
   // differential drive

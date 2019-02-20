@@ -28,11 +28,14 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   // PWM
-  public static int liftdrivePort = 3;
+  public static int liftdrivePort = 6;
   public static int frontLiftMotorPort = 5;
   public static int backLiftMotorPort = 1;
   public static int victorDrivePortLeft = 8;
   public static int victorDrivePortRight = 9;
+  public static int servo = 2;
+  public static int servo2 = 4;
+  public static int ballLiftMotorPort = 7;
 
 
 
@@ -45,14 +48,18 @@ public class RobotMap {
 
   // USB
   public static int joystickPort = 0;
+  public static int logitechJoystickPort = 1;
 
 
 
 
   //Pneumatics
-  public static int hatchExtend = 0;
-  public static int hatchRetract = 1;
+  public static int hatchExtend = 2;
+  public static int hatchRetract = 3;
   public static int hatchCompressor = 0;
+  public static int ballExtend = 1;
+  public static int ballRetract = 4;
+
 
   //Digital IO
   public static int frontLiftSwitch = 0;

@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExtendCommand;
+import frc.robot.commands.BallGrabCommand;
+import frc.robot.commands.BallReleaseCommand;
+import frc.robot.commands.HatchExtendCommand;
+import frc.robot.commands.HatchRetractCommand;
 import frc.robot.commands.LowerRobotBackCommand;
 import frc.robot.commands.LowerRobotFrontCommand;
 import frc.robot.commands.LowerWholeRobotCommand;
 import frc.robot.commands.RaiseRobotCommand;
-import frc.robot.commands.RetractCommand;
 import frc.robot.commands.StopLowerRobotBackCommand;
 import frc.robot.commands.StopLowerRobotFrontCommand;
 import frc.robot.commands.StopLowerWholeRobotCommand;
@@ -41,6 +43,9 @@ public class OI {
                 buttonRightBumper = new JoystickButton(stick,6),
                 buttonBack = new JoystickButton(stick,7);
 
+    public Joystick logitech = new Joystick(RobotMap.logitechJoystickPort);
+    public Button logitechButtonGrab = new JoystickButton(logitech,1),
+                  logitechButtonRelease = new JoystickButton(logitech,2);
 
 
 
@@ -58,8 +63,8 @@ public class OI {
   // Start the command when the button is pressed and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
-    buttonLeftBumper.whenPressed(new ExtendCommand());
-    buttonRightBumper.whenPressed(new RetractCommand());
+    buttonLeftBumper.whenPressed(new HatchExtendCommand());
+    buttonRightBumper.whenPressed(new HatchRetractCommand());
     buttonA.whenPressed(new LowerRobotFrontCommand());
     buttonA.whenReleased(new StopLowerRobotFrontCommand());
     buttonB.whenPressed(new LowerRobotBackCommand());
@@ -68,6 +73,10 @@ public class OI {
     buttonY.whenReleased(new StopRaiseRobotCommand());
     buttonX.whenPressed(new LowerWholeRobotCommand());
     buttonX.whenReleased(new StopLowerWholeRobotCommand());
+
+    logitechButtonGrab.whenPressed(new BallGrabCommand());
+    logitechButtonRelease.whenPressed(new BallReleaseCommand());
+
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
@@ -78,8 +87,8 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   // Add commands to SmartDashboard
-    SmartDashboard.putData("ExtendCommand", new ExtendCommand());
-    SmartDashboard.putData("RetractCommand", new RetractCommand());
+    SmartDashboard.putData("ExtendCommand", new HatchExtendCommand());
+    SmartDashboard.putData("RetractCommand", new HatchRetractCommand());
     SmartDashboard.putData("LowerRobotCommand", new LowerRobotFrontCommand());
     SmartDashboard.putData("RaiseRobotCommand", new RaiseRobotCommand());
   }

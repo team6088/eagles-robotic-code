@@ -10,7 +10,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.LiftSubsystem;
-import frc.robot.OI;
 
 public class LowerWholeRobotCommand extends Command {
   public LowerWholeRobotCommand() {
