@@ -14,7 +14,7 @@ public class ExampleAutoCommand extends Command {
   public ExampleAutoCommand() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.exampleSubsystem);
+    requires(Robot.ballLiftSubsystem);
   }
 
   // Called just before this Command runs the first time

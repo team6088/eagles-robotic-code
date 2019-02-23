@@ -8,18 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.BallLiftSubsystem;
+import frc.robot.OI;
 
 public class BallLiftCommand extends Command {
   public BallLiftCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.ballLiftSubsystem);
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+ 
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -37,6 +41,7 @@ public class BallLiftCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    BallLiftSubsystem.stopDriveLift();
   }
 
   // Called when another command which requires one or more of the same

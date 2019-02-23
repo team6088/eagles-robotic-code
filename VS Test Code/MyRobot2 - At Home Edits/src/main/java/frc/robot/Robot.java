@@ -142,8 +142,9 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putData(driveSubsystem);
     SmartDashboard.putBoolean("Low Lift Switch", LiftSubsystem.frontLiftSwitch.get());
      // LiveWindow.addSensor("Front Raise Robot Switch", RobotMap.frontLiftSwitch, new DIO);
-
     
+     final boolean liftStop;
+     liftStop = SmartDashboard.putBoolean("BallLiftCommand",true);
   }
   
 

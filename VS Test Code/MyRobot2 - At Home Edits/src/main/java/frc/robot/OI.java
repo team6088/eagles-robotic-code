@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.BallGrabCommand;
+import frc.robot.commands.BallLiftCommand;
 import frc.robot.commands.BallReleaseCommand;
 import frc.robot.commands.HatchExtendCommand;
 import frc.robot.commands.HatchRetractCommand;
@@ -91,6 +92,9 @@ public class OI {
     SmartDashboard.putData("RetractCommand", new HatchRetractCommand());
     SmartDashboard.putData("LowerRobotCommand", new LowerRobotFrontCommand());
     SmartDashboard.putData("RaiseRobotCommand", new RaiseRobotCommand());
+    SmartDashboard.putData("StartBallLift",new BallLiftCommand());
+
+
   }
 
 }

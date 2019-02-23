@@ -23,13 +23,16 @@ public class BallLiftSubsystem extends Subsystem {
 
   public static void driveLift(){
     ballLiftMotor.set(Robot.oi.logitech.getRawAxis(1));
-
+    
   }
 
+  public static void stopDriveLift(){
+    ballLiftMotor.set(0);
+  }
   @Override
   public void initDefaultCommand() {
 
     // Set the default command for a subsystem here.
-    setDefaultCommand(new BallLiftCommand());
+    //setDefaultCommand(new BallLiftCommand());
   }
 }

@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.CameraSubsystem;
 
@@ -26,8 +27,10 @@ public class CameraMoveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    CameraSubsystem.horizontalLook();
-    CameraSubsystem.verticalLook();
+    double lookUp = Robot.oi.stick.getRawAxis(5);
+    //double lookSideways = Robot.oi.stick.getRawAxis(4);
+    //CameraSubsystem.horizontalLook(lookSideways);
+    CameraSubsystem.verticalLook(lookUp);
   }
 
   // Make this return true when this Command no longer needs to run execute()
