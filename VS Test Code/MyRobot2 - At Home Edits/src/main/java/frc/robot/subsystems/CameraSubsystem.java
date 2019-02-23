@@ -27,12 +27,16 @@ public class CameraSubsystem extends Subsystem {
 public static double verticalPosition = 0;
 public static double horizontalPosition = 0;
 
-  public static void verticalLook(double lookUp){
-    if(lookUp !=0 & Math.abs(lookUp)>.1)
-    verticalPosition = verticalPosition + lookUp/40;
+  public static void verticalLook(){
+    double lookUp = Robot.oi.stick.getRawAxis(5)/100;
+    if(lookUp !=0 & Math.abs(lookUp)>(.1/100))
+    verticalPosition = verticalPosition + lookUp;
+    else if(verticalPosition>1)
+    verticalPosition = 1;
+    else if (verticalPosition<0)
+    verticalPosition = 0;
     servo2.set(verticalPosition);
     SmartDashboard.putNumber("verticalPosition", verticalPosition);
-    servo2.set((Robot.oi.stick.getRawAxis(5)+1)/2);
 
 
   }

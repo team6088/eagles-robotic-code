@@ -27,10 +27,10 @@ public class CameraMoveCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double lookUp = Robot.oi.stick.getRawAxis(5);
+
     //double lookSideways = Robot.oi.stick.getRawAxis(4);
     //CameraSubsystem.horizontalLook(lookSideways);
-    CameraSubsystem.verticalLook(lookUp);
+    CameraSubsystem.verticalLook();
   }
 
   // Make this return true when this Command no longer needs to run execute()

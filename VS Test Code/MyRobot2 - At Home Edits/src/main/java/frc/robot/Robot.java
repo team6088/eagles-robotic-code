@@ -21,6 +21,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.BallGrabCommand;
+import frc.robot.commands.ExampleAutoCommand;
 //import frc.robot.commands.DriveManuallyCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.BallLiftSubsystem;
@@ -63,7 +65,7 @@ public class Robot extends TimedRobot {
   //Command driveManuallyCommand;
   Command autonomousCommand;
 
-  SendableChooser<Command> chooser = new SendableChooser<>();
+  SendableChooser<String> chooser = new SendableChooser<>();
 
   // The following is an example of how to add preferences for calibration settings
   // to the smartDashboard instead of hard-coding them.
@@ -125,26 +127,19 @@ public class Robot extends TimedRobot {
     //m_visionThread.start();
 
 
+    //Adding Scheduler and commmands to the smartDashboard
+		chooser.addDefault("Middle", "Middle");
+		chooser.addObject("Left Hatch", "LeftHatch");
+		//chooser.addObject("Center Position", "Center");
+		//chooser.addObject("Right Position", "Right");
+		//chooser.addObject("Right - Scale Preferred", "RightScale");
+    SmartDashboard.putData("Auto mode", chooser);
 
-    chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    chooser.addOption("ExampleCommand", new ExampleCommand());
-    //chooser.addObject("Example Command2", new DriveManuallyCommand());
-    SmartDashboard.putData("Autonomous mode chooser",chooser);
+
     CameraServer.getInstance().startAutomaticCapture(0);
     CameraServer.getInstance().startAutomaticCapture(1);
 
-    //Adding Scheduler and commmands to the smartDashboard
-    SmartDashboard.putData(Scheduler.getInstance());
-    SmartDashboard.putData("Auto mode", chooser);
-    //SmartDashboard.putData(pneumaticSubsystem);
-    //SmartDashboard.putData(liftSubystem);
-    //SmartDashboard.putData(exampleSubsystem);
-    //SmartDashboard.putData(driveSubsystem);
-    SmartDashboard.putBoolean("Low Lift Switch", LiftSubsystem.frontLiftSwitch.get());
      // LiveWindow.addSensor("Front Raise Robot Switch", RobotMap.frontLiftSwitch, new DIO);
-    
-     final boolean liftStop;
-     liftStop = SmartDashboard.putBoolean("BallLiftCommand",true);
   }
   
 
@@ -191,20 +186,24 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    autonomousCommand = chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
-    if (autonomousCommand != null) {
-      autonomousCommand.start();
-    }
+    String command = chooser.getSelected();
+		if (command.equals("Middle")) {
+			autonomousCommand = new ExampleAutoCommand();
+		} else if (command.equals("LeftHatch")) {
+			autonomousCommand = new BallGrabCommand();
+		//} else if (command.equals("Center")) {
+		//	autonomousCommand = new Center_Auton_CommandGroup();
+	//	} else if (command.equals("Right")) {
+		//autonomousCommand = new Right_Auton_CommandGroup();
+		//} else if (command.equals("RightScale")) {
+			//autonomousCommand = new Right_Scale_CommandGroup();
+		//}
   }
+  if (autonomousCommand != null)
+    autonomousCommand.start();
+}
+    
+  
 
   /**
    * This function is called periodically during autonomous.
@@ -239,6 +238,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    LiveWindow.run();
+    //LiveWindow.run();
   }
 }
