@@ -18,13 +18,11 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.BallGrabCommand;
+import frc.robot.commands.BallLiftCommand;
 import frc.robot.commands.ExampleAutoCommand;
-//import frc.robot.commands.DriveManuallyCommand;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.BallLiftSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -64,8 +62,7 @@ public class Robot extends TimedRobot {
   //Command lowerRobotCommand;
   //Command driveManuallyCommand;
   Command autonomousCommand;
-
-  SendableChooser<String> chooser = new SendableChooser<>();
+  SendableChooser chooser = new SendableChooser<>();
 
   // The following is an example of how to add preferences for calibration settings
   // to the smartDashboard instead of hard-coding them.
@@ -128,12 +125,13 @@ public class Robot extends TimedRobot {
 
 
     //Adding Scheduler and commmands to the smartDashboard
-		chooser.addDefault("Middle", "Middle");
-		chooser.addObject("Left Hatch", "LeftHatch");
+		chooser.addDefault("Middle", new ExampleAutoCommand());
+		chooser.addObject("Left Hatch", new BallLiftCommand());
 		//chooser.addObject("Center Position", "Center");
 		//chooser.addObject("Right Position", "Right");
 		//chooser.addObject("Right - Scale Preferred", "RightScale");
-    SmartDashboard.putData("Auto mode", chooser);
+    SmartDashboard.putData("auto mode",chooser);
+
 
 
     CameraServer.getInstance().startAutomaticCapture(0);
@@ -186,19 +184,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    String command = chooser.getSelected();
-		if (command.equals("Middle")) {
-			autonomousCommand = new ExampleAutoCommand();
-		} else if (command.equals("LeftHatch")) {
-			autonomousCommand = new BallGrabCommand();
-		//} else if (command.equals("Center")) {
-		//	autonomousCommand = new Center_Auton_CommandGroup();
-	//	} else if (command.equals("Right")) {
-		//autonomousCommand = new Right_Auton_CommandGroup();
-		//} else if (command.equals("RightScale")) {
-			//autonomousCommand = new Right_Scale_CommandGroup();
-		//}
-  }
+    autonomousCommand = (Command) chooser.getSelected();
   if (autonomousCommand != null)
     autonomousCommand.start();
 }

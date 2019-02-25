@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.BallLiftSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
 
 public class ExampleAutoCommand extends Command {
   public ExampleAutoCommand() {
@@ -29,14 +30,14 @@ public class ExampleAutoCommand extends Command {
   @Override
   protected void execute() {
     BallLiftSubsystem.driveLiftAuto();
-    Timer.delay(3);
+    //Timer.delay(3);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-
-    return true;
+    //Stop when switch is pressed (the ! means opposite)
+    return !LiftSubsystem.frontLiftSwitch.get();
   }
 
   // Called once after isFinished returns true
