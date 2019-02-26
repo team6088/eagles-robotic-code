@@ -67,6 +67,9 @@ public class RobotMap {
   public static int frontLowerSwitch = 6;
   public static int backLowerSwitch = 7;
 
+  //Analog
+  public static int ultrasonicSensor = 0;
+
   
 
   //public static int wheelDiameter = 6;

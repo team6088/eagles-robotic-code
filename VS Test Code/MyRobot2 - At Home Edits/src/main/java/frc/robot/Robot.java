@@ -15,22 +15,23 @@ package frc.robot;
 //import edu.wpi.cscore.CvSource;
 //import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.BallGrabCommand;
 import frc.robot.commands.BallLiftCommand;
 import frc.robot.commands.ExampleAutoCommand;
 import frc.robot.subsystems.BallLiftSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
+import frc.robot.subsystems.DistanceSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LiftDriveSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
-//import org.opencv.core.Point;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -47,9 +48,10 @@ public class Robot extends TimedRobot {
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
   public static BallLiftSubsystem ballLiftSubsystem = new BallLiftSubsystem();
   public static LiftDriveSubsystem liftDriveSubsystem = new LiftDriveSubsystem();
-  
+  public static DistanceSubsystem distanceSubsystem = new DistanceSubsystem();  
   public static OI oi;
-
+  public static AnalogOutput liftUltrasonic = new AnalogOutput(RobotMap.ultrasonicSensor);
+  
   //LiveWindow Test Stuff
   
 
@@ -152,9 +154,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-
-
-
+    SmartDashboard.putNumber("Drive Speed",BallLiftSubsystem.ballLiftMotor.get());
+    SmartDashboard.putNumber("distance",liftUltrasonic.getVoltage());
   }
 
   /**

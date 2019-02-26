@@ -8,12 +8,12 @@
 package frc.robot.subsystems;
 
 
+import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.commands.DriveLiftCommand;;
+import frc.robot.RobotMap;;
 
 /**
  * Add your docs here.
@@ -28,10 +28,16 @@ public class LiftSubsystem extends Subsystem {
   public static DigitalInput frontLowerSwitch = new DigitalInput(RobotMap.frontLowerSwitch);
   public static DigitalInput backLowerSwitch = new DigitalInput(RobotMap.backLowerSwitch);
   
+  //public static void liftDistance(){
+  //  double distance = liftUltrasonic.getVoltage();
+  //}
+  
   
   public static double liftMotorSpeed(){
     return frontLiftMotor.get();
   }
+
+
 
 
   //public static boolean isRaised(){

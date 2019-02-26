@@ -7,38 +7,22 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.BallLiftCommand;
 
 /**
  * Add your docs here.
  */
-public class BallLiftSubsystem extends Subsystem {
+public class DistanceSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public static Spark ballLiftMotor = new Spark(RobotMap.ballLiftMotorPort);
-
-  public static void driveLift(){
-    ballLiftMotor.set(Robot.oi.logitech.getRawAxis(1));
-  }
-
-  public static void driveLiftAuto(){
-    ballLiftMotor.set(.2);
-  }
-
-  public static void stopDriveLift(){
-    ballLiftMotor.set(0);
-  }
 
 
   @Override
   public void initDefaultCommand() {
-
     // Set the default command for a subsystem here.
-    setDefaultCommand(new BallLiftCommand());
+    // setDefaultCommand(new MySpecialCommand());
   }
 }
