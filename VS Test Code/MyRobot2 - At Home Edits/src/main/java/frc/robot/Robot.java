@@ -50,7 +50,7 @@ public class Robot extends TimedRobot {
   public static LiftDriveSubsystem liftDriveSubsystem = new LiftDriveSubsystem();
   public static DistanceSubsystem distanceSubsystem = new DistanceSubsystem();  
   public static OI oi;
-  public static AnalogOutput liftUltrasonic = new AnalogOutput(RobotMap.ultrasonicSensor);
+
   
   //LiveWindow Test Stuff
   
@@ -155,7 +155,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Drive Speed",BallLiftSubsystem.ballLiftMotor.get());
-    SmartDashboard.putNumber("distance",liftUltrasonic.getVoltage());
+    SmartDashboard.putNumber("distance",LiftSubsystem.ultrasonic.getVoltage()*(12*3.6));
   }
 
   /**

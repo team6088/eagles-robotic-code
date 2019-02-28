@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
       // Get the UsbCamera from CameraServer
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
       // Set the resolution
-      camera.setResolution(640, 480);
+      camera.setResolution(320, 240);
 
       // Get a CvSink. This will capture Mats from the camera
       CvSink cvSink = CameraServer.getInstance().getVideo();
