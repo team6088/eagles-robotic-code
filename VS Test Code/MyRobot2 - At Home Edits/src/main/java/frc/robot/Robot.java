@@ -28,7 +28,6 @@ import frc.robot.subsystems.BallLiftSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.DistanceSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LiftDriveSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
@@ -41,7 +40,6 @@ import frc.robot.subsystems.PneumaticSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
   public static LiftSubsystem liftSubystem = new LiftSubsystem();
@@ -155,7 +153,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Drive Speed",BallLiftSubsystem.ballLiftMotor.get());
-    SmartDashboard.putNumber("distance",LiftSubsystem.ultrasonic.getVoltage()*(12*3.6));
+    //SmartDashboard.putNumber("distance",LiftSubsystem.ultrasonic.getVoltage()*(12*3.6));
   }
 
   /**
