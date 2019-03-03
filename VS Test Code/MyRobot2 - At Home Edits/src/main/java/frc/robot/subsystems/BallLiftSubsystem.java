@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,7 +22,12 @@ public class BallLiftSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public static Spark ballLiftMotor = new Spark(RobotMap.ballLiftMotorPort);
+  public static AnalogInput ultrasonic = new AnalogInput(RobotMap.ultrasonicSensor);
 
+
+  public static void displayDistance(){
+    SmartDashboard.putNumber("distance",ultrasonic.getVoltage()*(12*3.6));
+  }
   public static void driveLift(){
     ballLiftMotor.set(Robot.oi.logitech.getRawAxis(1));
   }
