@@ -15,8 +15,6 @@ package frc.robot;
 //import edu.wpi.cscore.CvSource;
 //import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -26,7 +24,6 @@ import frc.robot.commands.BallLiftCommand;
 import frc.robot.commands.ExampleAutoCommand;
 import frc.robot.subsystems.BallLiftSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
-import frc.robot.subsystems.DistanceSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LiftDriveSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
@@ -46,7 +43,6 @@ public class Robot extends TimedRobot {
   public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
   public static BallLiftSubsystem ballLiftSubsystem = new BallLiftSubsystem();
   public static LiftDriveSubsystem liftDriveSubsystem = new LiftDriveSubsystem();
-  public static DistanceSubsystem distanceSubsystem = new DistanceSubsystem();  
   public static OI oi;
 
   

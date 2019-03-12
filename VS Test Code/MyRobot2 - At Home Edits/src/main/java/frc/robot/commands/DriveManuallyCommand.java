@@ -8,6 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class DriveManuallyCommand extends Command {
@@ -20,6 +22,7 @@ public class DriveManuallyCommand extends Command {
   @Override
   protected void initialize() {
     // where to reset gyro/encoders/etc.
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -27,7 +30,21 @@ public class DriveManuallyCommand extends Command {
   protected void execute() {
     double move = Robot.oi.stick.getY();
     double turn = -Robot.oi.stick.getX();
-    Robot.driveSubsystem.manualDrive(move,turn);
+
+    SendableChooser<String> driveChooser = new SendableChooser<>();
+
+		driveChooser.addObject("Competition", "Competition");
+		driveChooser.addObject("Practice", "Practice");
+    SmartDashboard.putData("Auto mode", driveChooser);
+
+    String command = driveChooser.getSelected();
+		if (command.equals("Competition")) {
+      Robot.driveSubsystem.victorDrive(move,turn);
+		} else if (command.equals("Practice")) {
+      Robot.driveSubsystem.manualDrive(move,turn);
+    }
+
+
 
   }
 

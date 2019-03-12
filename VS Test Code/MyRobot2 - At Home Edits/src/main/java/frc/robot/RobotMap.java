@@ -57,8 +57,8 @@ public class RobotMap {
   public static int hatchExtend = 2;
   public static int hatchRetract = 3;
   public static int hatchCompressor = 0;
-  public static int ballExtend = 1;
-  public static int ballRetract = 4;
+  public static int ballExtend = 0;
+  public static int ballRetract = 1;
 
 
   //Digital IO
