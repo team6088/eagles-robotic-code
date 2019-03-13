@@ -29,24 +29,13 @@ public class DriveManuallyCommand extends Command {
   @Override
   protected void execute() {
     double move = Robot.oi.stick.getY();
-    double turn = -Robot.oi.stick.getX();
-
-    SendableChooser<String> driveChooser = new SendableChooser<>();
-
-		driveChooser.addObject("Competition", "Competition");
-		driveChooser.addObject("Practice", "Practice");
-    SmartDashboard.putData("Auto mode", driveChooser);
-
-    String command = driveChooser.getSelected();
-		if (command.equals("Competition")) {
-      Robot.driveSubsystem.victorDrive(move,turn);
-		} else if (command.equals("Practice")) {
-      Robot.driveSubsystem.manualDrive(move,turn);
-    }
-
-
+    double turn = -Robot.oi.stick.getX(); 
+      //Robot.driveSubsystem.manualDrive(move,turn);
+    
 
   }
+
+  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

@@ -12,8 +12,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveManuallyCommand;
+import frc.robot.commands.UseVictorsCommand;
 
 
 /**
@@ -34,7 +37,7 @@ public class DriveSubsystem extends Subsystem {
   // differential drive
 
 
-  public DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+  //public DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
   public DifferentialDrive victorDrive = new DifferentialDrive(leftVictor, rightVictor);
 
   // create constructor function
@@ -46,13 +49,13 @@ public class DriveSubsystem extends Subsystem {
   }
 
   // add manualDrive() method
-  public void manualDrive(double move, double turn) {
+  //public void manualDrive(double move, double turn) {
 
     // max speed example
     // if(move>.5) move = .5;
 
-    drive.arcadeDrive(move, turn);
-  }
+  //  drive.arcadeDrive(move, turn);
+  //}
 
   public void victorDrive(double move, double turn){
     victorDrive.arcadeDrive(move,turn);
@@ -61,6 +64,16 @@ public class DriveSubsystem extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new DriveManuallyCommand());
+    //SendableChooser<String> driveChooser = new SendableChooser<>();
+		//driveChooser.addDefault("Competition", "Competition");
+		//driveChooser.addObject("Practice", "Practice");
+    //SmartDashboard.putData("Drive mode", driveChooser);
+    //String command = driveChooser.getSelected();
+		//if (command.equals("Competition")) {
+    //  setDefaultCommand(new UseVictorsCommand());
+		//} else if (command.equals("Practice")) {
+      setDefaultCommand(new UseVictorsCommand());
+    //}
+
   }
 }

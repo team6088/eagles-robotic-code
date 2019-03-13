@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+
 //import org.opencv.core.Mat;
 //import org.opencv.core.Scalar;
 //import org.opencv.imgproc.Imgproc;
@@ -128,10 +130,15 @@ public class Robot extends TimedRobot {
 		//chooser.addObject("Right - Scale Preferred", "RightScale");
     SmartDashboard.putData("auto mode",chooser);
 
+    // Get the UsbCamera from CameraServer
+    UsbCamera frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
+    UsbCamera backCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.backCamera);
+      //Set the resolution
+    frontCamera.setResolution(320, 240);
+    backCamera.setResolution(320, 240);
 
-
-    CameraServer.getInstance().startAutomaticCapture(0);
-    CameraServer.getInstance().startAutomaticCapture(1);
+    //CameraServer.getInstance().startAutomaticCapture(0);
+    //CameraServer.getInstance().startAutomaticCapture(1);
 
      // LiveWindow.addSensor("Front Raise Robot Switch", RobotMap.frontLiftSwitch, new DIO);
   }

@@ -42,6 +42,9 @@ public static double horizontalPosition = 0;
   }
 
   public static void horizontalLook(double lookSideways){
+
+
+    
     //if(lookSideways!=0 & Math.abs(lookSideways)>.1)
     //horizontalPosition = horizontalPosition + lookSideways/50;
     //servo2.set(horizontalPosition);

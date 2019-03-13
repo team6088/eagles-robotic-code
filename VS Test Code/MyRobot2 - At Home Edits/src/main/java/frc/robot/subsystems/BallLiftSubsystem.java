@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,7 +24,10 @@ public class BallLiftSubsystem extends Subsystem {
   // here. Call these from Commands.
   public static Spark ballLiftMotor = new Spark(RobotMap.ballLiftMotorPort);
   public static AnalogInput ultrasonic = new AnalogInput(RobotMap.ultrasonicSensor);
-
+  public static DigitalInput lowBallSwitch = new DigitalInput(RobotMap.lowBallSwitch);
+  public static DigitalInput midBallSwitch = new DigitalInput(RobotMap.midBallSwitch);
+  public static DigitalInput highBallSwitch = new DigitalInput(RobotMap.highBallSwitch);
+  public static String position = "null";
 
   public static void displayDistance(){
     SmartDashboard.putNumber("distance",ultrasonic.getVoltage()*(12*3.6));
@@ -32,6 +36,26 @@ public class BallLiftSubsystem extends Subsystem {
     ballLiftMotor.set(Robot.oi.logitech.getRawAxis(1));
   }
 
+  public static void getLiftPosition(){
+    if(highBallSwitch.get()==false)
+      position = "high";
+      else if (midBallSwitch.get()==false)
+        position = "mid";
+      else if (lowBallSwitch.get()==false)
+        position = "low";
+      else if (lowBallSwitch.get()==true & midBallSwitch.get()==true & highBallSwitch.get()==true)
+        position = "unkown";  
+      
+      SmartDashboard.putString("ball position", position);
+
+  }
+  public static void raiseBallLift(){
+    if(highBallSwitch.get()==true)
+    ballLiftMotor.set(.5);
+    else{
+      ballLiftMotor.set(0);
+  }
+  }
   public static void driveLiftAuto(){
     ballLiftMotor.set(.2);
   }

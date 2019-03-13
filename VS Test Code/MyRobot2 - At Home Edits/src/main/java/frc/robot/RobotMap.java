@@ -50,6 +50,9 @@ public class RobotMap {
   public static int joystickPort = 0;
   public static int logitechJoystickPort = 1;
 
+  //Cameras
+  public static int frontCamera = 0;
+  public static int backCamera = 1;
 
 
 
@@ -66,6 +69,9 @@ public class RobotMap {
   public static int backLiftSwitch = 1;
   public static int frontLowerSwitch = 6;
   public static int backLowerSwitch = 7;
+  public static int lowBallSwitch = 2;
+  public static int midBallSwitch = 3;
+  public static int highBallSwitch = 4;
 
   //Analog
   public static int ultrasonicSensor = 0;
