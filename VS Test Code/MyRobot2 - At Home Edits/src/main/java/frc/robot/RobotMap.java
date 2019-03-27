@@ -31,11 +31,11 @@ public class RobotMap {
   public static int liftdrivePort = 6;
   public static int frontLiftMotorPort = 5;
   public static int backLiftMotorPort = 1;
-  public static int victorDrivePortLeft = 8;
-  public static int victorDrivePortRight = 9;
-  public static int servo = 2;
-  public static int servo2 = 4;
-  public static int ballLiftMotorPort = 7;
+  //public static int victorDrivePortLeft = 8;
+  //public static int victorDrivePortRight = 9;
+  public static int servo = 8;
+  public static int servo2 = 9;
+  public static int ballLiftMotorPort = 3;
 
 
 
@@ -62,6 +62,9 @@ public class RobotMap {
   public static int hatchCompressor = 0;
   public static int ballExtend = 0;
   public static int ballRetract = 1;
+  public static int kickExtend = 4;
+  public static int kickRetract = 5;
+ public static int pancakeSolenoid = 6;
 
 
   //Digital IO
@@ -69,9 +72,9 @@ public class RobotMap {
   public static int backLiftSwitch = 1;
   public static int frontLowerSwitch = 6;
   public static int backLowerSwitch = 7;
-  public static int lowBallSwitch = 2;
+  public static int lowBallSwitch = 4;
   public static int midBallSwitch = 3;
-  public static int highBallSwitch = 4;
+  public static int highBallSwitch = 2;
 
   //Analog
   public static int ultrasonicSensor = 0;

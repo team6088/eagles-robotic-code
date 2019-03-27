@@ -6,36 +6,27 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subsystems.PneumaticSubsystem;
 
-public class DriveManuallyCommand extends Command {
-  public DriveManuallyCommand() {
+public class PancakeSolenoidCommand extends Command {
+  public PancakeSolenoidCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.driveSubsystem);
+    // eg. requires(chassis);
+   requires(Robot.pneumaticSubsystem); 
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    // where to reset gyro/encoders/etc.
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double move = Robot.oi.stick.getY();
-    double turn = -Robot.oi.stick.getX(); 
-      Robot.driveSubsystem.manualDrive(move,turn);
-    
-
+    PneumaticSubsystem.pancakeSolenoidExtend();
   }
-
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override

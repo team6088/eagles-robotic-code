@@ -13,12 +13,16 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.BallGrabCommand;
 import frc.robot.commands.BallLiftCommand;
-import frc.robot.commands.BallReleaseCommand;
+import frc.robot.commands.BallShootCommandGroup;
 import frc.robot.commands.HatchExtendCommand;
 import frc.robot.commands.HatchRetractCommand;
+import frc.robot.commands.KickExtendCommand;
+import frc.robot.commands.KickRetractCommand;
 import frc.robot.commands.LowerRobotBackCommand;
 import frc.robot.commands.LowerRobotFrontCommand;
 import frc.robot.commands.LowerWholeRobotCommand;
+import frc.robot.commands.PancakeSolenoidCommand;
+import frc.robot.commands.PancakeSolenoidRelease;
 import frc.robot.commands.RaiseRobotCommand;
 import frc.robot.commands.StopLowerRobotBackCommand;
 import frc.robot.commands.StopLowerRobotFrontCommand;
@@ -42,11 +46,16 @@ public class OI {
                 buttonY = new JoystickButton(stick,4),
                 buttonLeftBumper = new JoystickButton(stick,5),
                 buttonRightBumper = new JoystickButton(stick,6),
-                buttonBack = new JoystickButton(stick,7);
+                buttonBack = new JoystickButton(stick,7),
+                buttonRightStick = new JoystickButton(stick,10),
+                buttonLeftStick = new JoystickButton(stick,9);
+
 
     public Joystick logitech = new Joystick(RobotMap.logitechJoystickPort);
     public Button logitechButtonGrab = new JoystickButton(logitech,1),
-                  logitechButtonRelease = new JoystickButton(logitech,2);
+                  logitechButtonRelease = new JoystickButton(logitech,2),
+                  logitechButton11 = new JoystickButton(logitech,11),
+                  logitechButton12 = new JoystickButton(logitech,12);
 
 
 
@@ -74,9 +83,12 @@ public class OI {
     buttonY.whenReleased(new StopRaiseRobotCommand());
     buttonX.whenPressed(new LowerWholeRobotCommand());
     buttonX.whenReleased(new StopLowerWholeRobotCommand());
-
+    buttonRightStick.whenPressed(new PancakeSolenoidCommand());
+    buttonRightStick.whenReleased(new PancakeSolenoidRelease());
     logitechButtonGrab.whenPressed(new BallGrabCommand());
-    logitechButtonRelease.whenPressed(new BallReleaseCommand());
+    logitechButtonRelease.whenPressed(new BallShootCommandGroup());
+    logitechButton11.whenPressed(new KickRetractCommand());
+    logitechButton12.whenPressed(new KickExtendCommand());
 
 
   // Run the command while the button is being held down and interrupt it once

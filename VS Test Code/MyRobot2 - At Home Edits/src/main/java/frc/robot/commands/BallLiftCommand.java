@@ -29,7 +29,7 @@ public class BallLiftCommand extends Command {
   @Override
   protected void execute() {
     BallLiftSubsystem.driveLift();
-    BallLiftSubsystem.getLiftPosition();
+    //BallLiftSubsystem.getLiftPosition();
 
   }
 

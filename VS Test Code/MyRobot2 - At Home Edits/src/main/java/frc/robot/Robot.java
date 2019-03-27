@@ -59,8 +59,8 @@ public class Robot extends TimedRobot {
   //Command raiseRobotCommand;
   //Command lowerRobotCommand;
   //Command driveManuallyCommand;
-  Command autonomousCommand;
-  SendableChooser chooser = new SendableChooser<>();
+  //Command autonomousCommand;
+  //SendableChooser chooser = new SendableChooser<>();
 
   // The following is an example of how to add preferences for calibration settings
   // to the smartDashboard instead of hard-coding them.
@@ -123,19 +123,19 @@ public class Robot extends TimedRobot {
 
 
     //Adding Scheduler and commmands to the smartDashboard
-		chooser.addDefault("Middle", new ExampleAutoCommand());
-		chooser.addObject("Left Hatch", new BallLiftCommand());
+		//chooser.addDefault("Middle", new ExampleAutoCommand());
+		//chooser.addObject("Left Hatch", new BallLiftCommand());
 		//chooser.addObject("Center Position", "Center");
 		//chooser.addObject("Right Position", "Right");
 		//chooser.addObject("Right - Scale Preferred", "RightScale");
-    SmartDashboard.putData("auto mode",chooser);
+    //SmartDashboard.putData("auto mode",chooser);
 
     // Get the UsbCamera from CameraServer
     UsbCamera frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
     UsbCamera backCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.backCamera);
       //Set the resolution
-    frontCamera.setResolution(320, 240);
-    backCamera.setResolution(320, 240);
+    frontCamera.setResolution(240, 180);
+    backCamera.setResolution(240, 180);
 
     //CameraServer.getInstance().startAutomaticCapture(0);
     //CameraServer.getInstance().startAutomaticCapture(1);
@@ -186,9 +186,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    autonomousCommand = (Command) chooser.getSelected();
-  if (autonomousCommand != null)
-    autonomousCommand.start();
+  //  autonomousCommand = (Command) chooser.getSelected();
+  //if (autonomousCommand != null)
+  //  autonomousCommand.start();
 }
     
   
@@ -207,9 +207,9 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (autonomousCommand != null) {
-      autonomousCommand.cancel();
-    }
+    //if (autonomousCommand != null) {
+    //  autonomousCommand.cancel();
+    //}
   }
 
   /**

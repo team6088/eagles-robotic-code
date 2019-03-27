@@ -28,12 +28,28 @@ public class BallLiftSubsystem extends Subsystem {
   public static DigitalInput midBallSwitch = new DigitalInput(RobotMap.midBallSwitch);
   public static DigitalInput highBallSwitch = new DigitalInput(RobotMap.highBallSwitch);
   public static String position = "null";
+  
 
   public static void displayDistance(){
     SmartDashboard.putNumber("distance",ultrasonic.getVoltage()*(12*3.6));
   }
   public static void driveLift(){
-    ballLiftMotor.set(Robot.oi.logitech.getRawAxis(1));
+    double ballLiftSpeed = Robot.oi.logitech.getRawAxis(1);
+    //if (lowBallSwitch.get()==true & midBallSwitch.get()==true & highBallSwitch.get()==true)
+
+    SmartDashboard.putBoolean("Low Ball Position",lowBallSwitch.get());
+    SmartDashboard.putBoolean("Mid Ball Position",midBallSwitch.get());
+    SmartDashboard.putBoolean("High Ball Position",highBallSwitch.get());
+    
+    //if (highBallSwitch.get()==false & ballLiftSpeed>0)
+    //ballLiftMotor.set(0);
+    //else if(lowBallSwitch.get()==false)
+    //ballLiftMotor.set(ballLiftSpeed);
+    //else
+    ballLiftMotor.set(ballLiftSpeed);
+    SmartDashboard.putNumber("Lift Speed",ballLiftSpeed);
+    
+
   }
 
   public static void getLiftPosition(){
@@ -49,13 +65,13 @@ public class BallLiftSubsystem extends Subsystem {
       SmartDashboard.putString("ball position", position);
 
   }
-  public static void raiseBallLift(){
-    if(highBallSwitch.get()==true)
-    ballLiftMotor.set(.5);
-    else{
-      ballLiftMotor.set(0);
-  }
-  }
+  //public static void raiseBallLift(){
+  //  if(highBallSwitch.get()==true)
+  //  ballLiftMotor.set(.5);
+  //  else{
+  //    ballLiftMotor.set(0);
+  //}
+  //}
   public static void driveLiftAuto(){
     ballLiftMotor.set(.2);
   }

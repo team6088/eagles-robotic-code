@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveManuallyCommand;
-import frc.robot.commands.UseVictorsCommand;
 
 
 /**
@@ -30,15 +29,15 @@ public class DriveSubsystem extends Subsystem {
   public WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.leftSlavePort);
   public WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.rightMasterPort);
   public WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.rightSlavePort);
-  public VictorSP leftVictor = new VictorSP (RobotMap.victorDrivePortLeft);
-  public VictorSP rightVictor = new VictorSP(RobotMap.victorDrivePortRight);
+  //public VictorSP leftVictor = new VictorSP (RobotMap.victorDrivePortLeft);
+  //public VictorSP rightVictor = new VictorSP(RobotMap.victorDrivePortRight);
 
   // instantiate a new DifferentialDrive object and assign motor controllers to
   // differential drive
 
 
-  //public DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
-  public DifferentialDrive victorDrive = new DifferentialDrive(leftVictor, rightVictor);
+  public DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+  //public DifferentialDrive victorDrive = new DifferentialDrive(leftVictor, rightVictor);
 
   // create constructor function
   public DriveSubsystem() {
@@ -49,17 +48,24 @@ public class DriveSubsystem extends Subsystem {
   }
 
   // add manualDrive() method
-  //public void manualDrive(double move, double turn) {
+  public void manualDrive(double move, double turn) {
 
     // max speed example
-    // if(move>.5) move = .5;
+    if(Math.abs(move)<.2) {
+      move = 0;
+    }
+    if (Math.abs(turn)<.2){
+      turn = 0;
+    }
 
-  //  drive.arcadeDrive(move, turn);
-  //}
+    drive.arcadeDrive(move, turn);
+    
 
-  public void victorDrive(double move, double turn){
-    victorDrive.arcadeDrive(move,turn);
   }
+
+  //public void victorDrive(double move, double turn){
+  //  victorDrive.arcadeDrive(move,turn);
+  //}
 
   @Override
   public void initDefaultCommand() {
@@ -72,7 +78,7 @@ public class DriveSubsystem extends Subsystem {
 		//if (command.equals("Competition")) {
     //  setDefaultCommand(new UseVictorsCommand());
 		//} else if (command.equals("Practice")) {
-      setDefaultCommand(new UseVictorsCommand());
+      setDefaultCommand(new DriveManuallyCommand());
     //}
 
   }

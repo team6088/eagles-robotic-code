@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.PneumaticSubsystem;
@@ -25,24 +26,30 @@ public class BallReleaseCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    PneumaticSubsystem.ballSolenoidExtend();
+    PneumaticSubsystem.ballSolenoidRetract();
+    PneumaticSubsystem.kickSolenoidExtend();
+    
+    //Timer.delay(1);
+    //PneumaticSubsystem.kickSolenoidRetract();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+   return false;
+
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    PneumaticSubsystem.hatchSolenoidOff();
+    PneumaticSubsystem.ballSolenoidOff();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    
   }
 }
