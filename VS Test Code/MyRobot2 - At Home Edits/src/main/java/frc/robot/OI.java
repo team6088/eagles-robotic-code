@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.BallGrabCommand;
 import frc.robot.commands.BallLiftCommand;
 import frc.robot.commands.BallShootCommandGroup;
+import frc.robot.commands.CalibrateGyroCommand;
 import frc.robot.commands.HatchExtendCommand;
 import frc.robot.commands.HatchRetractCommand;
 import frc.robot.commands.KickExtendCommand;
@@ -105,6 +106,7 @@ public class OI {
     SmartDashboard.putData("LowerRobotCommand", new LowerRobotFrontCommand());
     SmartDashboard.putData("RaiseRobotCommand", new RaiseRobotCommand());
     SmartDashboard.putData("StartBallLift",new BallLiftCommand());
+    SmartDashboard.putData("Calibrate Gyro",new CalibrateGyroCommand());
 
 
   }

@@ -23,16 +23,16 @@ public class BallLiftSubsystem extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   public static Spark ballLiftMotor = new Spark(RobotMap.ballLiftMotorPort);
-  public static AnalogInput ultrasonic = new AnalogInput(RobotMap.ultrasonicSensor);
+  //public static AnalogInput ultrasonic = new AnalogInput(RobotMap.ultrasonicSensor);
   public static DigitalInput lowBallSwitch = new DigitalInput(RobotMap.lowBallSwitch);
   public static DigitalInput midBallSwitch = new DigitalInput(RobotMap.midBallSwitch);
   public static DigitalInput highBallSwitch = new DigitalInput(RobotMap.highBallSwitch);
   public static String position = "null";
   
 
-  public static void displayDistance(){
-    SmartDashboard.putNumber("distance",ultrasonic.getVoltage()*(12*3.6));
-  }
+  //public static void displayDistance(){
+  //  SmartDashboard.putNumber("distance",ultrasonic.getVoltage()*(12*3.6));
+  //}
   public static void driveLift(){
     double ballLiftSpeed = Robot.oi.logitech.getRawAxis(1);
     //if (lowBallSwitch.get()==true & midBallSwitch.get()==true & highBallSwitch.get()==true)

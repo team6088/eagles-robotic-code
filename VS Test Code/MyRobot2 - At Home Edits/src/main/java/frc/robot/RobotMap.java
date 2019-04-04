@@ -40,10 +40,10 @@ public class RobotMap {
 
 
   // CAN
-  public static int leftMasterPort = 1;
-  public static int leftSlavePort = 3;
-  public static int rightMasterPort = 0;
-  public static int rightSlavePort = 2;
+  public static int leftMasterPort = 0;
+  public static int leftSlavePort = 1;
+  public static int rightMasterPort = 2;
+  public static int rightSlavePort = 3;
 
 
   // USB
@@ -53,6 +53,7 @@ public class RobotMap {
   //Cameras
   public static int frontCamera = 0;
   public static int backCamera = 1;
+
 
 
 

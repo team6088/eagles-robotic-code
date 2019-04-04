@@ -11,8 +11,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;;
+import frc.robot.RobotMap;
+import frc.robot.commands.GetGyroValueCommand;
+
 
 /**
  * Add your docs here.
@@ -26,9 +29,7 @@ public class LiftSubsystem extends Subsystem {
   public static DigitalInput backLiftSwitch = new DigitalInput(RobotMap.backLiftSwitch);
   public static DigitalInput frontLowerSwitch = new DigitalInput(RobotMap.frontLowerSwitch);
   public static DigitalInput backLowerSwitch = new DigitalInput(RobotMap.backLowerSwitch);
-
-
-
+  public static ADXRS453Gyro gyroSPI = new ADXRS453Gyro();
 
 
   public static double liftMotorSpeed(){
@@ -90,6 +91,8 @@ public class LiftSubsystem extends Subsystem {
     //}
 }
 
+
+
   public static void stopFrontLift(){
     frontLiftMotor.set(0);
   }
@@ -102,16 +105,33 @@ public class LiftSubsystem extends Subsystem {
     frontLiftMotor.set(0);
     backLiftMotor.set(0);
   }
-  
 
  // public static void stopLower(){
     //if(isLowered() & liftMotorSpeed() < 0)
       //liftMotor.set(0);
   //}
+  
+public static void initializeGyro(){
+  gyroSPI.startThread();
+}
+public static void calibrateGyro(){
+  gyroSPI.calibrate();
+}
 
+public static void calibrationComplete(boolean calibrated){
+ calibrated = gyroSPI.hasCompletedCalibration();
+  }
+  
+
+public static void getAngle(){
+  SmartDashboard.putNumber("angle", gyroSPI.getAngle());
+  SmartDashboard.putNumber("position",gyroSPI.getPos());
+
+}
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    //setDefaultCommand(new DriveLiftCommand());
+    setDefaultCommand(new GetGyroValueCommand());
   }
 }
+
