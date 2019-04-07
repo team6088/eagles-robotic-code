@@ -8,13 +8,16 @@
 package frc.robot.subsystems;
 
 
+//import static org.junit.Assume.assumeFalse;
+//import static org.junit.Assume.assumeTrue;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.GetGyroValueCommand;
+//import frc.robot.commands.GetGyroValueCommand;
 
 
 /**
@@ -49,7 +52,7 @@ public class LiftSubsystem extends Subsystem {
 
   public static void raiseRobot(){
     if(frontLiftSwitch.get()==true)
-    frontLiftMotor.set(1);
+    frontLiftMotor.set(-.92);
     else{
       frontLiftMotor.set(0);
     }
@@ -60,6 +63,20 @@ public class LiftSubsystem extends Subsystem {
     }
     }
 
+public static void raiseRobotFront(){
+  if(frontLiftSwitch.get()==true)
+  frontLiftMotor.set(-1);
+  else{
+    frontLiftMotor.set(0);
+  }
+}
+public static void raiseRobotBack(){
+  if(backLiftSwitch.get()==true)
+  backLiftMotor.set(1);
+else{
+  backLiftMotor.set(0);
+}
+}
 
   //public static void stopRaise(){
     //if(isRaised() & liftMotorSpeed() > 0)
@@ -67,30 +84,54 @@ public class LiftSubsystem extends Subsystem {
   //}
 
   public static void lowerRobotFront(){
-    if(frontLowerSwitch.get()==true)
-      frontLiftMotor.set(-1);
-      else {
-        frontLiftMotor.set(0);
+    if(Robot.oi.buttonLeftBumper.get()==true && Robot.oi.buttonA.get()==true)
+      frontLiftMotor.set(1);
+      else if (Robot.oi.buttonLeftBumper.get()==true && Robot.oi.buttonA.get()==false)
+      frontLiftMotor.set(-.18);
+      else if (Robot.oi.buttonLeftBumper.get()==false && Robot.oi.buttonA.get()==true)
+      frontLiftMotor.set(1);
+      else
+      frontLiftMotor.set(0);
   }
-  }
+  
   public static void lowerRobotBack(){
-    if(backLowerSwitch.get()==true)
-      backLiftMotor.set(-1);
-    else {
-      backLiftMotor.set(0);
-    }
+    //ORIGINAL CODE
+    //if(backLowerSwitch.get()==true)
+    //  backLiftMotor.set(-1);
+    //else {
+     // backLiftMotor.set(0);
+    //}
+
+    //Test holding code.... Don't need ==True for buttons?
+    if(Robot.oi.buttonRightBumper.get()==true && Robot.oi.buttonB.get()==true)
+    backLiftMotor.set(-1);
+    else if (Robot.oi.buttonRightBumper.get()==true && Robot.oi.buttonB.get()==false)
+    backLiftMotor.set(.18);
+    else if (Robot.oi.buttonRightBumper.get()==false && Robot.oi.buttonB.get()==true)
+    backLiftMotor.set(-1);
+    else
+    backLiftMotor.set(0);
   }
 
   public static void lowerWholeRobot(){
     if(Robot.oi.buttonX.get())
     backLiftMotor.set(-1);
-    frontLiftMotor.set(-1);
+    frontLiftMotor.set(1);
     //else{
      // backLiftMotor.set(0);
      // frontLiftMotor.set(0);
     //}
 }
 
+public static void holdRobotFront(){
+  if (frontLowerSwitch.get()==true)
+    frontLiftMotor.set(.1);
+}
+
+public static void holdRobotBack(){
+  if (backLowerSwitch.get()==true)
+    backLiftMotor.set(.1);
+}
 
 
   public static void stopFrontLift(){
@@ -131,7 +172,7 @@ public static void getAngle(){
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new GetGyroValueCommand());
+    //setDefaultCommand(new GetGyroValueCommand());
   }
 }
 

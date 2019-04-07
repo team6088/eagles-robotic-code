@@ -6,12 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
+import frc.robot.Robot;
+import frc.robot.subsystems.LiftSubsystem;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.PneumaticSubsystem;
 
-public class PancakeSolenoidRelease extends Command {
-  public PancakeSolenoidRelease() {
+public class StopRaiseRobotBackCommand extends Command {
+  public StopRaiseRobotBackCommand() {
+    requires(Robot.liftSubystem);
+
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -24,7 +26,7 @@ public class PancakeSolenoidRelease extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    PneumaticSubsystem.pancakeSolenoidRetract();
+    LiftSubsystem.stopBackLift();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,5 +44,6 @@ public class PancakeSolenoidRelease extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    LiftSubsystem.stopBackLift();
   }
 }

@@ -24,21 +24,22 @@ public class PneumaticSubsystem extends Subsystem {
   public static DoubleSolenoid hatchSolenoid = new DoubleSolenoid(RobotMap.hatchRetract,RobotMap.hatchExtend);
   public static DoubleSolenoid ballSolenoid = new DoubleSolenoid(RobotMap.ballRetract,RobotMap.ballExtend);
   public static DoubleSolenoid kickSolenoid = new DoubleSolenoid(RobotMap.kickRetract,RobotMap.kickExtend);
- public static Solenoid pancakeSolenoid = new Solenoid(RobotMap.pancakeSolenoid);
+  public static DoubleSolenoid pancakeSolenoid = new DoubleSolenoid(RobotMap.pancakeSolenoidRetract,RobotMap.pancakeSolenoidExtend);
 
   public static void init(){
     compressor1.setClosedLoopControl(true);
     //compressor1.enabled();
   }
  public static void pancakeSolenoidExtend(){
-   pancakeSolenoid.set(true);
- }
+pancakeSolenoid.set(DoubleSolenoid.Value.kForward); }
 
   public static void pancakeSolenoidRetract(){
-    pancakeSolenoid.set(false);
+    pancakeSolenoid.set(DoubleSolenoid.Value.kReverse);
   }
 
-
+public static void pancakeSolenoidOff(){
+  pancakeSolenoid.set(DoubleSolenoid.Value.kOff);
+}
   public static void hatchSolenoidExtend(){
     hatchSolenoid.set(DoubleSolenoid.Value.kForward);
   }

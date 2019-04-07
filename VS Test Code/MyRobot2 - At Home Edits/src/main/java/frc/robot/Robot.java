@@ -17,6 +17,7 @@ import edu.wpi.cscore.UsbCamera;
 //import edu.wpi.cscore.CvSource;
 //import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -156,6 +157,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Drive Speed",BallLiftSubsystem.ballLiftMotor.get());
+    System.out.println("controller button count: " + new Joystick(RobotMap.joystickPort).getButtonCount());
     //SmartDashboard.putNumber("distance",LiftSubsystem.ultrasonic.getVoltage()*(12*3.6));
   }
 

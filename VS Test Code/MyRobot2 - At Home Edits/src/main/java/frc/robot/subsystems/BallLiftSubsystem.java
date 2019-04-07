@@ -34,6 +34,7 @@ public class BallLiftSubsystem extends Subsystem {
   //  SmartDashboard.putNumber("distance",ultrasonic.getVoltage()*(12*3.6));
   //}
   public static void driveLift(){
+    
     double ballLiftSpeed = Robot.oi.logitech.getRawAxis(1);
     //if (lowBallSwitch.get()==true & midBallSwitch.get()==true & highBallSwitch.get()==true)
 
@@ -46,6 +47,9 @@ public class BallLiftSubsystem extends Subsystem {
     //else if(lowBallSwitch.get()==false)
     //ballLiftMotor.set(ballLiftSpeed);
     //else
+    if(Math.abs(ballLiftSpeed)<.25) {
+      ballLiftSpeed = 0;
+    }
     ballLiftMotor.set(ballLiftSpeed);
     SmartDashboard.putNumber("Lift Speed",ballLiftSpeed);
     

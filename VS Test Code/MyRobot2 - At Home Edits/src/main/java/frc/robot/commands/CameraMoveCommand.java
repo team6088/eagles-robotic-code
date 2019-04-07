@@ -21,7 +21,7 @@ public class CameraMoveCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    CameraSubsystem.servo2.set(.6);
+    CameraSubsystem.servo2.set(.2);
     CameraSubsystem.servo.set(.5);
   }
 

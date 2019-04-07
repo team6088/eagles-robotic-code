@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.POVButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.BallGrabCommand;
 import frc.robot.commands.BallLiftCommand;
@@ -17,18 +19,26 @@ import frc.robot.commands.BallShootCommandGroup;
 import frc.robot.commands.CalibrateGyroCommand;
 import frc.robot.commands.HatchExtendCommand;
 import frc.robot.commands.HatchRetractCommand;
+//import frc.robot.commands.HoldRobotBackCommand;
+//import frc.robot.commands.HoldRobotFrontCommand;
 import frc.robot.commands.KickExtendCommand;
 import frc.robot.commands.KickRetractCommand;
 import frc.robot.commands.LowerRobotBackCommand;
 import frc.robot.commands.LowerRobotFrontCommand;
 import frc.robot.commands.LowerWholeRobotCommand;
-import frc.robot.commands.PancakeSolenoidCommand;
-import frc.robot.commands.PancakeSolenoidRelease;
+import frc.robot.commands.PancakeSolenoidExtendCommand;
+import frc.robot.commands.PancakeSolenoidRetractCommand;
+import frc.robot.commands.RaiseRobotBackCommand;
 import frc.robot.commands.RaiseRobotCommand;
+import frc.robot.commands.RaiseRobotFrontCommand;
+//import frc.robot.commands.StopHoldRobotBackCommand;
+//import frc.robot.commands.StopHoldRobotFrontCommand;
 import frc.robot.commands.StopLowerRobotBackCommand;
 import frc.robot.commands.StopLowerRobotFrontCommand;
 import frc.robot.commands.StopLowerWholeRobotCommand;
+import frc.robot.commands.StopRaiseRobotBackCommand;
 import frc.robot.commands.StopRaiseRobotCommand;
+import frc.robot.commands.StopRaiseRobotFrontCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,14 +59,26 @@ public class OI {
                 buttonRightBumper = new JoystickButton(stick,6),
                 buttonBack = new JoystickButton(stick,7),
                 buttonRightStick = new JoystickButton(stick,10),
-                buttonLeftStick = new JoystickButton(stick,9);
+                buttonLeftStick = new JoystickButton(stick,9),
+                buttonDpadN = new AnalogJoystickButton(stick, 0, 0),
+                buttonDpadE = new AnalogJoystickButton(stick, 0, 90),
+                buttonDpadS = new AnalogJoystickButton(stick, 0, 180),
+                buttonDpadW = new AnalogJoystickButton(stick, 0, 270),
+                buttonDpadNE = new AnalogJoystickButton(stick, 0, 45),
+                buttonDpadSE = new AnalogJoystickButton(stick, 0, 135),
+                buttonDpadSW = new AnalogJoystickButton(stick, 0, 225),
+                buttonDpadNW = new AnalogJoystickButton(stick, 0, 315);
+
 
 
     public Joystick logitech = new Joystick(RobotMap.logitechJoystickPort);
     public Button logitechButtonGrab = new JoystickButton(logitech,1),
                   logitechButtonRelease = new JoystickButton(logitech,2),
                   logitechButton11 = new JoystickButton(logitech,11),
-                  logitechButton12 = new JoystickButton(logitech,12);
+                  logitechButton12 = new JoystickButton(logitech,12),
+                  logitechButton7 = new JoystickButton(logitech,7),
+                  logitechButton8 = new JoystickButton(logitech,8);
+
 
 
 
@@ -74,8 +96,10 @@ public class OI {
   // Start the command when the button is pressed and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenPressed(new ExampleCommand());
-    buttonLeftBumper.whenPressed(new HatchExtendCommand());
-    buttonRightBumper.whenPressed(new HatchRetractCommand());
+    buttonLeftBumper.whenPressed(new LowerRobotFrontCommand());
+    buttonLeftBumper.whenReleased(new StopLowerRobotFrontCommand());
+    buttonRightBumper.whenPressed(new LowerRobotBackCommand());
+    buttonRightBumper.whenReleased(new StopLowerRobotBackCommand());
     buttonA.whenPressed(new LowerRobotFrontCommand());
     buttonA.whenReleased(new StopLowerRobotFrontCommand());
     buttonB.whenPressed(new LowerRobotBackCommand());
@@ -84,13 +108,26 @@ public class OI {
     buttonY.whenReleased(new StopRaiseRobotCommand());
     buttonX.whenPressed(new LowerWholeRobotCommand());
     buttonX.whenReleased(new StopLowerWholeRobotCommand());
-    buttonRightStick.whenPressed(new PancakeSolenoidCommand());
-    buttonRightStick.whenReleased(new PancakeSolenoidRelease());
+    buttonDpadN.whenPressed(new RaiseRobotCommand());
+    buttonDpadN.whenReleased(new StopRaiseRobotCommand());
+    buttonDpadS.whenPressed(new LowerWholeRobotCommand());
+    buttonDpadS.whenReleased(new StopLowerWholeRobotCommand());
+    buttonDpadE.whenPressed(new RaiseRobotFrontCommand());
+    buttonDpadE.whenReleased(new StopRaiseRobotFrontCommand());
+    buttonDpadW.whenPressed(new RaiseRobotBackCommand());
+    buttonDpadW.whenReleased(new StopRaiseRobotBackCommand());
+    buttonRightStick.whenPressed(new PancakeSolenoidExtendCommand());
+    buttonLeftStick.whenReleased(new PancakeSolenoidRetractCommand());
     logitechButtonGrab.whenPressed(new BallGrabCommand());
     logitechButtonRelease.whenPressed(new BallShootCommandGroup());
     logitechButton11.whenPressed(new KickRetractCommand());
     logitechButton12.whenPressed(new KickExtendCommand());
-
+    logitechButton7.whenPressed(new HatchExtendCommand());
+    //logitechButton7.whenReleased(new StopLowerRobotFrontCommand());
+    logitechButton8.whenPressed(new HatchRetractCommand());
+    //logitechButton8.whenReleased(new StopLowerRobotBackCommand());
+    // Having "whenReleased" for logitech buttons apply the stop lower command may cause issues with other buttons trying to lower the robot.
+    // Having the "else" motor = 0 in the subsystem may be adequate for stopping the lower function.
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.

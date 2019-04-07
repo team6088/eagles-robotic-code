@@ -6,36 +6,27 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.subsystems.LiftSubsystem;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveManuallyCommand extends Command {
-  public DriveManuallyCommand() {
+public class RaiseRobotFrontCommand extends Command {
+  public RaiseRobotFrontCommand() {
+    requires(Robot.liftSubystem);
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.driveSubsystem);
+    // eg. requires(chassis);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    // where to reset gyro/encoders/etc.
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double move = Robot.oi.stick.getY()*.9;
-    double turn = Robot.oi.stick.getX()*.9; 
-      Robot.driveSubsystem.manualDrive(move,turn);
-    
-
+    LiftSubsystem.raiseRobotFront();
   }
-
-  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -46,11 +37,14 @@ public class DriveManuallyCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    LiftSubsystem.stopFrontLift();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    LiftSubsystem.stopFrontLift();
+
   }
 }

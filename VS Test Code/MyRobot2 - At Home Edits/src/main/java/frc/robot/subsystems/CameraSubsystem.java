@@ -24,12 +24,12 @@ public class CameraSubsystem extends Subsystem {
   public static Servo servo = new Servo(RobotMap.servo);
   public static Servo servo2 = new Servo(RobotMap.servo2);
   public static WaitCommand servoWait = new WaitCommand(100);
-public static double verticalPosition = .6;
+public static double verticalPosition = .2;
 public static double horizontalPosition = .5;
 
   public static void verticalLook(){
     double lookUp = Robot.oi.stick.getRawAxis(5)/100;
-    if(lookUp !=0 & Math.abs(lookUp)>(.2/100))
+    if(lookUp !=0 & Math.abs(lookUp)>(.4/100))
     verticalPosition = verticalPosition + lookUp;
     else if(verticalPosition>1)
     verticalPosition = 1;
@@ -41,15 +41,17 @@ public static double horizontalPosition = .5;
 
   }
   public static void horizontalPosition(){
-    double lookSideways = Robot.oi.stick.getRawAxis(4)/50;
-    if(lookSideways !=0 & Math.abs(lookSideways)>(.2/100))
-    horizontalPosition = horizontalPosition + lookSideways;
-    else if(horizontalPosition>1)
-    horizontalPosition = 1;
-    else if (horizontalPosition<0)
-    horizontalPosition = 0;
-    servo.set(horizontalPosition);
-    SmartDashboard.putNumber("horizontalPosition", horizontalPosition);
+    //double lookSideways = Robot.oi.stick.getRawAxis(4)/50;
+    //if(lookSideways !=0 & Math.abs(lookSideways)>(.4/100))
+    //horizontalPosition = horizontalPosition + lookSideways;
+    //else if(horizontalPosition>1)
+    //horizontalPosition = 1;
+    //else if (horizontalPosition<0)
+    //horizontalPosition = 0;
+    //servo.set(horizontalPosition);
+    //SmartDashboard.putNumber("horizontalPosition", horizontalPosition);
+
+    servo.set((Robot.oi.stick.getRawAxis(4)+1)/2);
   }
 
   
@@ -63,7 +65,7 @@ public static double horizontalPosition = .5;
     
     
     
-    //servo.set((Robot.oi.stick.getRawAxis(4)+1)/2);
+
   
 
   @Override

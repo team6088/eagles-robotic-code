@@ -65,7 +65,8 @@ public class RobotMap {
   public static int ballRetract = 1;
   public static int kickExtend = 4;
   public static int kickRetract = 5;
- public static int pancakeSolenoid = 6;
+ public static int pancakeSolenoidExtend = 6;
+ public static int pancakeSolenoidRetract = 7;
 
 
   //Digital IO
