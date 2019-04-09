@@ -128,6 +128,7 @@ public class OI {
     //logitechButton8.whenReleased(new StopLowerRobotBackCommand());
     // Having "whenReleased" for logitech buttons apply the stop lower command may cause issues with other buttons trying to lower the robot.
     // Having the "else" motor = 0 in the subsystem may be adequate for stopping the lower function.
+    
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
