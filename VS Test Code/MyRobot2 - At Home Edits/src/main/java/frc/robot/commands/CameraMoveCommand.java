@@ -23,6 +23,7 @@ public class CameraMoveCommand extends Command {
   protected void initialize() {
     CameraSubsystem.servo2.set(.2);
     CameraSubsystem.servo.set(.5);
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -32,7 +33,7 @@ public class CameraMoveCommand extends Command {
     //double lookSideways = Robot.oi.stick.getRawAxis(4);
     //CameraSubsystem.horizontalLook(lookSideways);
     CameraSubsystem.verticalLook();
-    CameraSubsystem.horizontalPosition();
+    CameraSubsystem.horizontalLook();
   }
 
   // Make this return true when this Command no longer needs to run execute()

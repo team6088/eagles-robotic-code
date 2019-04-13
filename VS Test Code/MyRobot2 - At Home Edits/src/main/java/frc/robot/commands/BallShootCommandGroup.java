@@ -21,6 +21,8 @@ public class BallShootCommandGroup extends CommandGroup {
     // Add Commands here:
     addSequential(new BallReleaseCommand());
     addSequential(new KickExtendCommand());
+    addSequential(new WaitCommand(1));
+    addSequential(new KickRetractCommand());
     
     //addSequential(new KickRetractCommand());
 

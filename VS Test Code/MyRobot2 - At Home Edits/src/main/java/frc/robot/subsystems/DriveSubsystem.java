@@ -43,27 +43,22 @@ public class DriveSubsystem extends Subsystem {
 
     leftSlave.follow(leftMaster);
     rightSlave.follow(rightMaster);
-  }
 
-  // add manualDrive() method
-  public void manualDrive(double move, double turn) {
-        /* Current threshold to trigger current limit */
-    final int peakCurrentAmps = 20;
+
+    final int peakCurrentAmps = 35;
         /* Duration after current exceed Peak Current to trigger current limit */
     final int peakTimeMs = 0;
         /* Current to mantain once current limit has been triggered */
-    final int continCurrentAmps = 15;
+    final int continCurrentAmps = 35;
         /**
      * Timeout value generally used in parameter configs
      * Non-zero to block the config until success, zero to skip checking 
      */
-    final int timoutMs = 30;
-    boolean currentSelect = false;
-    boolean currentButton = Robot.oi.logitech.getRawButton(10);
+    final int timoutMs = 200;
+    //boolean currentSelect = false;
+    //boolean currentButton = Robot.oi.logitech.getRawButton(10);
     boolean currentLimitState = true;
-    
-    leftMaster.configFactoryDefault();
-    rightMaster.configFactoryDefault();
+
     leftMaster.configPeakCurrentLimit(peakCurrentAmps,timoutMs);
     leftMaster.configPeakCurrentDuration(peakTimeMs,timoutMs);
     leftMaster.configContinuousCurrentLimit(continCurrentAmps,timoutMs);
@@ -73,7 +68,27 @@ public class DriveSubsystem extends Subsystem {
     rightMaster.configContinuousCurrentLimit(continCurrentAmps,timoutMs);
     rightMaster.enableCurrentLimit(currentLimitState);
 
-    // max speed example
+        		/* on logitech button 10  */
+    //        if (!currentSelect && currentButton){
+    //          /* toggle current limit */
+    //    currentLimitState = !currentLimitState;
+        /* update Talon current limit */
+      //  leftMaster.enableCurrentLimit(currentLimitState);
+      //  rightMaster.enableCurrentLimit(currentLimitState);
+        /* print to DS */
+   
+        /* print to DS */
+   //     System.out.println("Enable Current Limit:" + currentLimitState);
+   //     SmartDashboard.putBoolean("Current Limit State", currentLimitState);
+       SmartDashboard.putNumber("Right current",rightMaster.getOutputCurrent());
+      SmartDashboard.putNumber("Left current",leftMaster.getOutputCurrent());
+    
+            }
+          
+
+  // add manualDrive() method
+  public void manualDrive(double move, double turn) {
+  
     if(Math.abs(move)<.2) {
       move = 0;
     }
@@ -83,20 +98,10 @@ public class DriveSubsystem extends Subsystem {
 
     drive.arcadeDrive(move, turn);
     
-    		/* on logitech button 10  */
-    if (!currentSelect && currentButton){
-      			/* toggle current limit */
-      currentLimitState = !currentLimitState;
-			/* update Talon current limit */
-      leftMaster.enableCurrentLimit(currentLimitState);
-      rightMaster.enableCurrentLimit(currentLimitState);
-			/* print to DS */
-      System.out.println("Enable Current Limit:" + currentLimitState);
-    	/* print to DS */
-      SmartDashboard.putBoolean("Current Limit State", currentLimitState);
-    }
 
-  }
+    }
+   
+  
 
   //public void victorDrive(double move, double turn){
   //  victorDrive.arcadeDrive(move,turn);

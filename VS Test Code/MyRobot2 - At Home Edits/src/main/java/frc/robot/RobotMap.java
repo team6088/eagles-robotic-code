@@ -36,6 +36,9 @@ public class RobotMap {
   public static int servo = 8;
   public static int servo2 = 9;
   public static int ballLiftMotorPort = 3;
+  public static int ballIntakeMotor = 4;
+  public static int ballServoVertical = 2;
+  public static int ballServoHorizontal = 7;
 
 
 

@@ -10,11 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.POVButton;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.BallGrabCommand;
 import frc.robot.commands.BallLiftCommand;
+import frc.robot.commands.BallLookDownCommand;
+import frc.robot.commands.BallLookLeftCommand;
+import frc.robot.commands.BallLookRightCommand;
+import frc.robot.commands.BallLookUpCommand;
 import frc.robot.commands.BallShootCommandGroup;
 import frc.robot.commands.CalibrateGyroCommand;
 import frc.robot.commands.HatchExtendCommand;
@@ -77,7 +79,12 @@ public class OI {
                   logitechButton11 = new JoystickButton(logitech,11),
                   logitechButton12 = new JoystickButton(logitech,12),
                   logitechButton7 = new JoystickButton(logitech,7),
-                  logitechButton8 = new JoystickButton(logitech,8);
+                  logitechButton8 = new JoystickButton(logitech,8),
+                  //Buttons Verified
+                  logitechButtonDpadS = new AnalogJoystickButton(logitech, 0, 180),
+                  logitechButtonDpadE = new AnalogJoystickButton(logitech, 0, 90),
+                  logitechButtonDpadN = new AnalogJoystickButton(logitech, 0, 0),
+                  logitechButtonDpadW = new AnalogJoystickButton(logitech, 0, 270);
 
 
 
@@ -119,7 +126,9 @@ public class OI {
     buttonRightStick.whenPressed(new PancakeSolenoidExtendCommand());
     buttonLeftStick.whenReleased(new PancakeSolenoidRetractCommand());
     logitechButtonGrab.whenPressed(new BallGrabCommand());
+    //logitechButtonGrab.whileHeld(new BallIntakeCommand());
     logitechButtonRelease.whenPressed(new BallShootCommandGroup());
+    //logitechButtonRelease.whileHeld(new BallShootCommand());
     logitechButton11.whenPressed(new KickRetractCommand());
     logitechButton12.whenPressed(new KickExtendCommand());
     logitechButton7.whenPressed(new HatchExtendCommand());
@@ -128,7 +137,11 @@ public class OI {
     //logitechButton8.whenReleased(new StopLowerRobotBackCommand());
     // Having "whenReleased" for logitech buttons apply the stop lower command may cause issues with other buttons trying to lower the robot.
     // Having the "else" motor = 0 in the subsystem may be adequate for stopping the lower function.
-    
+    logitechButtonDpadN.whileHeld(new BallLookUpCommand());
+    logitechButtonDpadS.whileHeld(new BallLookDownCommand());
+    logitechButtonDpadE.whileHeld(new BallLookRightCommand());
+    logitechButtonDpadW.whileHeld(new BallLookLeftCommand());
+
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
@@ -145,7 +158,6 @@ public class OI {
     SmartDashboard.putData("RaiseRobotCommand", new RaiseRobotCommand());
     SmartDashboard.putData("StartBallLift",new BallLiftCommand());
     SmartDashboard.putData("Calibrate Gyro",new CalibrateGyroCommand());
-
 
   }
 

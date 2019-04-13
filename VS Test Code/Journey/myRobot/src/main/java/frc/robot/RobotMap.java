@@ -25,9 +25,9 @@ public class RobotMap {
   // public static int rangefinderModule = 1;
 
   //CAN
-  public static int leftMasterPort = 2;
-  public static int leftSlavePort = 0;
-  public static int rightMasterPort = 1;
+  public static int leftMasterPort = 0;
+  public static int leftSlavePort = 1;
+  public static int rightMasterPort = 2;
   public static int rightSlavePort = 3;
 
   //USB

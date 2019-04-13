@@ -47,19 +47,19 @@ public void teleopDrive(double move, double turn) {
       turn = 0;
   }
 
-  if (move > .5){
-      move = .5;
-  }
-  if (move < -.5){
-  move = -.5;
-  }
+  //if (move > .5){
+  //    move = .5;
+  //}
+  //if (move < -.5){
+  //move = -.5;
+  //}
 
-  if (turn > .5){
-    turn = .5;
-}
-if (turn < -.5){
-turn = -.5;
-}
+  //if (turn > .5){
+  //  turn = .5;
+//}
+//if (turn < -.5){
+//turn = -.5;
+//}
 
 
 drive.arcadeDrive(move, turn);

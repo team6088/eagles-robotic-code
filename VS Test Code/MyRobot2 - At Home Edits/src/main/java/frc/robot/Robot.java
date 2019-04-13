@@ -82,6 +82,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+    CameraSubsystem.ballVerticalServo.set(1);
+    CameraSubsystem.ballHorizontalServo.set(.5);
     //retractCommand = new RetractCommand();
 
     //TEST CODE FROM INTERMEDIATE VISINO EXAMPLE
@@ -220,7 +222,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
+    SmartDashboard.putBoolean("logitech right test",Robot.oi.logitechButtonDpadE.get());
+    SmartDashboard.putBoolean("logitech left test",Robot.oi.logitechButtonDpadW.get());
+    SmartDashboard.putBoolean("logitech north test",Robot.oi.logitechButtonDpadN.get());
+    SmartDashboard.putBoolean("logitech south test",Robot.oi.logitechButtonDpadS.get());
+
   }
 
   /**

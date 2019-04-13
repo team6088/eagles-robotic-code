@@ -28,6 +28,7 @@ public class BallLiftSubsystem extends Subsystem {
   public static DigitalInput midBallSwitch = new DigitalInput(RobotMap.midBallSwitch);
   public static DigitalInput highBallSwitch = new DigitalInput(RobotMap.highBallSwitch);
   public static String position = "null";
+  public static Spark ballIntakeMotor = new Spark(RobotMap.ballIntakeMotor);
   
 
   //public static void displayDistance(){
@@ -84,6 +85,16 @@ public class BallLiftSubsystem extends Subsystem {
     ballLiftMotor.set(0);
   }
 
+  public static void ballIntake(){
+    ballIntakeMotor.set(-.5);
+  }
+
+  public static void ballShoot(){
+    ballIntakeMotor.set(.5);
+  }
+  public static void ballMotorStop(){
+    ballIntakeMotor.set(0);
+  }
 
   @Override
   public void initDefaultCommand() {
