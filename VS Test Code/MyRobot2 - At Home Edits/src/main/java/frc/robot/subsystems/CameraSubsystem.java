@@ -30,6 +30,7 @@ public class CameraSubsystem extends Subsystem {
   public static double horizontalPosition = .5;
   public static double ballVerticalPosition = 1;
   public static double ballHorizontalPosition = .5;
+  
 
 
   public static void verticalLook(){
@@ -100,6 +101,19 @@ public class CameraSubsystem extends Subsystem {
       ballHorizontalPosition = 0;
       ballHorizontalServo.set(ballHorizontalPosition);
       SmartDashboard.putNumber("ballHorizontalPosition", ballHorizontalPosition);
+    }
+
+    public static void ballSnapUp(){
+      ballVerticalPosition = .664;
+      ballVerticalServo.set(ballVerticalPosition);
+      SmartDashboard.putNumber("ballVerticalPosition", ballVerticalPosition);
+
+    }
+
+    public static void ballSnapDown(){
+      ballVerticalPosition = 1;
+      ballVerticalServo.set(ballVerticalPosition);
+      SmartDashboard.putNumber("ballVerticalPosition", ballVerticalPosition);
     }
 
 

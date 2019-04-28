@@ -159,7 +159,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("Drive Speed",BallLiftSubsystem.ballLiftMotor.get());
-    System.out.println("controller button count: " + new Joystick(RobotMap.joystickPort).getButtonCount());
+    //System.out.println("controller button count: " + new Joystick(RobotMap.joystickPort).getButtonCount());
     //SmartDashboard.putNumber("distance",LiftSubsystem.ultrasonic.getVoltage()*(12*3.6));
   }
 

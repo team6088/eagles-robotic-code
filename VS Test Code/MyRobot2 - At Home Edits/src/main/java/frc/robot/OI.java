@@ -18,6 +18,8 @@ import frc.robot.commands.BallLookLeftCommand;
 import frc.robot.commands.BallLookRightCommand;
 import frc.robot.commands.BallLookUpCommand;
 import frc.robot.commands.BallShootCommandGroup;
+import frc.robot.commands.BallSnapDownCommand;
+import frc.robot.commands.BallSnapUpCommand;
 import frc.robot.commands.CalibrateGyroCommand;
 import frc.robot.commands.HatchExtendCommand;
 import frc.robot.commands.HatchRetractCommand;
@@ -84,7 +86,9 @@ public class OI {
                   logitechButtonDpadS = new AnalogJoystickButton(logitech, 0, 180),
                   logitechButtonDpadE = new AnalogJoystickButton(logitech, 0, 90),
                   logitechButtonDpadN = new AnalogJoystickButton(logitech, 0, 0),
-                  logitechButtonDpadW = new AnalogJoystickButton(logitech, 0, 270);
+                  logitechButtonDpadW = new AnalogJoystickButton(logitech, 0, 270),
+                  logitechButton4 = new JoystickButton(logitech,4),
+                  logitechButton3 = new JoystickButton(logitech,3);
 
 
 
@@ -141,7 +145,8 @@ public class OI {
     logitechButtonDpadS.whileHeld(new BallLookDownCommand());
     logitechButtonDpadE.whileHeld(new BallLookRightCommand());
     logitechButtonDpadW.whileHeld(new BallLookLeftCommand());
-
+    logitechButton4.whenPressed(new BallSnapUpCommand());
+    logitechButton3.whenPressed(new BallSnapDownCommand());
 
   // Run the command while the button is being held down and interrupt it once
   // the button is released.
