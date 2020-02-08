@@ -14,7 +14,8 @@ import frc.robot.RobotMap;
 
 public class SpinWheelThreeCommand extends Command {
   int mBlueCount;
-  public SpinWheelThreeCommand() {
+  public SpinWheelThreeCommand(int blueCount) {
+    mBlueCount = blueCount;
     // Use requires() here to declare subsystem dependencies
     requires(Robot.colorSubsystem);
   }
@@ -22,15 +23,14 @@ public class SpinWheelThreeCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    int mBlueCount = 0;
+    mBlueCount = 0;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.colorSubsystem.turnColorWheel(RobotMap.maxSpeed);
-    Robot.colorSubsystem.trackColors(mBlueCount);
-    SmartDashboard.putNumber("Comand Blue Count", mBlueCount);
+    Robot.colorSubsystem.trackColors(mBlueCount,RobotMap.maxSpeed);
+    SmartDashboard.putNumber("Command Blue Count", mBlueCount);
     
 
   }

@@ -55,7 +55,7 @@ public class OI {
       buttonY.whenReleased(new StopColorWheelCommand());
       buttonB.whileHeld(new TurnColorWheelFastCommand());
       buttonB.whenReleased(new StopColorWheelCommand());
-      buttonA.whenPressed(new SpinWheelThreeCommand());
+      buttonA.whenPressed(new SpinWheelThreeCommand(0));
     }
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to

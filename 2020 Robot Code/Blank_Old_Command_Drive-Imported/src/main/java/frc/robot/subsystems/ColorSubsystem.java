@@ -31,22 +31,16 @@ public class ColorSubsystem extends Subsystem {
 
   public final Spark colorMotor = new Spark(RobotMap.colorMotorPort);
 
-  public void addColors() {
-
-  }
-
-  public void turnColorWheel(final double speed){
+  public void turnColorWheel(final double speed) {
     colorMotor.set(speed);
   }
 
-
-
-  public void trackColors(int blueCount){
-
+  public void trackColors(int blueCount, double speed) {
+    colorMotor.set(speed);
     if(Robot.match.color == Robot.BlueTarget){//&& Robot.colorString != "Blue"
       blueCount = blueCount + 1;
     }
-    SmartDashboard.putNumber("Blue Count", blueCount);
+    SmartDashboard.putNumber("subsystem Blue Count", blueCount);
     
   }
   
