@@ -8,14 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class SpinWheelThreeCommand extends Command {
-  int mBlueCount;
-  public SpinWheelThreeCommand(int blueCount) {
-    mBlueCount = blueCount;
+  public SpinWheelThreeCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.colorSubsystem);
   }
@@ -23,27 +20,28 @@ public class SpinWheelThreeCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    mBlueCount = 0;
+    Robot.colorSubsystem.init();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.colorSubsystem.trackColors(mBlueCount,RobotMap.maxSpeed);
-    SmartDashboard.putNumber("Command Blue Count", mBlueCount);
-    
-
+    Robot.colorSubsystem.turnColorWheelThreeTimes(RobotMap.maxSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    if (Robot.colorSubsystem.blueCount < 4)
+    return true;
+    else
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.colorSubsystem.stopColorWheel();
   }
 
   // Called when another command which requires one or more of the same

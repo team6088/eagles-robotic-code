@@ -7,12 +7,11 @@
 
 package frc.robot.commands;
 
-import com.revrobotics.ColorMatch;
+
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.Robot;
-import frc.robot.subsystems.ColorSubsystem;
+
 
 public class GoToColorCommand extends Command {
   
@@ -44,6 +43,7 @@ public class GoToColorCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.colorSubsystem.stopColorWheel();
   }
 
   // Called when another command which requires one or more of the same

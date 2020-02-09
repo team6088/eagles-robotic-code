@@ -7,18 +7,12 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ColorSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
-
-
 
 
 /**
@@ -29,14 +23,11 @@ import frc.robot.subsystems.ExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem subsystem = new ExampleSubsystem();
-  public static OI oi;
-  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static ColorSubsystem colorSubsystem = new ColorSubsystem();
+  public static OI oi;
 
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
-
 
   /**
    * This function is run when the robot is first started up and should be
@@ -45,11 +36,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
+    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    //chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
-
-
   }
 
   /**
@@ -62,9 +51,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-
-
   }
+
   /**
    * This function is called once each time the robot enters Disabled mode.
    * You can use it to reset any subsystem information you want to clear when
@@ -134,9 +122,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
 
 
-
   }
-  
 
   /**
    * This function is called periodically during test mode.

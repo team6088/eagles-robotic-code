@@ -30,8 +30,6 @@ public class DriveSubsystem extends Subsystem {
   public DriveSubsystem(){
     leftSlave.follow(leftMaster);
     rightSlave.follow(rightMaster);
-
-
     final int peakCurrentAmps = 35;
     /* Duration after current exceed Peak Current to trigger current limit */
     final int peakTimeMs = 0;

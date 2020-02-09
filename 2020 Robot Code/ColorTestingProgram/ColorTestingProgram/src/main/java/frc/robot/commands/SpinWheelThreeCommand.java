@@ -9,10 +9,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-
-public class StopColorWheelCommand extends Command {
-  public StopColorWheelCommand() {
+public class SpinWheelThreeCommand extends Command {
+  public SpinWheelThreeCommand() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.colorSubsystem);
   }
@@ -20,29 +20,40 @@ public class StopColorWheelCommand extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    Robot.colorSubsystem.init();
+    Robot.colorSubsystem.resetCount();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.colorSubsystem.turnColorWheel(0);
+    Robot.colorSubsystem.checkColor();
+    Robot.colorSubsystem.turnColorWheelThreeTimes(RobotMap.maxSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    if (Robot.colorSubsystem.countBlue == 3)
+    return true;
+    else
     return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.colorSubsystem.quickStop();
+    Robot.colorSubsystem.checkColor();
+
+
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.colorSubsystem.stopColorWheel();
+
   }
 }
