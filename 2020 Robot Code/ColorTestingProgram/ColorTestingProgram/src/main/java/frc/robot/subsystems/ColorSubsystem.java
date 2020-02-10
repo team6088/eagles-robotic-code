@@ -11,6 +11,7 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Spark;
@@ -53,11 +54,8 @@ public class ColorSubsystem extends Subsystem {
   public int countBlue = 0;
   public String targetColor;
   public ColorSubsystem() {
-
-
-
-
   }
+
   public void turnColorWheel(final double speed) {
     colorMotor.set(speed);
   }
@@ -76,6 +74,7 @@ public class ColorSubsystem extends Subsystem {
   public void checkColor(){
     detectedColor = colorSensor.getColor();
     match = colorMatcher.matchClosestColor(detectedColor);
+
     if(match.color == BlueTarget){
       prevColor = colorString;
       colorString = "Blue";
@@ -100,13 +99,15 @@ public class ColorSubsystem extends Subsystem {
     if(prevColor != "Blue" && match.color == BlueTarget){//
     countBlue = countBlue + 1;
     }
-    
+
+
     SmartDashboard.putNumber("Red", detectedColor.red);
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
     SmartDashboard.putNumber("countBlue", countBlue);
+
   }
 
 
