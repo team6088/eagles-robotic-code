@@ -43,8 +43,6 @@ public class RobotMap {
   public static final double maxSpeed = .35;//should be about .15
   public static final double slowSpeed = .2;
   public static final int ultraSonicPort = 0;
-  public static final int intakeMotorPort = 6;
-public static int ultraSonicPort2 = 1;
 
 
 }

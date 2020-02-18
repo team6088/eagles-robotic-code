@@ -60,7 +60,7 @@ public class DriveSubsystem extends Subsystem {
     if (Math.abs(turn)<.2){
       turn = 0;
     }
-  drive.arcadeDrive(move, turn);
+  drive.arcadeDrive(-move, turn);
   }
 
 

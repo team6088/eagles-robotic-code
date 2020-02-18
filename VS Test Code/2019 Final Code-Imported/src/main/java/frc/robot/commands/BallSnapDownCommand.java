@@ -9,29 +9,31 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.CameraSubsystem;
 
-
-public class StopColorWheelCommand extends Command {
-  public StopColorWheelCommand() {
+public class BallSnapDownCommand extends Command {
+  public BallSnapDownCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.colorSubsystem);
+    requires(Robot.cameraSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.colorSubsystem.stopColorWheel();
+    CameraSubsystem.ballSnapDown();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    if(CameraSubsystem.ballVerticalServo.get()>.995)
+    return true;
+    else
     return false;
   }
 
@@ -45,6 +47,6 @@ public class StopColorWheelCommand extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
+    CameraSubsystem.ballLookStop();
   }
 }

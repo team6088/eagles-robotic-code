@@ -10,11 +10,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.CheckColorCommand;
+import frc.robot.commands.GoToColorCommand;
+import frc.robot.commands.GoToColorGroup;
+import frc.robot.commands.IntakeBallCommand;
 import frc.robot.commands.MoveSequence;
 import frc.robot.commands.SpinWheelThreeCommand;
 import frc.robot.commands.StopColorWheelCommand;
-import frc.robot.commands.TurnColorWheelFastCommand;
-import frc.robot.commands.TurnColorWheelSlowCommand;
+import frc.robot.commands.StopIntakeCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -28,34 +32,42 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
-    public final Joystick stick = new Joystick(RobotMap.joystickPort);
-    public Button buttonA = new JoystickButton(stick, 1),
-    buttonB = new JoystickButton(stick,2),
-    buttonX = new JoystickButton(stick,3),
-    buttonY = new JoystickButton(stick,4),
-    buttonLeftBumper = new JoystickButton(stick,5),
-    buttonRightBumper = new JoystickButton(stick,6),
-    buttonBack = new JoystickButton(stick,7),
-    buttonRightStick = new JoystickButton(stick,10),
-    buttonLeftStick = new JoystickButton(stick,9);
-    /* buttonDpadN = new AnalogJoystickButton(stick, 0, 0),
-    buttonDpadE = new AnalogJoystickButton(stick, 0, 90),
-    buttonDpadS = new AnalogJoystickButton(stick, 0, 180),
-    buttonDpadW = new AnalogJoystickButton(stick, 0, 270),
-    buttonDpadNE = new AnalogJoystickButton(stick, 0, 45),
-    buttonDpadSE = new AnalogJoystickButton(stick, 0, 135),
-    buttonDpadSW = new AnalogJoystickButton(stick, 0, 225),
-    buttonDpadNW = new AnalogJoystickButton(stick, 0, 315); */
-    
-    
-    public OI() {
-      buttonX.whenPressed(new MoveSequence());
-      buttonY.whileHeld(new TurnColorWheelSlowCommand());
-      buttonY.whenReleased(new StopColorWheelCommand());
-      buttonB.whileHeld(new TurnColorWheelFastCommand());
-      buttonB.whenReleased(new StopColorWheelCommand());
-      buttonA.whenPressed(new SpinWheelThreeCommand());
-    }
+  public final Joystick stick = new Joystick(RobotMap.joystickPort);
+  public Button buttonA = new JoystickButton(stick, 1), buttonB = new JoystickButton(stick, 2),
+      buttonX = new JoystickButton(stick, 3), buttonY = new JoystickButton(stick, 4),
+      buttonLeftBumper = new JoystickButton(stick, 5), buttonRightBumper = new JoystickButton(stick, 6),
+      buttonBack = new JoystickButton(stick, 7), buttonRightStick = new JoystickButton(stick, 10),
+      buttonLeftStick = new JoystickButton(stick, 9);
+  /*
+   * buttonDpadN = new AnalogJoystickButton(stick, 0, 0), buttonDpadE = new
+   * AnalogJoystickButton(stick, 0, 90), buttonDpadS = new
+   * AnalogJoystickButton(stick, 0, 180), buttonDpadW = new
+   * AnalogJoystickButton(stick, 0, 270), buttonDpadNE = new
+   * AnalogJoystickButton(stick, 0, 45), buttonDpadSE = new
+   * AnalogJoystickButton(stick, 0, 135), buttonDpadSW = new
+   * AnalogJoystickButton(stick, 0, 225), buttonDpadNW = new
+   * AnalogJoystickButton(stick, 0, 315);
+   */
+
+  public OI() {
+    /*
+     * buttonX.whenPressed(new MoveSequence()); buttonY.whileHeld(new
+     * TurnColorWheelSlowCommand()); buttonY.whenReleased(new
+     * StopColorWheelCommand()); buttonB.whileHeld(new TurnColorWheelFastCommand());
+     * buttonB.whenReleased(new StopColorWheelCommand());
+     */
+    buttonX.whenPressed(new MoveSequence());
+    buttonA.whenPressed(new SpinWheelThreeCommand());
+    buttonLeftBumper.whileHeld(new IntakeBallCommand());
+    buttonLeftBumper.whenReleased(new StopIntakeCommand());
+    SmartDashboard.putData("color wheel 3 times", new SpinWheelThreeCommand());
+    SmartDashboard.putData("Just Read Color", new CheckColorCommand());
+    SmartDashboard.putData("Stop Color Wheel", new StopColorWheelCommand());
+    SmartDashboard.putData("GoToColor", new GoToColorCommand());
+    SmartDashboard.putData("GoToColorGroup", new GoToColorGroup());
+  
+  }
+
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.

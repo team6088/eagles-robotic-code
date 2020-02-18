@@ -39,10 +39,10 @@ public class ColorSubsystem extends Subsystem {
   public final ColorMatch colorMatcher = new ColorMatch();
 
   // Put the color sensor on our targets and change the "average" to these values
-  public static Color BlueTarget = ColorMatch.makeColor(.125, .42, .44);//143, .427, .429
-  public static Color GreenTarget = ColorMatch.makeColor(.17, .6, .250);//.197, .561, .240
-  public static Color RedTarget = ColorMatch.makeColor(.52, .35, .14);//561, .232, .114
-  public static Color YellowTarget = ColorMatch.makeColor(.32, .56, .118);//.361, .524, .113
+  public static Color BlueTarget = ColorMatch.makeColor(.143, .427, .429);
+  public static Color GreenTarget = ColorMatch.makeColor(.197, .561, .240);
+  public static Color RedTarget = ColorMatch.makeColor(.561, .232, .114);
+  public static Color YellowTarget = ColorMatch.makeColor(.361, .524, .113);
 
 
   public static Color detectedColor;

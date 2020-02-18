@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.ColorSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 
@@ -27,7 +26,6 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class Robot extends TimedRobot {
   public static ColorSubsystem colorSubsystem = new ColorSubsystem();
   public static OI oi;
-  public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
   Command autonomousCommand;
