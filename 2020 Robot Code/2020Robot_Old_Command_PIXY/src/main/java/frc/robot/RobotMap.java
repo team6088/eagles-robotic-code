@@ -48,6 +48,9 @@ public class RobotMap {
   public static final int intakeMotorPort = 1;
   public static final int frontCamera = 0;
   public static final int backCamera = 1;
-
-
+  public static final int shooterMotor = 2;
+  public static final int minTargetHeight = 60;
+  public static final int maxTargetHeight = 80;
+  public static final int minTargetWidth = 150;
+  public static final int maxTargetWidth = 170;
 }

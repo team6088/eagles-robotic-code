@@ -16,6 +16,7 @@ import frc.robot.commands.GoToColorCommand;
 import frc.robot.commands.GoToColorGroup;
 import frc.robot.commands.IntakeBallCommand;
 import frc.robot.commands.MoveSequence;
+import frc.robot.commands.ShootBallCommand;
 import frc.robot.commands.SpinWheelThreeCommand;
 import frc.robot.commands.StopColorWheelCommand;
 import frc.robot.commands.StopIntakeCommand;
@@ -65,6 +66,7 @@ public class OI {
     SmartDashboard.putData("Stop Color Wheel", new StopColorWheelCommand());
     SmartDashboard.putData("GoToColor", new GoToColorCommand());
     SmartDashboard.putData("GoToColorGroup", new GoToColorGroup());
+    SmartDashboard.putData("Shoot Ball", new ShootBallCommand());
   
   }
 
