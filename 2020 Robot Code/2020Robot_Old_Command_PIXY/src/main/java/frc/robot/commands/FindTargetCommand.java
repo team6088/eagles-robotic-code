@@ -13,21 +13,20 @@ import frc.robot.Robot;
 public class FindTargetCommand extends Command {
   public FindTargetCommand() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.shooterSubsystem);
+    requires(Robot.pixySubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.shooterSubsystem.initPixy();
+    Robot.pixySubsystem.initPixy();
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.shooterSubsystem.findTarget();
-    Robot.shooterSubsystem.measureDistance();
+    Robot.pixySubsystem.findTarget();
   }
 
   // Make this return true when this Command no longer needs to run execute()
