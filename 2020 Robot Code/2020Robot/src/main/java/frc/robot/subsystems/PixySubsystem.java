@@ -51,7 +51,7 @@ public void findTarget(){
   SmartDashboard.putBoolean("Camera", isCamera);   //publish if we are connected
   pixycam.getCCC().getBlocks(true,255,255); //run getBlocks with arguments to have the camera
                                              //acquire target data
-  ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
+  ArrayList<Block> blocks = pixycam.getCCC().getBlockCache(); //assign the data to an ArrayList for convinience
   if(blocks.size() > 0)
   {
   xcoord = blocks.get(0).getX();       // x position of the largest target
@@ -72,13 +72,13 @@ public void findTarget(){
   SmartDashboard.putNumber("size", blocks.size()); //push to dashboard how many targets are detected
   }
 
-  if(targetHeight>=VisionConstants.minTargetHeight && targetHeight<=VisionConstants.maxTargetHeight && 
+/*   if(targetHeight>=VisionConstants.minTargetHeight && targetHeight<=VisionConstants.maxTargetHeight && 
   targetWidth>=VisionConstants.minTargetWidth && targetWidth<=VisionConstants.maxTargetWidth){
     targetAquired = true;
   }
   else{
   targetAquired = false;
-  }
+  } */
 SmartDashboard.putBoolean("Target Status", targetAquired);
 }
 // Goal ratio is 39.125 x 17.125 for h x w    

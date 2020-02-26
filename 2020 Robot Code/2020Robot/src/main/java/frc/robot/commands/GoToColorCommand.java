@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -7,48 +7,42 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 
-public class GoToColorCommand extends Command {
+
+
+public class GoToColorCommand extends CommandBase {
+
+  /**
+   * Creates a new GoToColorCommand.
+   */
   public GoToColorCommand() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.colorSubsystem);
   }
 
-  // Called just before this Command runs the first time
+  // Called when the command is initially scheduled.
   @Override
-  protected void initialize() {
-    Robot.colorSubsystem.init();
+  public void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
+  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  protected void execute() {
-    Robot.colorSubsystem.checkColor();
-    Robot.colorSubsystem.goToColor(RobotMap.slowSpeed);
+  public void execute() {
+    RobotContainer.colorSubsystem.checkColor();
+    RobotContainer.colorSubsystem.turnWheel();
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  // Called once the command ends or is interrupted.
   @Override
-  protected boolean isFinished() {
-    if (Robot.colorSubsystem.colorString == Robot.colorSubsystem.targetColor)
-    return true;
-    else
-    return false;
+  public void end(boolean interrupted) {
+  RobotContainer.colorSubsystem.stopColorWheel();
   }
 
-  // Called once after isFinished returns true
+  // Returns true when the command should end.
   @Override
-  protected void end() {
-    Robot.colorSubsystem.checkColor();
-    Robot.colorSubsystem.stopColorWheel();
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+  public boolean isFinished() {
+    return RobotContainer.colorSubsystem.colorTargetAquired();
   }
 }
