@@ -23,9 +23,9 @@ public class LiftDriveSubsystem extends Subsystem {
   public static void driveLift(){
 
     if(Robot.oi.stick.getRawAxis(2) > Robot.oi.stick.getRawAxis((3)))
-    liftDriveMotor.set(Robot.oi.stick.getRawAxis(2)*-.5);
+    liftDriveMotor.set(Robot.oi.stick.getRawAxis(2)*-1);
     else
-    liftDriveMotor.set(Robot.oi.stick.getRawAxis(3)*.5);
+    liftDriveMotor.set(Robot.oi.stick.getRawAxis(3));
 
         //if (driveType =true)
     //liftDriveMotor.set(1);
