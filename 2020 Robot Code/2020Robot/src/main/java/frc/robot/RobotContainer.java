@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+//import frc.robot.commands.RotationalControlCommand;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.PixySubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -56,6 +58,20 @@ public class RobotContainer {
   buttonDpadSW = new POVButton(driverStick, 225, 0),
   buttonDpadNW = new POVButton(driverStick, 315, 0);
 
+  //VERIFY LOGITECH BUTTONS!
+  public Button logitechThumbButton = new JoystickButton(operatorStick, 1),
+  logitechFingerTrigger = new JoystickButton(operatorStick, 2),
+  logitechButton11 = new JoystickButton(operatorStick,11),
+  logitechButton12 = new JoystickButton(operatorStick,12),
+  logitechButton7 = new JoystickButton(operatorStick,7),
+  logitechButton8 = new JoystickButton(operatorStick,8),
+  logitechButtonDpadS = new POVButton(operatorStick, 180, 0),
+  logitechButtonDpadE = new POVButton(operatorStick, 90, 0),
+  logitechButtonDpadN = new POVButton(operatorStick, 0, 0),
+  logitechButtonDpadW = new POVButton(operatorStick, 270, 0),
+  logitechButton4 = new JoystickButton(operatorStick,4),
+  logitechButton3 = new JoystickButton(operatorStick,3);
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -73,8 +89,34 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     driveSubsystem.setDefaultCommand(
-      new RunCommand(() -> driveSubsystem.manualDrive(driverStick.getY(), driverStick.getX()),driveSubsystem));
-    
+      new RunCommand(() -> 
+      driveSubsystem.manualDrive(driverStick.getY(), driverStick.getX()),driveSubsystem)
+      );
+
+
+      //ColorWheel Commands!
+      buttonA.whenPressed(
+        new InstantCommand(colorSubsystem::manualTurnWheelQuick, colorSubsystem)
+      ).whenReleased(
+        new InstantCommand(colorSubsystem::stopColorWheel, colorSubsystem)
+      );
+
+      buttonB.whenPressed(
+        new InstantCommand(colorSubsystem::manualTurnWheelSlow, colorSubsystem)
+      ).whenReleased(
+        new InstantCommand(colorSubsystem::stopColorWheel, colorSubsystem)
+      );
+
+
+    //Test of this version of a command
+    buttonX.whenPressed(
+        new RunCommand(colorSubsystem::rotationControl, colorSubsystem)
+        .withInterrupt(colorSubsystem::colorPositionSet)
+        .andThen(colorSubsystem::stopColorWheel, colorSubsystem)
+    );
+        //Otherwise this one works probably
+    //buttonX.whenPressed(new RotationalControlCommand());
+
   }
 
 

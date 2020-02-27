@@ -30,8 +30,7 @@ public class GoToColorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.colorSubsystem.checkColor();
-    RobotContainer.colorSubsystem.turnWheel();
+    RobotContainer.colorSubsystem.colorControl();
   }
 
   // Called once the command ends or is interrupted.
@@ -43,6 +42,6 @@ public class GoToColorCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return RobotContainer.colorSubsystem.colorTargetAquired();
+    return RobotContainer.colorSubsystem.colorPositionSet();
   }
 }

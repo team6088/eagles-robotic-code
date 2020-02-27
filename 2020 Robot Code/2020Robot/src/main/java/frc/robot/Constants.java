@@ -38,6 +38,10 @@ public final class Constants {
 
     public static final class ColorConstants {
         public static final int colorMotorPort = 0;
+        public static final double colorMotorHighSpeed = .14;
+        public static final double colorMotorSlowSpeed = .07;
+        public static final double quickStopSpeed = -.2;
+        public static final double quickStopSpeedDelay = .2;
     }
 
     public static final class VisionConstants {

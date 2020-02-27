@@ -29,13 +29,13 @@ public class ColorSubsystem extends SubsystemBase {
   private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
   public final ColorMatch colorMatcher = new ColorMatch();
-  // Put the color sensor on our targets and change the "average" to these values
   public static Color BlueTarget = ColorMatch.makeColor(.125, .42, .44);//143, .427, .429
   public static Color GreenTarget = ColorMatch.makeColor(.17, .6, .250);//.197, .561, .240
   public static Color RedTarget = ColorMatch.makeColor(.52, .35, .14);//561, .232, .114
   public static Color YellowTarget = ColorMatch.makeColor(.32, .56, .118);//.361, .524, .113
   public static Color detectedColor;
-  public String colorString;
+  public static String measuredColor;
+  public static String setColor;
   public static String prevColor;
   public static ColorMatchResult match;
   public static int blueCount = 0;
@@ -51,37 +51,98 @@ public class ColorSubsystem extends SubsystemBase {
     colorMatcher.addColorMatch(RedTarget);
   }
 
-  public void turnWheel() {
-    colorMotor.set(.15);
+  public void manualTurnWheelQuick() {
+    colorMotor.set(ColorConstants.colorMotorHighSpeed);
+  }
+
+  public void manualTurnWheelSlow() {
+    colorMotor.set(ColorConstants.colorMotorSlowSpeed);
   }
 
   public void resetCount(){
     countBlue=0;
   }
 
-  public void checkColor(){
+
+  public void rotationControl() {
+    if (blueCount >= 0){
+      colorMotor.set(ColorConstants.colorMotorHighSpeed);
+      }
+    else if (blueCount >= 6 ){
+      colorMotor.set(ColorConstants.colorMotorSlowSpeed);
+    }
+    else if (blueCount > 6 )
+    colorMotor.set(0);
+  }
+
+  
+  public boolean blueCount(){
+    if (blueCount > 6){
+    return true;
+  }
+    else{
+    return false;
+    }
+  }
+
+  public boolean colorPositionSet(){
+    if (targetColor == setColor){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  public void colorControl(){
+    if (targetColor != setColor){
+      colorMotor.set(ColorConstants.colorMotorSlowSpeed);
+    }
+    else
+    colorMotor.set(0);
+  }
+
+  public void quickStop(){
+    colorMotor.set(ColorConstants.quickStopSpeed);
+    Timer.delay(ColorConstants.quickStopSpeedDelay);
+    colorMotor.set(0);
+  }
+
+  public void stopColorWheel(){
+    colorMotor.set(0);
+  }
+
+
+
+  @Override
+  public void periodic() {
     detectedColor = colorSensor.getColor();
     match = colorMatcher.matchClosestColor(detectedColor);
 
     if(match.color == BlueTarget){
-      prevColor = colorString;
-      colorString = "Blue";
+      prevColor = measuredColor;
+      measuredColor = "Blue";
+      setColor = "Red";
     }
     else if (match.color == RedTarget){
-      prevColor = colorString;
-      colorString = "Red";
+      prevColor = measuredColor;
+      measuredColor = "Red";
+      setColor = "Blue";
     }
     else if (match.color == GreenTarget){
-      prevColor = colorString;
-      colorString = "Green";
+      prevColor = measuredColor;
+      measuredColor = "Green";
+      setColor = "Yellow";
     }
     else if (match.color == YellowTarget){
-      prevColor = colorString;
-      colorString = "Yellow";
+      prevColor = measuredColor;
+      measuredColor = "Yellow";
+      setColor = "Green";
     }
     else {
-      prevColor = colorString;
-      colorString = "Unknown";
+      prevColor = measuredColor;
+      measuredColor = "Unknown";
+      setColor = "Check Color Sensor";
     }
     
     if(prevColor != "Blue" && match.color == BlueTarget){//
@@ -121,48 +182,9 @@ public class ColorSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Green", detectedColor.green);
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", colorString);
+    SmartDashboard.putString("Detected Color", measuredColor);
     SmartDashboard.putNumber("countBlue", countBlue);
     SmartDashboard.putString("Target Color", targetColor);
   }
-
-
-  public void rotationControl() {
-    if (blueCount < 4){
-    colorMotor.set(.14);
-    }
-    else
-    colorMotor.set(0);
-  }
-  public boolean blueCount(){
-    if (blueCount >3){
-    return true;
-  }
-    return false;
-  }
-
-  public boolean colorTargetAquired() {
-    if(targetColor == colorString){
-    return true;
-  }
-    return false;
-    
-  }
-
-  public void quickStop(){
-    colorMotor.set(-.2);
-    Timer.delay(.2);
-    colorMotor.set(0);
-  }
-
-  public void stopColorWheel(){
-    colorMotor.set(0);
-  }
-
-
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
 }
+
