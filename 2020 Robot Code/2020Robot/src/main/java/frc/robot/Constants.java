@@ -29,11 +29,10 @@ public final class Constants {
         public static final int current40AmpContinuousCurrentLimit = 35;
 
     public static final class DriveConstants {
-
-		public static final int leftMasterPort = 0;
-		public static final int leftSlavePort = 1;
-		public static final int rightMasterPort = 2;
-		public static final int rightSlavePort = 3;
+		  public static final int leftMasterPort = 0;
+		  public static final int leftSlavePort = 1;
+		  public static final int rightMasterPort = 2;
+		  public static final int rightSlavePort = 3;
     }
 
     public static final class ColorConstants {
@@ -44,7 +43,24 @@ public final class Constants {
         public static final double quickStopSpeedDelay = .2;
     }
 
+  public static final class ShooterConstants{
+
+		public static final int ultraSonicPort = 0;
+		public static final int shooterMotor = 0;
+
+  }
+
+
+    public static final class IntakeConstants {
+      public static final int intakeMotorPort = 0;
+      public static final double intakeMotorSpeed = .4;
+    }
     public static final class VisionConstants {
+      //60x137 - 80x182
+		  public static final int minTargetHeight = 60;
+		  public static final int maxTargetHeight = 80;
+		  public static final int minTargetWidth = 137;
+		  public static final int maxTargetWidth = 182;
 
     }
 
