@@ -65,14 +65,7 @@ public class ColorSubsystem extends SubsystemBase {
 
 
   public void rotationControl() {
-    if (blueCount >= 0){
       colorMotor.set(ColorConstants.colorMotorHighSpeed);
-      }
-    else if (blueCount >= 6 ){
-      colorMotor.set(ColorConstants.colorMotorSlowSpeed);
-    }
-    else if (blueCount > 6 )
-    colorMotor.set(0);
   }
 
   
@@ -100,6 +93,7 @@ public class ColorSubsystem extends SubsystemBase {
     }
     else
     colorMotor.set(0);
+
   }
 
   public void quickStop(){
@@ -188,7 +182,7 @@ public class ColorSubsystem extends SubsystemBase {
     SmartDashboard.putString("Detected Color", measuredColor);
     SmartDashboard.putNumber("countBlue", countBlue);
     SmartDashboard.putString("Target Color", targetColor);
-    
+    SmartDashboard.putString("Set Color", setColor);
   }
 }
 

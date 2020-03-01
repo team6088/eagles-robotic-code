@@ -36,9 +36,9 @@ public final class Constants {
     }
 
     public static final class ColorConstants {
-        public static final int colorMotorPort = 0;
-        public static final double colorMotorHighSpeed = .14;
-        public static final double colorMotorSlowSpeed = .07;
+        public static final int colorMotorPort = 4;
+        public static final double colorMotorHighSpeed = .4;
+        public static final double colorMotorSlowSpeed = .2;
         public static final double quickStopSpeed = -.2;
         public static final double quickStopSpeedDelay = .2;
     }
@@ -46,12 +46,13 @@ public final class Constants {
   public static final class ShooterConstants{
 
 		public static final int ultraSonicPort = 0;
-		public static final int shooterMotor = 4;
+		public static final int shooterMotor = 0;
 
   }
 
 
     public static final class IntakeConstants {
+      public static final int intakeLiftMotorPort = 5;
       public static final int intakeMotorPort = 3;
       public static final double intakeMotorSpeed = .4;
     }
