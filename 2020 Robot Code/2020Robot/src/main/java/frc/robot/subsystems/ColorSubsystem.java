@@ -44,7 +44,7 @@ public class ColorSubsystem extends SubsystemBase {
 
 
 
-  public ColorSubsystem() {
+  public void init() {
     colorMatcher.addColorMatch(BlueTarget);
     colorMatcher.addColorMatch(GreenTarget);
     colorMatcher.addColorMatch(YellowTarget);
@@ -112,10 +112,7 @@ public class ColorSubsystem extends SubsystemBase {
     colorMotor.set(0);
   }
 
-
-
-  @Override
-  public void periodic() {
+  public void getColor(){
     detectedColor = colorSensor.getColor();
     match = colorMatcher.matchClosestColor(detectedColor);
 
@@ -185,6 +182,11 @@ public class ColorSubsystem extends SubsystemBase {
     SmartDashboard.putString("Detected Color", measuredColor);
     SmartDashboard.putNumber("countBlue", countBlue);
     SmartDashboard.putString("Target Color", targetColor);
+  }
+
+
+  @Override
+  public void periodic() {
   }
 }
 

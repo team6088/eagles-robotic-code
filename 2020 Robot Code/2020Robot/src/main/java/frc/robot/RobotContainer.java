@@ -10,12 +10,17 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.GetColorCommand;
 //import frc.robot.commands.RotationalControlCommand;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PixySubsystem;
+import frc.robot.subsystems.PneumaticSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -37,6 +42,9 @@ public class RobotContainer {
   public final static ColorSubsystem colorSubsystem = new ColorSubsystem();
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final PixySubsystem pixySubsystem = new PixySubsystem();
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
 
   public static Joystick driverStick = new Joystick(0);
   public static Joystick operatorStick = new Joystick(1);
@@ -49,6 +57,7 @@ public class RobotContainer {
   buttonBack = new JoystickButton(driverStick,7),
   buttonRightStick = new JoystickButton(driverStick,10),
   buttonLeftStick = new JoystickButton(driverStick,9),
+  buttonStart = new JoystickButton(driverStick,8),
   buttonDpadN = new POVButton(driverStick, 0, 0),
   buttonDpadE = new POVButton(driverStick, 90, 0),
   buttonDpadS = new POVButton(driverStick, 180, 0),
@@ -93,6 +102,16 @@ public class RobotContainer {
       driveSubsystem.manualDrive(driverStick.getY(), driverStick.getX()),driveSubsystem)
       );
 
+      shooterSubsystem.setDefaultCommand(
+      new RunCommand(() ->
+      shooterSubsystem.manualShoot(driverStick.getRawAxis(2),driverStick.getRawAxis(3)),shooterSubsystem)
+    );
+
+  
+      colorSubsystem.setDefaultCommand(
+        new GetColorCommand()
+      );
+
 
       //ColorWheel Commands!
       buttonA.whenPressed(
@@ -107,6 +126,13 @@ public class RobotContainer {
         new InstantCommand(colorSubsystem::stopColorWheel, colorSubsystem)
       );
 
+      buttonStart.whenPressed(
+        new InstantCommand(shooterSubsystem::runShooter, shooterSubsystem)
+      ).whenReleased(
+        new InstantCommand(shooterSubsystem::stopShooter, shooterSubsystem)
+      );
+
+
 
     //Test of this version of a command
     buttonX.whenPressed(
@@ -116,6 +142,35 @@ public class RobotContainer {
     );
         //Otherwise this one works probably
     //buttonX.whenPressed(new RotationalControlCommand());
+
+/*     buttonLeftBumper.whenPressed(
+    new InstantCommand(intakeSubsystem::runShooter, intakeSubsystem)
+    ).whenReleased(
+      new InstantCommand(intakeSubsystem::stopShooter, intakeSubsystem)
+    ); */
+
+    //buttonLeftBumper.whenPressed(
+      //new InstantCommand(intakeSubsystem::runShooter, intakeSubsystem)
+      //);
+
+    buttonLeftBumper.whenPressed(()
+       -> pneumaticSubsystem.shooterExtend());
+    
+
+
+    buttonRightBumper.whenPressed(
+      new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
+    );
+
+    
+    buttonLeftStick.whenPressed(
+      new InstantCommand(pneumaticSubsystem::wheelDown, pneumaticSubsystem)
+    );
+
+    
+    buttonRightStick.whenPressed(
+      new InstantCommand(pneumaticSubsystem::wheelUp, pneumaticSubsystem)
+    );
 
   }
 

@@ -48,14 +48,14 @@ public class PixySubsystem extends SubsystemBase {
 // Goal ratio is 39.125 x 17.125 for h x w    
 //60x137 - 80x182
 public void findTarget(){
-  if(targetHeight>=VisionConstants.minTargetHeight && targetHeight<=VisionConstants.maxTargetHeight && 
+/*   if(targetHeight>=VisionConstants.minTargetHeight && targetHeight<=VisionConstants.maxTargetHeight && 
   targetWidth>=VisionConstants.minTargetWidth && targetWidth<=VisionConstants.maxTargetWidth){
     targetAquired = true;
   }
   else{
   targetAquired = false;
   }
-  SmartDashboard.putBoolean("Target Status", targetAquired);
+  SmartDashboard.putBoolean("Target Status", targetAquired); */
   }
 
 
@@ -65,7 +65,7 @@ public void findTarget(){
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+/*     // This method will be called once per scheduler run
     if(!isCamera)
     state = pixycam.init(1); // if no camera present, try to initialize
     isCamera = state>=0;
@@ -84,8 +84,8 @@ public void findTarget(){
     SmartDashboard.putBoolean("present", true); // show there is a target present
     SmartDashboard.putNumber("Xccord",xcoord);
     SmartDashboard.putNumber("Ycoord", ycoord);
-    SmartDashboard.putString("Data", data );
-    }
+    SmartDashboard.putString("Data", data ); */
+/*     }
   
   
     else{
@@ -93,5 +93,6 @@ public void findTarget(){
     SmartDashboard.putBoolean("present", false);
     SmartDashboard.putNumber("size", blocks.size()); //push to dashboard how many targets are detected
     }
-  }
+  } */
+}
 }

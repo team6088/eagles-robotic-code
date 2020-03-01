@@ -46,13 +46,13 @@ public final class Constants {
   public static final class ShooterConstants{
 
 		public static final int ultraSonicPort = 0;
-		public static final int shooterMotor = 0;
+		public static final int shooterMotor = 4;
 
   }
 
 
     public static final class IntakeConstants {
-      public static final int intakeMotorPort = 0;
+      public static final int intakeMotorPort = 3;
       public static final double intakeMotorSpeed = .4;
     }
     public static final class VisionConstants {
@@ -63,5 +63,20 @@ public final class Constants {
 		  public static final int maxTargetWidth = 182;
 
     }
+
+    public static final class CameraConstants{
+      public static final int camera1 = 0;
+      public static final int camera2 = 1;
+    }
+
+    public static final class PneumaticConstants{
+      public static final int compressor = 0;
+	    public static final int shooterRetract = 4;
+	    public static final int shooterExtend = 3;
+	    public static final int ballRetract = 7;
+	    public static final int ballExtend = 6;
+  
+    }
+
 
 }

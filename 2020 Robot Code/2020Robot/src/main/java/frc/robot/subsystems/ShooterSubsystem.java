@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -28,8 +30,9 @@ public class ShooterSubsystem extends SubsystemBase {
   private static double distance2 = 0;
   private static double distance3 = 0;
   private static double distance4 = 0;
-  private static double readings[];
+  private static double distance = 0;
   private static double sum;
+  private static double readings[];
 
 
   public void runShooter(){
@@ -40,15 +43,23 @@ public class ShooterSubsystem extends SubsystemBase {
       shooterMotor.set(0);
   }
 
+  public void manualShoot(double forward, double reverse){
+
+      if(forward > reverse)
+      shooterMotor.set(forward);
+      else
+      shooterMotor.set(-1*reverse);
+  }
+
   @Override
   public void periodic() {
       double sensorValue = ultraSonic.getVoltage();
       final double scaleFactor = 1/(5./1024.)/25.4; //scale converting voltage to distance
       double distance = 5*sensorValue*scaleFactor; //convert the voltage to distance
- 
 
 
-      //while (distance != 0){
+
+/*       if (distance != 0){
         reading4 = reading3;
         reading3 = reading2;
         reading2 = reading1;
@@ -60,13 +71,17 @@ public class ShooterSubsystem extends SubsystemBase {
         distance2 = distance1;
         distance1 = distance0;
         distance0 = distance;
-      //}
 
-      readings[0] = distance0;
-      readings[1] = distance1;
-      readings[2] = distance2;
-      readings[3] = distance3;
-      readings[4] = distance4;
+        readings[0] = distance;
+        readings[1] = distance0;
+        readings[2] = distance1;
+        readings[3] = distance3;
+        readings[4] = distance4;
+
+
+      }
+
+
 
       for(int i=0; i<readings.length; i++){
         sum = sum + readings[i];
@@ -74,6 +89,8 @@ public class ShooterSubsystem extends SubsystemBase {
       double smoothDistance = sum/readings.length;
       SmartDashboard.putNumber("Smoothed Ultrasonic Distance", smoothDistance);
       SmartDashboard.putNumber("Distance Array Length", readings.length);
+       */
+      
       SmartDashboard.putNumber("Ultrasonic Distance", distance); //write the value to the LabVIEW DriverStation
 
   
