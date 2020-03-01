@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.GetColorCommand;
 //import frc.robot.commands.RotationalControlCommand;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -107,11 +106,6 @@ public class RobotContainer {
       shooterSubsystem.manualShoot(driverStick.getRawAxis(2),driverStick.getRawAxis(3)),shooterSubsystem)
     );
 
-  
-      colorSubsystem.setDefaultCommand(
-        new GetColorCommand()
-      );
-
 
       //ColorWheel Commands!
       buttonA.whenPressed(
@@ -136,7 +130,7 @@ public class RobotContainer {
 
     //Test of this version of a command
     buttonX.whenPressed(
-        new RunCommand(colorSubsystem::rotationControl, colorSubsystem)
+        new RunCommand(colorSubsystem::colorControl, colorSubsystem)
         .withInterrupt(colorSubsystem::colorPositionSet)
         .andThen(colorSubsystem::stopColorWheel, colorSubsystem)
     );
