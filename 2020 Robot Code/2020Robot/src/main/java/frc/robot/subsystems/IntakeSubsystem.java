@@ -49,6 +49,10 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeLiftMotor.set(-1*down);
 }
 
+  public void lowerIntake(double speed){
+    intakeMotor.set(speed);
+  }
+
   public void robotInit() {
     intakeEncoder.setDistancePerPulse(Math.PI*angle/cpr); //distance per pulse is pi* (wheel diameter / counts per revolution)
   }

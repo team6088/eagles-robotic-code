@@ -7,23 +7,19 @@
 
 package frc.robot.commands;
 
-import java.util.TimerTask;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class TimedMoveCommand extends CommandBase {
     private final DriveSubsystem m_drive;
-    double m_move, m_turn, m_time;
+    double m_move, m_turn;
 
 
   /**
    * Creates a new TimedMoveCommand.
    */
-  public TimedMoveCommand(DriveSubsystem drive, double time, double move, double turn) {
+  public TimedMoveCommand(DriveSubsystem drive, double move, double turn) {
     m_drive = drive;
-    m_time = time;
     m_move = move;
     m_turn = turn;
     addRequirements(drive);
@@ -33,13 +29,12 @@ public class TimedMoveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    withTimeout(m_time);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drive.manualDrive(m_move, m_turn);
+    m_drive.autonDrive(m_move, m_turn);
   }
 
   // Called once the command ends or is interrupted.

@@ -32,7 +32,8 @@ public final class Constants {
 		  public static final int leftMasterPort = 0;
 		  public static final int leftSlavePort = 1;
 		  public static final int rightMasterPort = 2;
-		  public static final int rightSlavePort = 3;
+      public static final int rightSlavePort = 3;
+      public static final int ultraSonicPort = 0;
     }
 
     public static final class ColorConstants {
@@ -45,7 +46,7 @@ public final class Constants {
 
   public static final class ShooterConstants{
 
-		public static final int ultraSonicPort = 0;
+
 		public static final int shooterMotor = 0;
 
   }

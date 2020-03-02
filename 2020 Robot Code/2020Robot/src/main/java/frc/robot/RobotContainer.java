@@ -13,20 +13,20 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.Constants.IntakeConstants;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.DriveToUltrasonicDistance;
 import frc.robot.commands.GoToColorCommand;
 import frc.robot.commands.RotationalControlCommand;
 import frc.robot.commands.TimedMoveCommand;
 //import frc.robot.commands.RotationalControlCommand;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PixySubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -42,9 +42,6 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
   public final static ColorSubsystem colorSubsystem = new ColorSubsystem();
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final PixySubsystem pixySubsystem = new PixySubsystem();
@@ -112,12 +109,22 @@ public class RobotContainer {
 
   //Auton Commands
 
-  // Test Command
-  private final Command autoTest = new SequentialCommandGroup(
-    new TimedMoveCommand(driveSubsystem, 1, .5, 0),
-    new TimedMoveCommand(driveSubsystem, 1, 0, .5)
-  );
+  // Test Command See if it will drive for .5 seconds.
+  private final Command autoTest = new TimedMoveCommand(driveSubsystem, .5, 0).withTimeout(.5)
+  ;
 
+  private final Command testSequenceCommand = new SequentialCommandGroup(
+    //new ParallelCommandGroup(
+      // Drive forward and lower ball intake
+      new TimedMoveCommand(driveSubsystem, .5, 0 ).withTimeout(.5),
+      //new InstantCommand(intakeSubsystem::lowerIntake(.2),intakeSubsystem)
+    //)
+      //Turn and lower Color Wheel adjuster
+      new TimedMoveCommand(driveSubsystem, 0, .5).withTimeout(.5),
+      new InstantCommand(pneumaticSubsystem::wheelDown, pneumaticSubsystem)
+  );
+  
+  private final Command autoDriveToDistanceTest = new DriveToUltrasonicDistance(driveSubsystem, 80);
   
 
   /**
@@ -145,6 +152,9 @@ public class RobotContainer {
       
     // Add auton Commands to the chooser
     m_chooser.addOption("Auto Test", autoTest);
+    m_chooser.addOption("Auto Sequence Test", testSequenceCommand);
+    m_chooser.addOption("Auto Drive to Distance (80 inches)", autoDriveToDistanceTest);
+
     Shuffleboard.getTab("Autonomous").add(m_chooser);
   }
 
@@ -180,7 +190,6 @@ public class RobotContainer {
       new GoToColorCommand()); // WORKS!
 
 
-        //Otherwise this one works probably
 
 /*     buttonLeftBumper.whenPressed(
     new InstantCommand(intakeSubsystem::runShooter, intakeSubsystem)
@@ -192,9 +201,29 @@ public class RobotContainer {
       //new InstantCommand(intakeSubsystem::runShooter, intakeSubsystem)
       //);
 
-    buttonLeftBumper.whenPressed(()
-       -> pneumaticSubsystem.shooterExtend());
+
+
+     /*  buttonLeftBumper.whenPressed(
+        new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem)
+      ); */
     
+    //Attempt to have the shooter feed ball and auto retract
+
+    buttonLeftBumper.whenPressed(new SequentialCommandGroup(
+      new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem),
+      new WaitCommand(1),
+      new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
+    )
+  );
+
+    //OR Have it go back when released
+
+/*     buttonLeftBumper.whenPressed(
+      new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem)
+    ) .whenReleased(
+      new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
+    ); */
+
 
 
     buttonRightBumper.whenPressed(
