@@ -31,7 +31,7 @@ public class DriveToUltrasonicDistance extends CommandBase {
     m_targetDistance = targetDistance;
     SmartDashboard.putNumber("dtd target", targetDistance);
     addRequirements(drive);
-    driveGains = new Gains(5, 0, 0, true, "dtd drive gains");
+    driveGains = new Gains(.06, 0, 0, true, "dtd drive gains");
     pid = new PID(driveGains, targetDistance);
 
   }
@@ -47,9 +47,10 @@ public class DriveToUltrasonicDistance extends CommandBase {
     driveGains.kPUpdated();
     driveGains.kIUpdated();
     driveGains.kDUpdated();
-    currentDistance = m_drive.getDistance();
+    currentDistance = m_drive.distance;
     error = m_targetDistance - currentDistance;
     SmartDashboard.putNumber("dtd error", error);
+    SmartDashboard.putNumber("current distance", currentDistance);
 
     drivePower = pid.getCorrection(currentDistance);
     if(drivePower > 0.6)
@@ -64,6 +65,8 @@ public class DriveToUltrasonicDistance extends CommandBase {
       } else {
         onTargetCounter = 0;
       }
+
+      m_drive.autonDrive(drivePower, 0);
 
 
   }

@@ -116,15 +116,15 @@ public class RobotContainer {
   private final Command testSequenceCommand = new SequentialCommandGroup(
     //new ParallelCommandGroup(
       // Drive forward and lower ball intake
-      new TimedMoveCommand(driveSubsystem, .5, 0 ).withTimeout(.5),
+      new TimedMoveCommand(driveSubsystem, .5, 0 ).withTimeout(1),
       //new InstantCommand(intakeSubsystem::lowerIntake(.2),intakeSubsystem)
     //)
       //Turn and lower Color Wheel adjuster
-      new TimedMoveCommand(driveSubsystem, 0, .5).withTimeout(.5),
+      new TimedMoveCommand(driveSubsystem, 0, .5).withTimeout(1),
       new InstantCommand(pneumaticSubsystem::wheelDown, pneumaticSubsystem)
   );
   
-  private final Command autoDriveToDistanceTest = new DriveToUltrasonicDistance(driveSubsystem, 80);
+  private final Command autoDriveToDistanceTest = new DriveToUltrasonicDistance(driveSubsystem, 30);
   
 
   /**
@@ -209,12 +209,14 @@ public class RobotContainer {
     
     //Attempt to have the shooter feed ball and auto retract
 
+    // WORKS
     buttonLeftBumper.whenPressed(new SequentialCommandGroup(
       new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem),
-      new WaitCommand(1),
+      new WaitCommand(.5),
       new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
     )
   );
+
 
     //OR Have it go back when released
 

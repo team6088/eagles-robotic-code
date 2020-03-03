@@ -28,8 +28,8 @@ public class DriveSubsystem extends SubsystemBase {
 
 
   private final AnalogInput ultraSonic = new AnalogInput(DriveConstants.ultraSonicPort);
+  public static double distance = 0;
 
-  private static double distance = 0;
 /*   private static int reading0 = 0;
   private static int reading1 = 0;
   private static int reading2 = 0;
@@ -79,7 +79,7 @@ public class DriveSubsystem extends SubsystemBase {
     if (Math.abs(turn)<.2){
       turn = 0;
     }
-  drive.arcadeDrive(-move, turn, true);
+  drive.arcadeDrive(move, turn, true);
 
   }
 
@@ -92,15 +92,12 @@ public class DriveSubsystem extends SubsystemBase {
     drive.arcadeDrive(0, 0);
   }
 
-  public double getDistance(){
-    return distance;
-  }
 
   @Override
   public void periodic() {
     double sensorValue = ultraSonic.getVoltage();
     final double scaleFactor = 1/(5./1024.)/25.4; //scale converting voltage to distance
-    double distance = 5*sensorValue*scaleFactor; //convert the voltage to distance
+    distance = 5*sensorValue*scaleFactor; //convert the voltage to distance
 
 
 
