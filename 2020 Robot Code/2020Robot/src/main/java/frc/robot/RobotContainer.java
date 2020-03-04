@@ -71,7 +71,7 @@ public class RobotContainer {
   buttonDpadNW = new POVButton(driverStick, 315, 0);
 
   //VERIFY LOGITECH BUTTONS!
-/*   public Button logitechThumbButton = new JoystickButton(operatorStick, 1),
+/*    public Button logitechThumbButton = new JoystickButton(operatorStick, 1),
   logitechFingerTrigger = new JoystickButton(operatorStick, 2),
   logitechButton11 = new JoystickButton(operatorStick,11),
   logitechButton12 = new JoystickButton(operatorStick,12),
@@ -82,10 +82,53 @@ public class RobotContainer {
   logitechButtonDpadN = new POVButton(operatorStick, 0, 0),
   logitechButtonDpadW = new POVButton(operatorStick, 270, 0),
   logitechButton4 = new JoystickButton(operatorStick,4),
-  logitechButton3 = new JoystickButton(operatorStick,3); */
+  logitechButton3 = new JoystickButton(operatorStick,3);  */
+
+  //Summary of Controls
+  //DRIVER
+  // A - Manual Conveyor
+  // B - Manual Intake
+  // X - Reverse Conveyor
+  // Y - Reverse Intake
+  // Left Bumper - Index Ball (instant out/in)
+  // RIght Bumper - Ball Feeder  (instant out/in)
+  // Start - 
+  // Back - 
+  // Left Trigger 2 - Intake & Belt
+  // Right Trigger 3 - Shoot
+  // Left D Pad -
+  // Right D Pad - 
+  // Up D Pad -
+  // Down D Pad - Manual Shooter Reverse
+  // L X axis 0 - Drive
+  // L Y Axis 1 - Drive
+  // R X Axis 4 - 
+  // R Y Axis 5 - 
+
+  //Operator
+  // A - Go to Color Command
+  // B - Rotational Control Command
+  // X -
+  // Y - Test Automated Loading
+  // Left Bumper - Color Wheel Down
+  // RIght Bumper - Color Wheel Up
+  // Start - 
+  // Back - 
+  // Left Trigger 2 - 
+  // Right Trigger 3 - Manual Color Wheel Control 
+  // Left D Pad - 
+  // Right D Pad - 
+  // Up D Pad -
+  // Down D Pad - 
+  // L X axis 0 - 
+  // L Y Axis 1 -
+  // R X Axis 4 - 
+  // R Y Axis 5 - 
+
+
 
   //2nd Xbox Controller
-  public Button operatorButtonA = new JoystickButton(operatorStick, 1),
+public Button operatorButtonA = new JoystickButton(operatorStick, 1),
   operatorButtonB = new JoystickButton(operatorStick,2),
   operatorButtonX = new JoystickButton(operatorStick,3),
   operatorButtonY = new JoystickButton(operatorStick,4),
@@ -102,7 +145,7 @@ public class RobotContainer {
   operatorButtonDpadNE = new POVButton(operatorStick, 45, 0),
   operatorButtonDpadSE = new POVButton(operatorStick, 135, 0),
   operatorButtonDpadSW = new POVButton(operatorStick, 225, 0),
-  operatorButtonDpadNW = new POVButton(operatorStick, 315, 0);
+  operatorButtonDpadNW = new POVButton(operatorStick, 315, 0); 
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -131,8 +174,10 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
+
+    // Configure Always Running Commands
+        configureButtonBindings();
+
     driveSubsystem.setDefaultCommand(
       new RunCommand(() -> 
       driveSubsystem.manualDrive(driverStick.getY(), driverStick.getX()),driveSubsystem)
@@ -140,21 +185,25 @@ public class RobotContainer {
 
     shooterSubsystem.setDefaultCommand(
       new RunCommand(() ->
-      shooterSubsystem.manualShoot(driverStick.getRawAxis(2),driverStick.getRawAxis(3)),shooterSubsystem)
+      shooterSubsystem.manualShoot(driverStick.getRawAxis(3)),shooterSubsystem)
     );
-
 
     intakeSubsystem.setDefaultCommand(
       new RunCommand(() ->
-      intakeSubsystem.manualIntakeHeight(operatorStick.getRawAxis(2),operatorStick.getRawAxis(3)),intakeSubsystem)
-      );
+      intakeSubsystem.manualIntake(operatorStick.getRawAxis(2)),intakeSubsystem)
+    );
+
+    colorSubsystem.setDefaultCommand(
+      new RunCommand(() ->
+      colorSubsystem.manualColorControl(operatorStick.getRawAxis(3)),colorSubsystem)
+    );
 
       
     // Add auton Commands to the chooser
     m_chooser.addOption("Auto Test", autoTest);
     m_chooser.addOption("Auto Sequence Test", testSequenceCommand);
     m_chooser.addOption("Auto Drive to Distance (80 inches)", autoDriveToDistanceTest);
-
+    m_chooser.setDefaultOption("Default", autoTest); // Does this work?
     Shuffleboard.getTab("Autonomous").add(m_chooser);
   }
 
@@ -163,84 +212,88 @@ public class RobotContainer {
   //button Mapping
   private void configureButtonBindings() {
 
-          buttonStart.whenPressed(
-        new InstantCommand(shooterSubsystem::runShooter, shooterSubsystem)
+
+      // Shooter Commands!
+      buttonDpadS.whenPressed(
+        new InstantCommand(shooterSubsystem::reverseShooter, shooterSubsystem)
       ).whenReleased(
         new InstantCommand(shooterSubsystem::stopShooter, shooterSubsystem)
       );
 
+          // WORKS
+    buttonRightBumper.whenPressed(new SequentialCommandGroup(
+      new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem),
+      new WaitCommand(.4),
+      new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
+    ));
 
-      //ColorWheel Commands!
+    buttonLeftBumper.whenPressed(new SequentialCommandGroup(
+      new InstantCommand(pneumaticSubsystem::indexerIn, pneumaticSubsystem),
+      new WaitCommand(.4),
+      new InstantCommand(pneumaticSubsystem::indexerOut, pneumaticSubsystem)
+    ));
+
+    operatorButtonY.whenPressed(new SequentialCommandGroup(
+      new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem),
+      new WaitCommand(.4),
+      new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem),
+      new WaitCommand(.2),
+      new InstantCommand(pneumaticSubsystem::indexerIn, pneumaticSubsystem),
+      new WaitCommand(.1),
+      new InstantCommand(pneumaticSubsystem::indexerOut, pneumaticSubsystem)
+    ));
+
+      //INTAKE COMMANDS !!
+
       buttonA.whenPressed(
-        new InstantCommand(colorSubsystem::manualTurnWheelQuick, colorSubsystem)
+        new InstantCommand(intakeSubsystem::runBelt, intakeSubsystem)
       ).whenReleased(
-        new InstantCommand(colorSubsystem::stopColorWheel, colorSubsystem)
+        new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
       );
 
       buttonB.whenPressed(
-        new InstantCommand(colorSubsystem::manualTurnWheelSlow, colorSubsystem)
+        new InstantCommand(intakeSubsystem::runIntake, intakeSubsystem)
       ).whenReleased(
-        new InstantCommand(colorSubsystem::stopColorWheel, colorSubsystem)
+        new InstantCommand(intakeSubsystem::stopIntake, intakeSubsystem)
+      );
+
+      buttonX.whenPressed(
+        new InstantCommand(intakeSubsystem::reverseBelt, intakeSubsystem)
+      ).whenReleased(
+        new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
       );
 
       buttonY.whenPressed(
-        new RotationalControlCommand());  // Works!
-
-    buttonX.whenPressed(
-      new GoToColorCommand()); // WORKS!
-
-
-
-/*     buttonLeftBumper.whenPressed(
-    new InstantCommand(intakeSubsystem::runShooter, intakeSubsystem)
-    ).whenReleased(
-      new InstantCommand(intakeSubsystem::stopShooter, intakeSubsystem)
-    ); */
-
-    //buttonLeftBumper.whenPressed(
-      //new InstantCommand(intakeSubsystem::runShooter, intakeSubsystem)
-      //);
+        new InstantCommand(intakeSubsystem::reverseIntake, intakeSubsystem)
+      ).whenReleased(
+        new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
+      );
 
 
 
-     /*  buttonLeftBumper.whenPressed(
-        new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem)
-      ); */
+
+          //ColorWheel Commands!
+
+/* 
+          operatorButtonX.whenPressed(
+            new InstantCommand(colorSubsystem::manualTurnWheelQuick, colorSubsystem)
+          ).whenReleased(
+            new InstantCommand(colorSubsystem::stopColorWheel, colorSubsystem)
+          ); */
     
-    //Attempt to have the shooter feed ball and auto retract
-
-    // WORKS
-    buttonLeftBumper.whenPressed(new SequentialCommandGroup(
-      new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem),
-      new WaitCommand(.5),
-      new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
-    )
-  );
-
-
-    //OR Have it go back when released
-
-/*     buttonLeftBumper.whenPressed(
-      new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem)
-    ) .whenReleased(
-      new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
-    ); */
-
-
-
-    buttonRightBumper.whenPressed(
-      new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
-    );
-
+          operatorButtonB.whenPressed(
+            new RotationalControlCommand());  // Works!
     
-    buttonLeftStick.whenPressed(
-      new InstantCommand(pneumaticSubsystem::wheelDown, pneumaticSubsystem)
-    );
+          operatorButtonA.whenPressed(
+          new GoToColorCommand()); // WORKS!
 
-    
-    buttonRightStick.whenPressed(
-      new InstantCommand(pneumaticSubsystem::wheelUp, pneumaticSubsystem)
-    );
+          operatorButtonLeftBumper.whenPressed(
+            new InstantCommand(pneumaticSubsystem::wheelDown, pneumaticSubsystem)
+          );
+      
+          operatorButtonRightBumper.whenPressed(
+            new InstantCommand(pneumaticSubsystem::wheelUp, pneumaticSubsystem)
+          );
 
   }
 

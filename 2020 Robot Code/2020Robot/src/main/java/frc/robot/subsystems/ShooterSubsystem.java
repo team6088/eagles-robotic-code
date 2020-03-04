@@ -16,24 +16,21 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
 
-  private final Spark shooterMotor = new Spark(ShooterConstants.shooterMotor);
+  private final Spark shooterMotor = new Spark(ShooterConstants.shooterMotorPort);
 
 
 
-  public void runShooter(){
-    shooterMotor.set(1);
+  public void reverseShooter(){
+    shooterMotor.set(-.5);
 }
 
   public void stopShooter(){
       shooterMotor.set(0);
   }
 
-  public void manualShoot(double forward, double reverse){
+  public void manualShoot(double forward){
 
-      if(forward > reverse)
       shooterMotor.set(forward);
-      else
-      shooterMotor.set(-1*reverse);
   }
 
   @Override

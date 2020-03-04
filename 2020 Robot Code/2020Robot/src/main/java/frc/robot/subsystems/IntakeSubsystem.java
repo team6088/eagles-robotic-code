@@ -25,7 +25,9 @@ public class IntakeSubsystem extends SubsystemBase {
   private final Encoder intakeEncoder = new Encoder(0,1);
   private final int angle = 5;
   private final Spark intakeLiftMotor = new Spark(IntakeConstants.intakeLiftMotorPort);
-  
+  private final Spark beltMotor = new Spark(IntakeConstants.beltMotorPort);
+
+
   int P, I, D = 1;
   int integral, previous_error = 0;
   double setpoint = 30;
@@ -37,20 +39,36 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeMotor.set(IntakeConstants.intakeMotorSpeed);
   }
 
-  public void stopShooter(){
-      intakeMotor.set(0);
+  public void reverseIntake(){
+    intakeMotor.set(-IntakeConstants.intakeMotorSpeed);
   }
 
-  public void manualIntakeHeight(double up, double down){
+  public void stopIntake(){
+    intakeMotor.set(0);
+  }
 
-    if(up > down)
-    intakeLiftMotor.set(up);
-    else
-    intakeLiftMotor.set(-1*down);
+  public void runBelt(){
+    beltMotor.set(IntakeConstants.beltMotorSpeed);
+  }
+
+  public void reverseBelt(){
+    beltMotor.set(-IntakeConstants.beltMotorSpeed);
+  }
+
+  public void stopBelt(){
+    beltMotor.set(0);
+  }
+
+  public void manualIntake(double speed){
+    if(speed>.8){
+    speed = .8;
+    }
+    intakeMotor.set(speed);
+    beltMotor.set(speed);
 }
 
-  public void lowerIntake(double speed){
-    intakeMotor.set(speed);
+  public void lowerIntake(){
+    intakeMotor.set(IntakeConstants.intakeLowerSpeed);
   }
 
   public void robotInit() {

@@ -87,6 +87,12 @@ public class ColorSubsystem extends SubsystemBase {
     }
   }
 
+  public void manualColorControl(double speed){
+    if (speed>.4){
+      colorMotor.set(speed);
+    }
+  }
+
   public void colorControl(){
     if (targetColor != setColor){
       colorMotor.set(ColorConstants.colorMotorSlowSpeed);

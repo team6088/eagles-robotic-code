@@ -47,16 +47,20 @@ public final class Constants {
   public static final class ShooterConstants{
 
 
-		public static final int shooterMotor = 0;
+		public static final int shooterMotorPort = 0;
 
   }
 
 
     public static final class IntakeConstants {
-      public static final int intakeLiftMotorPort = 5;
-      public static final int intakeMotorPort = 3;
-      public static final double intakeMotorSpeed = .4;
+      public static final int intakeLiftMotorPort = 1;
+      public static final int intakeMotorPort = 2;
+      public static final double intakeMotorSpeed = .8;
+	    public static final int beltMotorPort = 5;
+	    public static final double beltMotorSpeed = .8;
+		  public static final double intakeLowerSpeed = .3;
     }
+
     public static final class VisionConstants {
       //60x137 - 80x182
 		  public static final int minTargetHeight = 60;
@@ -77,6 +81,8 @@ public final class Constants {
 	    public static final int shooterExtend = 3;
 	    public static final int ballRetract = 7;
 	    public static final int ballExtend = 6;
+		  public static final int indexerRetract = 1;
+		  public static final int indexerExtend = 2;
   
     }
 

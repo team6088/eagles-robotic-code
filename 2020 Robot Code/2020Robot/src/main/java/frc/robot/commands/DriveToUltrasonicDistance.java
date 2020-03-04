@@ -31,7 +31,8 @@ public class DriveToUltrasonicDistance extends CommandBase {
     m_targetDistance = targetDistance;
     SmartDashboard.putNumber("dtd target", targetDistance);
     addRequirements(drive);
-    driveGains = new Gains(.06, 0, 0, true, "dtd drive gains");
+    driveGains = new Gains(.035, 0, .02, true, "dtd drive gains");
+    // Decent at moving 30"
     pid = new PID(driveGains, targetDistance);
 
   }

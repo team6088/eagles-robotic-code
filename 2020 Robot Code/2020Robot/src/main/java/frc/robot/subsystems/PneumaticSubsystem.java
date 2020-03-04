@@ -20,10 +20,12 @@ public class PneumaticSubsystem extends SubsystemBase {
 
      // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  public static Compressor compressor1 = new Compressor(PneumaticConstants.compressor);
-  public static DoubleSolenoid shooterSolenoid = new DoubleSolenoid(PneumaticConstants.shooterRetract,PneumaticConstants.shooterExtend);
-  public static DoubleSolenoid wheelSolenoid = new DoubleSolenoid(PneumaticConstants.ballRetract,PneumaticConstants.ballExtend);
-  
+  public final Compressor compressor1 = new Compressor(PneumaticConstants.compressor);
+  public final DoubleSolenoid shooterSolenoid = new DoubleSolenoid(PneumaticConstants.shooterRetract,PneumaticConstants.shooterExtend);
+  public final DoubleSolenoid wheelSolenoid = new DoubleSolenoid(PneumaticConstants.ballRetract,PneumaticConstants.ballExtend);
+  public final DoubleSolenoid indexerSolenoid = new DoubleSolenoid(PneumaticConstants.indexerRetract,PneumaticConstants.indexerExtend);
+
+
   public void init(){
     compressor1.setClosedLoopControl(true);
     //compressor1.enabled();
@@ -42,6 +44,14 @@ public class PneumaticSubsystem extends SubsystemBase {
 
   public void wheelDown(){
     wheelSolenoid.set(Value.kReverse); 
+  }
+
+  public void indexerOut() {
+    indexerSolenoid.set(Value.kForward);
+  }
+
+  public void indexerIn() {
+    indexerSolenoid.set(Value.kReverse);
   }
 
 
