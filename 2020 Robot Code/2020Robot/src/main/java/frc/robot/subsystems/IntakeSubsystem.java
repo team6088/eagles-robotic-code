@@ -60,11 +60,11 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void manualIntake(double speed){
-    if(speed>.8){
-    speed = .8;
+    if(speed>1){
+    speed = 1;
     }
-    intakeMotor.set(speed);
-    beltMotor.set(speed);
+    intakeMotor.set(-speed);
+    beltMotor.set(-speed);
 }
 
   public void lowerIntake(){

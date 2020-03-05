@@ -88,9 +88,7 @@ public class ColorSubsystem extends SubsystemBase {
   }
 
   public void manualColorControl(double speed){
-    if (speed>.4){
-      colorMotor.set(speed);
-    }
+      colorMotor.set(speed*.4);
   }
 
   public void colorControl(){

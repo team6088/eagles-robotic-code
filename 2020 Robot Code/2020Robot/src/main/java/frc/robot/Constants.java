@@ -55,9 +55,9 @@ public final class Constants {
     public static final class IntakeConstants {
       public static final int intakeLiftMotorPort = 1;
       public static final int intakeMotorPort = 2;
-      public static final double intakeMotorSpeed = .8;
+      public static final double intakeMotorSpeed = 1;
 	    public static final int beltMotorPort = 5;
-	    public static final double beltMotorSpeed = .8;
+	    public static final double beltMotorSpeed = 1;
 		  public static final double intakeLowerSpeed = .3;
     }
 
@@ -77,12 +77,12 @@ public final class Constants {
 
     public static final class PneumaticConstants{
       public static final int compressor = 0;
-	    public static final int shooterRetract = 4;
-	    public static final int shooterExtend = 3;
+	    public static final int shooterRetract = 3;
+	    public static final int shooterExtend = 4;
 	    public static final int ballRetract = 7;
 	    public static final int ballExtend = 6;
-		  public static final int indexerRetract = 1;
-		  public static final int indexerExtend = 2;
+		  public static final int indexerRetract = 2;
+		  public static final int indexerExtend = 1;
   
     }
 

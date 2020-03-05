@@ -190,7 +190,7 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
 
     intakeSubsystem.setDefaultCommand(
       new RunCommand(() ->
-      intakeSubsystem.manualIntake(operatorStick.getRawAxis(2)),intakeSubsystem)
+      intakeSubsystem.manualIntake(driverStick.getRawAxis(2)),intakeSubsystem)
     );
 
     colorSubsystem.setDefaultCommand(
@@ -245,25 +245,25 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
 
       //INTAKE COMMANDS !!
 
-      buttonA.whenPressed(
+      buttonA.whileHeld(
         new InstantCommand(intakeSubsystem::runBelt, intakeSubsystem)
       ).whenReleased(
         new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
       );
 
-      buttonB.whenPressed(
+      buttonB.whileHeld(
         new InstantCommand(intakeSubsystem::runIntake, intakeSubsystem)
       ).whenReleased(
         new InstantCommand(intakeSubsystem::stopIntake, intakeSubsystem)
       );
 
-      buttonX.whenPressed(
+      buttonX.whileHeld(
         new InstantCommand(intakeSubsystem::reverseBelt, intakeSubsystem)
       ).whenReleased(
         new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
       );
 
-      buttonY.whenPressed(
+      buttonY.whileHeld(
         new InstantCommand(intakeSubsystem::reverseIntake, intakeSubsystem)
       ).whenReleased(
         new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
