@@ -48,7 +48,7 @@ public final class Constants {
 
 
 		public static final int shooterMotorPort = 0;
-
+    public static final double shootPower = .8;
   }
 
 
@@ -56,6 +56,7 @@ public final class Constants {
       public static final int intakeLiftMotorPort = 1;
       public static final int intakeMotorPort = 2;
       public static final double intakeMotorSpeed = 1;
+      public static final double intakeMotorSpeedSlow = .5;
 	    public static final int beltMotorPort = 5;
 	    public static final double beltMotorSpeed = 1;
 		  public static final double intakeLowerSpeed = .3;

@@ -24,6 +24,10 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.set(-.5);
 }
 
+  public void staticShoot(){
+    shooterMotor.set(ShooterConstants.shootPower);  
+  }
+
   public void stopShooter(){
       shooterMotor.set(0);
   }

@@ -43,6 +43,14 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeMotor.set(-IntakeConstants.intakeMotorSpeed);
   }
 
+  public void runIntakeSlow(){
+    intakeMotor.set(IntakeConstants.intakeMotorSpeedSlow);
+  }
+
+  public void reverseIntakeSlow(){
+    intakeMotor.set(-IntakeConstants.intakeMotorSpeedSlow);
+  }
+
   public void stopIntake(){
     intakeMotor.set(0);
   }
@@ -63,12 +71,16 @@ public class IntakeSubsystem extends SubsystemBase {
     if(speed>1){
     speed = 1;
     }
-    intakeMotor.set(-speed);
+    intakeMotor.set(-speed*.6);
     beltMotor.set(-speed);
 }
 
-  public void lowerIntake(){
-    intakeMotor.set(IntakeConstants.intakeLowerSpeed);
+  public void lowerIntakeAngle(){
+    intakeLiftMotor.set(IntakeConstants.intakeLowerSpeed);
+  }
+
+  public void stopIntakeAngle(){
+    intakeLiftMotor.set(0);
   }
 
   public void robotInit() {
