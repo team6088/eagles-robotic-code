@@ -21,7 +21,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 //import frc.robot.commands.RotationalControlCommand;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+//import frc.robot.subsystems.shooterSubsystem;
 import frc.robot.subsystems.PixySubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -46,8 +46,8 @@ public class RobotContainer {
   public final static ColorSubsystem colorSubsystem = new ColorSubsystem();
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final PixySubsystem pixySubsystem = new PixySubsystem();
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  //private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
@@ -155,21 +155,21 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
   //Auton Commands
 
   // Test Command See if it will drive for .5 seconds.
-  private final Command timedMoveStraight = new TimedMoveCommand(driveSubsystem, .5, 0).withTimeout(2)
+  private final Command timedMoveStraight = new TimedMoveCommand(driveSubsystem, .5, 0).withTimeout(2) //Drives backwards
   ;
 
   private final Command sequentialMove = new SequentialCommandGroup(
     //new ParallelCommandGroup(
       // Drive forward and lower ball intake
       new TimedMoveCommand(driveSubsystem, .5, 0 ).withTimeout(2),
-      //new InstantCommand(intakeSubsystem::lowerIntake(.2),intakeSubsystem)
+      //new InstantCommand(shooterSubsystem::lowerIntake(.2),shooterSubsystem)
     //)
       //Turn and lower Color Wheel adjuster
-      new InstantCommand(intakeSubsystem::lowerIntakeAngle, intakeSubsystem).withTimeout(.3),
+      new InstantCommand(shooterSubsystem::lowerIntakeAngle, shooterSubsystem).withTimeout(.3),
       new InstantCommand(pneumaticSubsystem::wheelDown, pneumaticSubsystem)
   );
   
-  private final Command shootThreeBalls = new SequentialCommandGroup(
+/*   private final Command shootThreeBalls = new SequentialCommandGroup(
     new InstantCommand(shooterSubsystem::staticShoot, shooterSubsystem).withTimeout(2),
       new ParallelCommandGroup(
         new InstantCommand(shooterSubsystem::staticShoot, shooterSubsystem),//.withTimeout(1),
@@ -185,11 +185,11 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
         new InstantCommand(pneumaticSubsystem::indexerOut,pneumaticSubsystem)).withTimeout(.5),
       new ParallelCommandGroup(
         new InstantCommand(shooterSubsystem::staticShoot, shooterSubsystem),//.withTimeout(1),
-        new InstantCommand(intakeSubsystem::runBelt, intakeSubsystem),
+        new InstantCommand(shooterSubsystem::runBelt, shooterSubsystem),
         new InstantCommand(pneumaticSubsystem::shooterExtend,pneumaticSubsystem)).withTimeout(1),
       new ParallelCommandGroup(
         new InstantCommand(shooterSubsystem::staticShoot, shooterSubsystem),//.withTimeout(1),
-        new InstantCommand(intakeSubsystem::runBelt, intakeSubsystem),
+        new InstantCommand(shooterSubsystem::runBelt, shooterSubsystem),
         new InstantCommand(pneumaticSubsystem::shooterRetract,pneumaticSubsystem)).withTimeout(.5),
       new ParallelCommandGroup(
         new InstantCommand(shooterSubsystem::staticShoot, shooterSubsystem),//.withTimeout(1),
@@ -204,7 +204,7 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
         new InstantCommand(shooterSubsystem::staticShoot, shooterSubsystem),//.withTimeout(1),
         new InstantCommand(pneumaticSubsystem::shooterRetract,pneumaticSubsystem)).withTimeout(.5),
       new TimedMoveCommand(driveSubsystem, .5, 0).withTimeout(2)
-      );
+      ); */
 
   
   private final Command autoDriveToDistanceTest = new DriveToUltrasonicDistance(driveSubsystem, 30);
@@ -226,12 +226,12 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
     shooterSubsystem.setDefaultCommand(
       new RunCommand(() ->
       shooterSubsystem.manualShoot(driverStick.getRawAxis(3)),shooterSubsystem)
-    );
+      );
 
-    intakeSubsystem.setDefaultCommand(
+  /*   shooterSubsystem.setDefaultCommand(
       new RunCommand(() ->
-      intakeSubsystem.manualIntake(driverStick.getRawAxis(2)),intakeSubsystem)
-    );
+      shooterSubsystem.manualIntake(driverStick.getRawAxis(2)*.4),shooterSubsystem)
+    ); */
 
     // Now linked to CLIMBER!!
     colorSubsystem.setDefaultCommand(
@@ -244,7 +244,7 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
     m_chooser.addOption("Timed Move", timedMoveStraight);
     m_chooser.addOption("Sequential Move", sequentialMove);
     m_chooser.addOption("Auto Drive to Distance (80 inches)", autoDriveToDistanceTest);
-    m_chooser.addOption("Shoot 3 Balls and Move Straight", shootThreeBalls);
+    //m_chooser.addOption("Shoot 3 Balls and Move Straight", shootThreeBalls);
     m_chooser.setDefaultOption("Default", timedMoveStraight); // Does this work?
     Shuffleboard.getTab("Autonomous").add(m_chooser);
   }
@@ -263,18 +263,25 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
       );
 
           // WORKS
-    buttonRightBumper.whenPressed(new SequentialCommandGroup(
+/*     buttonRightBumper.whenPressed(new SequentialCommandGroup(
       new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem),
       new WaitCommand(.4),
       new InstantCommand(pneumaticSubsystem::shooterRetract, pneumaticSubsystem)
-    ));
+    )); */
 
-    buttonLeftBumper.whenPressed(new SequentialCommandGroup(
-      new InstantCommand(pneumaticSubsystem::indexerIn, pneumaticSubsystem),
-      new WaitCommand(.5),
-      new InstantCommand(pneumaticSubsystem::indexerOut, pneumaticSubsystem)
-    ));
+    buttonLeftBumper.whileHeld(
+      new InstantCommand(shooterSubsystem::shootLow, shooterSubsystem)
+    ).whenReleased(
+      new InstantCommand(shooterSubsystem::stopShooter, shooterSubsystem)
+    );
 
+    buttonRightBumper.whileHeld(
+      new InstantCommand(shooterSubsystem::shootHigh, shooterSubsystem)
+    ).whenReleased(
+      new InstantCommand(shooterSubsystem::stopShooter, shooterSubsystem)
+    );
+
+    
     operatorButtonStart.whenPressed(new SequentialCommandGroup(
       new InstantCommand(pneumaticSubsystem::shooterExtend, pneumaticSubsystem),
       new WaitCommand(.4),
@@ -287,34 +294,36 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
 
       //INTAKE COMMANDS !!
 
-      buttonX.whileHeld(
-        new InstantCommand(intakeSubsystem::runBelt, intakeSubsystem)
+      //tickler
+      buttonA.whileHeld(
+        new InstantCommand(shooterSubsystem::runTickler, shooterSubsystem)
       ).whenReleased(
-        new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
+        new InstantCommand(shooterSubsystem::stopTickler, shooterSubsystem)
       );
 
       buttonB.whileHeld(
-        new InstantCommand(intakeSubsystem::runIntake, intakeSubsystem)
+        new InstantCommand(shooterSubsystem::runIntake, shooterSubsystem)
       ).whenReleased(
-        new InstantCommand(intakeSubsystem::stopIntake, intakeSubsystem)
+        new InstantCommand(shooterSubsystem::stopIntake, shooterSubsystem)
       );
 
-      buttonA.whileHeld(
-        new InstantCommand(intakeSubsystem::reverseBelt, intakeSubsystem)
+      //tickler
+      buttonX.whileHeld(
+        new InstantCommand(shooterSubsystem::reverseTickler, shooterSubsystem)
       ).whenReleased(
-        new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
+        new InstantCommand(shooterSubsystem::stopTickler, shooterSubsystem)
       );
 
       buttonY.whileHeld(
-        new InstantCommand(intakeSubsystem::reverseIntake, intakeSubsystem)
+        new InstantCommand(shooterSubsystem::reverseIntake, shooterSubsystem)
       ).whenReleased(
-        new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
+        new InstantCommand(shooterSubsystem::stopIntake, shooterSubsystem)
       );
 
       operatorButtonY.whileHeld(
-        new InstantCommand(intakeSubsystem::lowerIntakeAngle, intakeSubsystem)
+        new InstantCommand(shooterSubsystem::lowerIntakeAngle, shooterSubsystem)
       ).whenReleased(
-        new InstantCommand(intakeSubsystem::stopIntakeAngle, intakeSubsystem)
+        new InstantCommand(shooterSubsystem::stopIntakeAngle, shooterSubsystem)
       );
 
 
