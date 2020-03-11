@@ -17,6 +17,7 @@ import frc.robot.commands.DriveToUltrasonicDistance;
 import frc.robot.commands.GoToColorCommand;
 import frc.robot.commands.RotationalControlCommand;
 import frc.robot.commands.TimedMoveCommand;
+import frc.robot.subsystems.ClimberSubsystem;
 //import frc.robot.commands.RotationalControlCommand;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -48,6 +49,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
+  private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
 
   public static Joystick driverStick = new Joystick(0);
   public static Joystick operatorStick = new Joystick(1);
@@ -231,9 +233,10 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
       intakeSubsystem.manualIntake(driverStick.getRawAxis(2)),intakeSubsystem)
     );
 
+    // Now linked to CLIMBER!!
     colorSubsystem.setDefaultCommand(
       new RunCommand(() ->
-      colorSubsystem.manualColorControl(operatorStick.getRawAxis(3)),colorSubsystem)
+      colorSubsystem.manualColorControl(operatorStick.getRawAxis(3)-operatorStick.getRawAxis(2)),colorSubsystem)
     );
 
       
@@ -284,7 +287,7 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
 
       //INTAKE COMMANDS !!
 
-      buttonA.whileHeld(
+      buttonX.whileHeld(
         new InstantCommand(intakeSubsystem::runBelt, intakeSubsystem)
       ).whenReleased(
         new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
@@ -296,7 +299,7 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
         new InstantCommand(intakeSubsystem::stopIntake, intakeSubsystem)
       );
 
-      buttonX.whileHeld(
+      buttonA.whileHeld(
         new InstantCommand(intakeSubsystem::reverseBelt, intakeSubsystem)
       ).whenReleased(
         new InstantCommand(intakeSubsystem::stopBelt, intakeSubsystem)
@@ -310,8 +313,7 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
 
       operatorButtonY.whileHeld(
         new InstantCommand(intakeSubsystem::lowerIntakeAngle, intakeSubsystem)
-      );
-      operatorButtonY.whenReleased(
+      ).whenReleased(
         new InstantCommand(intakeSubsystem::stopIntakeAngle, intakeSubsystem)
       );
 
@@ -327,8 +329,8 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
             new InstantCommand(colorSubsystem::stopColorWheel, colorSubsystem)
           ); */
     
-          operatorButtonB.whenPressed(
-            new RotationalControlCommand());  // Works!
+/*           operatorButtonB.whenPressed(
+            new RotationalControlCommand()); */  // Works!
     
           operatorButtonA.whenPressed(
           new GoToColorCommand()); // WORKS!
@@ -341,10 +343,25 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
             new InstantCommand(pneumaticSubsystem::wheelUp, pneumaticSubsystem)
           );
 
-          operatorButtonX.whileHeld(
+/*           operatorButtonX.whileHeld(
             new InstantCommand(colorSubsystem::manualTurnWheelQuick, colorSubsystem)
-          );
+          ); */
 
+
+
+        //Climber Commands
+
+        operatorButtonB.whileHeld(
+            new InstantCommand(climberSubsystem::runClimber, climberSubsystem)
+            ).whenReleased(
+            new InstantCommand(climberSubsystem::stopClimber, climberSubsystem)
+            );
+          
+          operatorButtonX.whileHeld(
+            new InstantCommand(climberSubsystem::reverseClimber, climberSubsystem
+          )).whenReleased(
+            new InstantCommand(climberSubsystem::stopClimber, climberSubsystem)
+          );
   }
 
 

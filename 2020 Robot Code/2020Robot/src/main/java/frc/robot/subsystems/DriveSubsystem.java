@@ -133,7 +133,7 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Distance Array Length", readings.length);
      */
     
-    SmartDashboard.putNumber("Ultrasonic Distance", distance); //write the value to the LabVIEW DriverStation
+    //SmartDashboard.putNumber("Ultrasonic Distance", distance); //write the value to the LabVIEW DriverStation
 
   }
 }

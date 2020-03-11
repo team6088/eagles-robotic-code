@@ -71,7 +71,7 @@ public class IntakeSubsystem extends SubsystemBase {
     if(speed>1){
     speed = 1;
     }
-    intakeMotor.set(-speed*.6);
+    intakeMotor.set(-speed*.46);
     beltMotor.set(-speed);
 }
 
@@ -92,6 +92,6 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     double dist = intakeEncoder.getDistance();
-    SmartDashboard.putNumber("Encoder", dist);
+    //SmartDashboard.putNumber("Encoder", dist);
   }
 }

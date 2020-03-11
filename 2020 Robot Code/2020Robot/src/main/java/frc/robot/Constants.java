@@ -55,11 +55,11 @@ public final class Constants {
     public static final class IntakeConstants {
       public static final int intakeLiftMotorPort = 1;
       public static final int intakeMotorPort = 2;
-      public static final double intakeMotorSpeed = 1;
+      public static final double intakeMotorSpeed = .7;
       public static final double intakeMotorSpeedSlow = .5;
 	    public static final int beltMotorPort = 5;
 	    public static final double beltMotorSpeed = 1;
-		  public static final double intakeLowerSpeed = .3;
+		  public static final double intakeLowerSpeed = .5;
     }
 
     public static final class VisionConstants {
@@ -87,5 +87,10 @@ public final class Constants {
   
     }
 
+    public static final class ClimberConstants{
+
+		public static final int climberMotorPort = 3;
+
+    }
 
 }

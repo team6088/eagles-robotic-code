@@ -179,14 +179,14 @@ public class ColorSubsystem extends SubsystemBase {
 
   }
 
-    SmartDashboard.putNumber("Red", detectedColor.red);
-    SmartDashboard.putNumber("Green", detectedColor.green);
-    SmartDashboard.putNumber("Blue", detectedColor.blue);
-    SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", measuredColor);
-    SmartDashboard.putNumber("countBlue", countBlue);
-    SmartDashboard.putString("Target Color", targetColor);
-    SmartDashboard.putString("Set Color", setColor);
+    //SmartDashboard.putNumber("Red", detectedColor.red);
+    //SmartDashboard.putNumber("Green", detectedColor.green);
+    //SmartDashboard.putNumber("Blue", detectedColor.blue);
+    //SmartDashboard.putNumber("Confidence", match.confidence);
+    //SmartDashboard.putString("Detected Color", measuredColor);
+    //SmartDashboard.putNumber("countBlue", countBlue);
+    //SmartDashboard.putString("Target Color", targetColor);
+    //SmartDashboard.putString("Set Color", setColor);
   }
 }
 

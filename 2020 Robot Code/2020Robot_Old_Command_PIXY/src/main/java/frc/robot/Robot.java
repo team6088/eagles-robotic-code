@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import java.util.ArrayList;
+
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -18,6 +20,8 @@ import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.PixySubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import io.github.pseudoresonance.pixy2api.Pixy2;
+import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 
 
 
@@ -35,6 +39,14 @@ public class Robot extends TimedRobot {
   public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   public static PixySubsystem pixySubsystem = new PixySubsystem();
 
+  public static Pixy2 pixycam;
+  boolean isCamera = false;
+  //private static SPILink spi;
+  int state=-1;
+  public int targetHeight;
+  public int targetWidth;
+  public boolean targetAquired;
+  
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
   //private RobotContainer m_robotContainer;
@@ -53,6 +65,9 @@ public class Robot extends TimedRobot {
       //Set the resolution
     frontCamera.setResolution(240, 180);
     backCamera.setResolution(240, 180);
+
+    pixycam = Pixy2.createInstance(Pixy2.LinkType.SPI);
+    
   }
 
   /**
@@ -65,7 +80,39 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if(!isCamera)
+    state = pixycam.init(1); // if no camera present, try to initialize
+    isCamera = state>=0;
+  
+    SmartDashboard.putBoolean("Camera", isCamera);   //publish if we are connected
+    pixycam.getCCC().getBlocks(true,255,255); //run getBlocks with arguments to have the camera
+                                               //acquire target data
+    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
+    if(blocks.size() > 0)
+    {
+    double xcoord = blocks.get(0).getX();       // x position of the largest target
+    double ycoord = blocks.get(0).getY();       // y position of the largest target
+    String data   = blocks.get(0).toString();   // string containing target info
+    targetHeight = blocks.get(0).getHeight();
+    targetWidth = blocks.get(0).getWidth();
+    if(targetHeight>=RobotMap.minTargetHeight && targetHeight<=RobotMap.maxTargetHeight && targetWidth>=RobotMap.minTargetWidth && targetWidth<=RobotMap.maxTargetWidth){
+    targetAquired = true;
+    }
+    else{
+    targetAquired = false;
+    }
+  
+    SmartDashboard.putBoolean("present", true); // show there is a target present
+    SmartDashboard.putNumber("Xccord",xcoord);
+    SmartDashboard.putNumber("Ycoord", ycoord);
+    SmartDashboard.putString("Data", data );
+    SmartDashboard.putBoolean("Target Status", targetAquired);
   }
+  else
+    SmartDashboard.putBoolean("present", false);
+  SmartDashboard.putNumber("size", blocks.size()); //push to dashboard how many targets are detected
+  }
+  
 
   /**
    * This function is called once each time the robot enters Disabled mode.
@@ -136,9 +183,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
-
   }
+
+
+
+
+  
   /**
    * This function is called periodically during test mode.
    */

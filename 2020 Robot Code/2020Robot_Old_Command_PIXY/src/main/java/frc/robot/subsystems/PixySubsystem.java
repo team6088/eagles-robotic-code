@@ -36,45 +36,8 @@ public class PixySubsystem extends Subsystem {
   }
 
 
-  public void findTarget(){
-    if(!isCamera)
-    state = pixycam.init(1); // if no camera present, try to initialize
-    isCamera = state>=0;
-  
-    SmartDashboard.putBoolean("Camera", isCamera);   //publish if we are connected
-    pixycam.getCCC().getBlocks(true,255,255); //run getBlocks with arguments to have the camera
-                                               //acquire target data
-    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
-    if(blocks.size() > 0)
-    {
-    double xcoord = blocks.get(0).getX();       // x position of the largest target
-    double ycoord = blocks.get(0).getY();       // y position of the largest target
-    String data   = blocks.get(0).toString();   // string containing target info
-    targetHeight = blocks.get(0).getHeight();
-    targetWidth = blocks.get(0).getWidth();
-    if(targetHeight>=RobotMap.minTargetHeight && targetHeight<=RobotMap.maxTargetHeight && targetWidth>=RobotMap.minTargetWidth && targetWidth<=RobotMap.maxTargetWidth){
-    targetAquired = true;
-    }
-    else{
-    targetAquired = false;
-    }
-  
-    SmartDashboard.putBoolean("present", true); // show there is a target present
-    SmartDashboard.putNumber("Xccord",xcoord);
-    SmartDashboard.putNumber("Ycoord", ycoord);
-    SmartDashboard.putString("Data", data );
-    SmartDashboard.putBoolean("Target Status", targetAquired);
-  }
-  else
-    SmartDashboard.putBoolean("present", false);
-  SmartDashboard.putNumber("size", blocks.size()); //push to dashboard how many targets are detected
-  }
-  // Goal ratio is 39.125 x 17.125 for h x w        
-
-  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 }
