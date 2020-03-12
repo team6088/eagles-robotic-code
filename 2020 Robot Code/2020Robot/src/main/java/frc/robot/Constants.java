@@ -50,19 +50,20 @@ public final class Constants {
 		public static final int shooterMotorPort = 0;
     public static final double shootPower = .8;
 
-    public static final int intakeLiftMotorPort = 1;
-    public static final int intakeMotorPort = 3;
-    public static final double intakeMotorSpeed = .5;
-    public static final double intakeMotorSpeedSlow = .3;
-    public static final int ticklerMotorPort = 5;
-    public static final double ticklerMotorSpeed = .3;
-    public static final double intakeLowerSpeed = .5;
-
-
   }
 
 
     public static final class IntakeConstants {
+      public static final int intakeLiftMotorPort = 1;
+      public static final int intakeMotorPort = 3;
+      public static final double intakeMotorSpeed = .5;
+      public static final double intakeMotorSpeedSlow = .3;
+      public static final double intakeLowerSpeed = .5;
+    }
+
+    public static final class TicklerConstants{
+      public static final int ticklerMotorPort = 5;
+      public static final double ticklerMotorSpeed = .3;
 
     }
 

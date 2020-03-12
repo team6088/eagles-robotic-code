@@ -15,10 +15,39 @@ import frc.robot.Constants.IntakeConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
 
+  private final Spark intakeMotor =  new Spark(IntakeConstants.intakeMotorPort);
+  private final Spark intakeLiftMotor = new Spark(IntakeConstants.intakeLiftMotorPort);
 
 
+  public void runIntake(){
+    intakeMotor.set(IntakeConstants.intakeMotorSpeed);
+  }
 
- 
+  public void reverseIntake(){
+    intakeMotor.set(-IntakeConstants.intakeMotorSpeed);
+  }
+
+  public void runIntakeSlow(){
+    intakeMotor.set(IntakeConstants.intakeMotorSpeedSlow);
+  }
+
+  public void reverseIntakeSlow(){
+    intakeMotor.set(-IntakeConstants.intakeMotorSpeedSlow);
+  }
+
+  public void stopIntake(){
+    intakeMotor.set(0);
+  }
+
+  public void manualFeed(double speed){
+    if(speed>.4){
+    speed = .4;
+    }
+    intakeMotor.set(speed);
+}
+  public void autoIntake(double speed){
+    intakeMotor.set(-speed);
+  }
 
   /**
    * Creates a new IntakeSubsystem.
