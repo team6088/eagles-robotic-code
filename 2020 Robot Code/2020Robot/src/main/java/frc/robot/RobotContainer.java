@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.IntakeConstants;
 import frc.robot.commands.DriveToUltrasonicDistance;
 import frc.robot.commands.GoToColorCommand;
@@ -162,6 +163,9 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
   private final Command timedMoveStraight = new TimedMoveCommand(driveSubsystem, .5, 0).withTimeout(2) //Drives backwards
   ;
 
+  //public final Command calibrateGyro = new InstantCommand(driveSubsystem::calibrateGyro,driveSubsystem);
+
+
   private final Command shootStriaghtOn = new SequentialCommandGroup(
     //new ParallelCommandGroup(
       // Drive forward and lower ball intake
@@ -249,6 +253,7 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
       colorSubsystem.manualColorControl(operatorStick.getRawAxis(3)-operatorStick.getRawAxis(2)),colorSubsystem)
     );
 
+
       
     // Add auton Commands to the chooser
     m_chooser.addOption("Timed Move", timedMoveStraight);
@@ -261,8 +266,10 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
 
 
 
+
   //button Mapping
   private void configureButtonBindings() {
+
 
 
       // Shooter Commands!
@@ -365,7 +372,6 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
 /*           operatorButtonX.whileHeld(
             new InstantCommand(colorSubsystem::manualTurnWheelQuick, colorSubsystem)
           ); */
-
 
 
         //Climber Commands

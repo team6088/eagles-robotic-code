@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -25,7 +26,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(DriveConstants.rightMasterPort);
   private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(DriveConstants.rightSlavePort);
   private final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
-
+  private final ADIS16448_IMU imu = new ADIS16448_IMU();
 
   private final AnalogInput ultraSonic = new AnalogInput(DriveConstants.ultraSonicPort);
   public static double distance = 0;
@@ -92,15 +93,25 @@ public class DriveSubsystem extends SubsystemBase {
     drive.arcadeDrive(0, 0);
   }
 
+  public void calibrateGyro(){
+    imu.calibrate();
+  }
+
 
   @Override
   public void periodic() {
+    
     double sensorValue = ultraSonic.getVoltage();
     final double scaleFactor = 1/(5./1024.)/25.4; //scale converting voltage to distance
     distance = 5*sensorValue*scaleFactor; //convert the voltage to distance
-
-
-
+    double temp = imu.getTemperature();
+    double x = imu.getGyroAngleX();
+    double y = imu.getGyroAngleY();
+    double z = imu.getGyroAngleZ();
+    SmartDashboard.putNumber("temp",temp);
+    SmartDashboard.putNumber("x",x);
+    SmartDashboard.putNumber("y",y);
+    SmartDashboard.putNumber("z",z);
 /*       if (distance != 0){
       reading4 = reading3;
       reading3 = reading2;
