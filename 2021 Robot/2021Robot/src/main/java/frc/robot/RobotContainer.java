@@ -7,17 +7,23 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.IntakeConstants;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.DriveToUltrasonicDistance;
 import frc.robot.commands.GoToColorCommand;
 import frc.robot.commands.ManualShootCommand;
-import frc.robot.commands.RotationalControlCommand;
 import frc.robot.commands.TimedMoveCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 //import frc.robot.commands.RotationalControlCommand;
@@ -29,15 +35,6 @@ import frc.robot.subsystems.PixySubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TicklerSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.button.Button;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -157,7 +154,45 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 
-  //Auton Commands
+ 
+
+  private ShuffleboardTab tab = Shuffleboard.getTab("AutoDrive");
+  private NetworkTableEntry forwardOne = 
+    tab.add("Forward One", 0).getEntry();
+    private NetworkTableEntry turnOne = 
+    tab.add("Turn One", 0).getEntry();
+    private NetworkTableEntry forwardTwo = 
+    tab.add("Forward Two", 0).getEntry();
+    private NetworkTableEntry turnTwo = 
+    tab.add("Turn Two", 0).getEntry();
+    private NetworkTableEntry forwardThree = 
+    tab.add("Forward Two", 0).getEntry();
+    private NetworkTableEntry turnThree = 
+    tab.add("Turn Two", 0).getEntry();
+    private NetworkTableEntry timeOne = 
+    tab.add("Time One", 0).getEntry();
+    private NetworkTableEntry timeTwo = 
+    tab.add("Time Two", 0).getEntry();  
+    private NetworkTableEntry timeThree = 
+    tab.add("Time Two", 0).getEntry();  
+
+ //Auton Commands
+
+  //Test to see if Data from shuffleboard can control driving
+  private final Command shuffleboardSelection = new SequentialCommandGroup(
+    //new ParallelCommandGroup(
+      new TimedMoveCommand(driveSubsystem, forwardOne.getDouble(0), 
+      turnOne.getDouble(0) ).withTimeout(timeOne.getDouble(0)),
+      new TimedMoveCommand(driveSubsystem, forwardTwo.getDouble(0), 
+      turnTwo.getDouble(0) ).withTimeout(timeTwo.getDouble(0)),
+      new TimedMoveCommand(driveSubsystem, forwardThree.getDouble(0), 
+      turnThree.getDouble(0) ).withTimeout(timeThree.getDouble(0))
+/*       new ParallelCommandGroup(
+        new InstantCommand(shooterSubsystem::staticShoot, shooterSubsystem), //CHECK SHOOT POWER
+        new InstantCommand(intakeSubsystem::runIntake, intakeSubsystem),
+        new InstantCommand(ticklerSubsystem::reverseTickler, ticklerSubsystem)).withTimeout(3) */
+      );
+
 
   // Test Command See if it will drive for .5 seconds.
   private final Command timedMoveStraight = new TimedMoveCommand(driveSubsystem, .5, 0).withTimeout(2) //Drives backwards
@@ -259,6 +294,7 @@ public Button operatorButtonA = new JoystickButton(operatorStick, 1),
     m_chooser.addOption("Timed Move", timedMoveStraight);
     m_chooser.addOption("Shoot from straight on", shootStriaghtOn);
     m_chooser.addOption("Auto Drive to Distance (80 inches)", autoDriveToDistanceTest);
+    m_chooser.addOption("Shuffleboard Selection", shuffleboardSelection);
     //m_chooser.addOption("Shoot 3 Balls and Move Straight", shootThreeBalls);
     m_chooser.setDefaultOption("Default", timedMoveStraight); // Does this work?
     Shuffleboard.getTab("Autonomous").add(m_chooser);
